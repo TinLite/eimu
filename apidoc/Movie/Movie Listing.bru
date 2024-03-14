@@ -1,0 +1,16 @@
+meta {
+  name: Movie Listing
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/movie
+  body: none
+  auth: none
+}
+
+query {
+  ~page: 1
+  ~size: 20
+}

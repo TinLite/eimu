@@ -1,0 +1,15 @@
+meta {
+  name: Movie Detail
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/movie/{{id}}
+  body: none
+  auth: none
+}
+
+vars:pre-request {
+  id: trang-quynh
+}
