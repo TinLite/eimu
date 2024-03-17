@@ -6,6 +6,7 @@ import io.github.tinlite.eimuserver.repository.MovieListRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -36,7 +37,19 @@ class MovieController {
 
     @GetMapping("/{id}")
     fun index(@PathVariable id: String): ResponseEntity<MovieDetail> {
-        val movie = movieDetailRepository.getMovieDetailById(id) ?: return ResponseEntity.notFound().build()
+        val movie = movieDetailRepository.findByIdOrNull(id) ?: return ResponseEntity.notFound().build()
+        var newMovie = MovieDetail(
+            "a",
+            "b",
+            "c",
+            null,
+            "e",
+            "d",
+            1,
+            listOf()
+        )
+
+        movieDetailRepository.existsById("")
         return ResponseEntity.ok(movie)
     }
 }

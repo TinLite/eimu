@@ -16,8 +16,8 @@ data class MovieDetail(
 )
 
 data class EpisodeServer(
-    val server_name: String,
-    @Field("items") val episodeList: Array<Episode>
+    @Field("server_name") val serverName: String,
+    @Field("items") val episodeList: List<Episode>
 )
 
 data class Episode(
