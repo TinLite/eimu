@@ -6,6 +6,14 @@ meta {
 
 post {
   url: {{baseUrl}}/user/create
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "password": "Hello",
+    "name": "tien",
+    "role": "sex"
+  }
 }
