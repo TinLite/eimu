@@ -1,0 +1,19 @@
+meta {
+  name: UpdateUser
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/user/update
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "65f655fba009a95a4656803f",
+    "name": "Trịnh Trần Phương Tuấn",
+    "role": "Do Re Mi Pha La Si Do"
+  }
+}

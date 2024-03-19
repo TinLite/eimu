@@ -21,6 +21,7 @@ data class EpisodeServer(
 )
 
 data class Episode(
+    @Field("slug") val id: String,
     val name: String,
     val embed: String
 )
