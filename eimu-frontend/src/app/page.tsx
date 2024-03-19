@@ -1,6 +1,6 @@
 import Image from "next/image";
 import axios from "axios";
-import Navbar from "./components/Navbar";
+import Navbar from "./header/Navbar";
 import React from "react";
 import Link from "next/link";
 
@@ -23,7 +23,7 @@ export default function Home() {
         </div>
       </div>
       <div className="px-4">
-        <div className="text-4xl px-8" style={{"margin-top": "-100%"}}>
+        <div className="text-4xl px-8" /*</main>style={{ "margin-top": "-100%" }}*/>
           Phim đang hot
         </div>
         <div className="flex gap-8 ">
