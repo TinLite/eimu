@@ -13,7 +13,7 @@ export default function Home() {
         <div
           className="w-full h-[450px] absolute inset-0 -z-0 bg-[url('https://phim.nguonc.com/public/images/Film/139378.jpg')] bg-center bg-cover"
         ></div>
-        <div className="mx-auto px-10 pt-24 h-full backdrop-blur-sm backdrop-brightness-75">
+        <div className="mx-auto px-28 pt-24 h-full backdrop-blur-sm backdrop-brightness-75">
           <h1 className="mb-3 font-bold sm:text-4xl relative -z-10">
             <a href="#">Jaku-Chara Tomozaki-kun 2nd Stage</a>
           </h1>
