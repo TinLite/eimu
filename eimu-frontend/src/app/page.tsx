@@ -31,66 +31,66 @@ export default function Home() {
         </div>
       </div>
       <div className="px-4">
-        <div className=" px-8 mt-8 flex justify-between items-end" /*</main>style={{ "margin-top": "-100%" }}*/>
-          <div className="text-4xl">Phim mới cập nhật</div>
-          <div><Link href={'#'} className="text-2xl hover:text-red-400">Xem thêm</Link></div>
+        <div className=" px-10 mt-8 flex justify-between items-end" /*</main>style={{ "margin-top": "-100%" }}*/>
+          <div className="text-3xl">Phim mới cập nhật</div>
+          <div><Link href={'#'} className=" hover:text-red-400">Xem thêm</Link></div>
         </div>
-        <div className="flex justify-between col-auto px-8">
+        <div className="flex justify-between col-auto px-10">
           <div>
-            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-48 rounded-sm" /></a>
-            <a href="#" className="text-lg hover:text-sky-300">The Last Of Us </a>
+            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-44 rounded-sm" /></a>
+            <a href="#" className=" hover:text-sky-300">The Last Of Us </a>
           </div>
           <div>
-            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-48 rounded-sm" /></a>
-            <a href="#" className="text-lg hover:text-sky-300">The Last Of Us </a>
+            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-44 rounded-sm" /></a>
+            <a href="#" className=" hover:text-sky-300">The Last Of Us </a>
           </div>
           <div>
-            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-48 rounded-sm" /></a>
-            <a href="#" className="text-lg hover:text-sky-300">The Last Of Us </a>
+            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-44 rounded-sm" /></a>
+            <a href="#" className=" hover:text-sky-300">The Last Of Us </a>
           </div>
           <div>
-            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-48 rounded-sm" /></a>
-            <a href="#" className="text-lg hover:text-sky-300">The Last Of Us </a>
+            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-44 rounded-sm" /></a>
+            <a href="#" className=" hover:text-sky-300">The Last Of Us </a>
           </div>
           <div>
-            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-48 rounded-sm" /></a>
-            <a href="#" className="text-lg hover:text-sky-300">The Last Of Us </a>
+            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-44 rounded-sm" /></a>
+            <a href="#" className=" hover:text-sky-300">The Last Of Us </a>
           </div>
           <div>
-            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-48 rounded-sm" /></a>
+            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-44 rounded-sm" /></a>
             <a href="#" className="text-lg hover:text-sky-300">The Last Of Us </a>
           </div>
         </div>
       </div>
       <div className="px-4">
-        <div className=" px-8 mt-8 flex justify-between items-end" /*</main>style={{ "margin-top": "-100%" }}*/>
-          <div className="text-4xl">Phim mới</div>
-          <div><Link href={'#'} className="text-2xl hover:text-red-400">Xem thêm</Link></div>
+        <div className=" px-10 mt-8 flex justify-between items-end" /*</main>style={{ "margin-top": "-100%" }}*/>
+          <div className="text-3xl">Phim mới</div>
+          <div><Link href={'#'} className=" hover:text-red-400">Xem thêm</Link></div>
         </div>
-        <div className="flex justify-between col-auto px-8">
+        <div className="flex justify-between col-auto px-10">
           <div>
-            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-48 rounded-sm" /></a>
-            <a href="#" className="text-lg hover:text-sky-300">The Last Of Us </a>
+            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-44 rounded-sm" /></a>
+            <a href="#" className=" hover:text-sky-300">The Last Of Us </a>
           </div>
           <div>
-            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-48 rounded-sm" /></a>
-            <a href="#" className="text-lg hover:text-sky-300">The Last Of Us </a>
+            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-44 rounded-sm" /></a>
+            <a href="#" className=" hover:text-sky-300">The Last Of Us </a>
           </div>
           <div>
-            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-48 rounded-sm" /></a>
-            <a href="#" className="text-lg hover:text-sky-300">The Last Of Us </a>
+            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-44 rounded-sm" /></a>
+            <a href="#" className=" hover:text-sky-300">The Last Of Us </a>
           </div>
           <div>
-            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-48 rounded-sm" /></a>
-            <a href="#" className="text-lg hover:text-sky-300">The Last Of Us </a>
+            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-44 rounded-sm" /></a>
+            <a href="#" className=" hover:text-sky-300">The Last Of Us </a>
           </div>
           <div>
-            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-48 rounded-sm" /></a>
-            <a href="#" className="text-lg hover:text-sky-300">The Last Of Us </a>
+            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-44 rounded-sm" /></a>
+            <a href="#" className=" hover:text-sky-300">The Last Of Us </a>
           </div>
           <div>
-            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-48 rounded-sm" /></a>
-            <a href="#" className="text-lg hover:text-sky-300">The Last Of Us </a>
+            <a href="#"><img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx154587-n1fmjRv4JQUd.jpg" className="max-w-44 rounded-sm" /></a>
+            <a href="#" className=" hover:text-sky-300">The Last Of Us </a>
           </div>
         </div>
       </div>
