@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function infor() {
+export default function Footer() {
     return (
         <footer className='w-full h-28 bg-[#001731]'>
             <div className='flex justify-around mx-80 mt-8 pt-4'>
