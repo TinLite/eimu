@@ -3,7 +3,6 @@ import Image from "next/image";
 const Navbar: React.FC = () => {
     return (
         <nav className="fixed top-0 left-0 w-full h-16 px-6 bg-[#001731] text-white z-50">
-            {/* Your menu items go here */}
             <ul className="flex items-center justify-between h-full px-4 ">
                 <div className="flex items-center">
                     <li className="">
@@ -20,15 +19,23 @@ const Navbar: React.FC = () => {
                 </div>
                 <li className="ml-4"><div><input className="w-60 h-8 bg-[#000D1C] text-cyan-50" type="text" name="" id="" placeholder=" Tìm kiếm..." /></div></li>
                 <div className="flex items-center">
-                    <li className=" ml-4 group"><a href="#" className="flex items-center">
-                        {/* <svg className="flex-initial w-7 group-hover:fill-green-400" fill="#FFFFFF" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 21a9 9 0 1 1 9-9 9.01 9.01 0 0 1-9 9zm0-16a7 7 0 1 0 7 7 7.008 7.008 0 0 0-7-7z"></path> <path d="M15.03 14.75a1 1 0 0 1-.5-.134l-3.03-1.75A1 1 0 0 1 11 12V7.5a1 1 0 0 1 2 0v3.923l2.531 1.461a1 1 0 0 1-.501 1.866z"></path> </g></svg> */}
-                        <div className="flex-initial w-20 group-hover:text-green-400">Lịch sử</div>
+                    <li className=" ml-4 group"><a href="#" className="flex items-center group-hover:text-green-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                        <div className="flex-initial w-20 ml-1">Lịch sử</div>
                     </a></li>
-                    <li className="ml-4 group"><a href="#" className="flex items-center">
-                        {/* <svg className="flex-initial w-7 group-hover:fill-green-400" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>bookmark-multiple</title> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> </g> <g id="icons_Q2" data-name="icons Q2"> <path d="M30,14V40l-7.6-5.8L20,32.4l-2.4,1.8L10,40V14H30M8,10a2,2,0,0,0-2,2V44a2,2,0,0,0,2,2,2.4,2.4,0,0,0,1.4-.5L20,37.4l10.6,8.1A2.4,2.4,0,0,0,32,46a2,2,0,0,0,2-2V12a2,2,0,0,0-2-2Z"></path> <path d="M16,2a2,2,0,0,0-2,2V6H38V37l.6.5A2.4,2.4,0,0,0,40,38a2,2,0,0,0,2-2V4a2,2,0,0,0-2-2Z"></path> </g> </g> </g></svg> */}
-                        <div className="flex-initial w-20 group-hover:text-green-400">Theo dõi</div>
+                    <li className="ml-4 group"><a href="#" className="flex items-center group-hover:text-green-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9" />
+                        </svg>
+                        <div className="flex-initial w-20 ml-1">Theo dõi</div>
                     </a></li>
-                    <li className="ml-4"><a href="#" className="px-6 py-2 rounded-md bg-blue-50 text-[#006FEE]">Login</a></li>
+                    <li className="ml-4"><a href="#" className="px-4 py-2 rounded-md bg-blue-50 text-[#006FEE] flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                        </svg>
+                        <span className="ml-1">Đăng nhập</span></a></li>
                 </div>
                 {/* Add more menu items as needed */}
             </ul>
