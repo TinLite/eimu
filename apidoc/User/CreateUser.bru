@@ -6,6 +6,15 @@ meta {
 
 post {
   url: {{baseUrl}}/user/create
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "name":"Teo",
+    "phone":1234567890,
+    "email":"teo1002@gmail.com",
+    "role":"beco"
+  }
 }
