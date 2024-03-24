@@ -1,0 +1,30 @@
+meta {
+  name: Movie Update
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/movie/{{id}}/update
+  body: json
+  auth: none
+}
+
+body:json {
+  [
+    {
+      "serverName": "Vietsub #1",
+      "episodeList": [
+        {
+          "id": "tap-full",
+          "name": "Full",
+          "embed": "https://embed.streamc.xyz/embed.php?hash=2c30305dc4eb9c76e7f71550aa3c9235"
+        }
+      ]
+    }
+  ]
+}
+
+vars:pre-request {
+  id: trang-quynh
+}
