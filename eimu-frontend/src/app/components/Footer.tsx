@@ -10,7 +10,7 @@ export default function Footer() {
                 <a href="#">Deletion Privacy</a>
                 <a href="#">Privacy Policy</a>
             </div>
-            <div className='text-center pt-6'>Copy @ 2024 Eimu Project. All Right Reserved</div>
+            <div className='text-center pt-6'>Copy © 2024 Eimu Project. All Right Reserved</div>
         </footer>
     )
 }
