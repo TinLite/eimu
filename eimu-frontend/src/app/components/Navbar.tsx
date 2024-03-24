@@ -7,16 +7,16 @@ const Navbar: React.FC = () => {
             <ul className="flex items-center justify-between h-full px-4 ">
                 <div className="flex items-center">
                     <li className="">
-                        <Link href={""}>
+                        <Link href={"/"}>
                             <Image src='/images/Eimu-logo-removebg-preview.png' alt='eimu'
                                 width={70}
                                 height={20} />
                         </Link>
                     </li>
-                    <li className="ml-4 "><Link href={""} className="hover:text-black p-[22px] hover:bg-sky-200">Phim mới</Link></li>
-                    <li className="ml-4 "><Link href={""} className="hover:text-black p-[22px] hover:bg-sky-200">Phim bộ</Link></li>
-                    <li className="ml-4 "><Link href={""} className="hover:text-black p-[22px] hover:bg-sky-200">Phim lẻ</Link></li>
-                    <li className="ml-4 "><Link href={""} className="hover:text-black p-[20px] hover:bg-sky-200 flex items-center">
+                    <li className="ml-4 "><Link href={"/genres"} className="hover:text-black p-[22px] hover:bg-sky-200">Phim mới</Link></li>
+                    <li className="ml-4 "><Link href={"/genres"} className="hover:text-black p-[22px] hover:bg-sky-200">Phim bộ</Link></li>
+                    <li className="ml-4 "><Link href={"/genres"} className="hover:text-black p-[22px] hover:bg-sky-200">Phim lẻ</Link></li>
+                    <li className="ml-4 "><Link href={"/genres"} className="hover:text-black p-[20px] hover:bg-sky-200 flex items-center">
                         Thể loại
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3 ml-1">
                             <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clip-rule="evenodd" />
