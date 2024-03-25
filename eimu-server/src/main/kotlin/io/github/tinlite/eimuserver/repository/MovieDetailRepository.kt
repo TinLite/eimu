@@ -6,6 +6,7 @@ import io.github.tinlite.eimuserver.model.MovieListEntryNew
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.mongodb.repository.MongoRepository
+import org.springframework.data.mongodb.repository.Query
 import org.springframework.data.mongodb.repository.Update
 
 interface MovieDetailRepository : MongoRepository<MovieDetail, String> {
@@ -16,6 +17,6 @@ interface MovieDetailRepository : MongoRepository<MovieDetail, String> {
 
     fun findAllBy(pageable: Pageable) : Page<MovieListEntryNew>
 
-    fun findAllByTagsContains(tag: String, pageable: Pageable) : Page<MovieListEntryNew>
-
+    @Query(value="{ 'tags': { \$all : ?0 } }")
+    fun findAllByTagsPaginated(tags: Collection<String>, pageable: Pageable) : Page<MovieListEntryNew>
 }
