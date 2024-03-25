@@ -3,9 +3,6 @@ package io.github.tinlite.eimuserver.controller
 import io.github.tinlite.eimuserver.model.EpisodeServer
 import io.github.tinlite.eimuserver.model.MovieDetail
 import io.github.tinlite.eimuserver.repository.MovieDetailRepository
-import io.github.tinlite.eimuserver.repository.MovieListRepository
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
@@ -16,17 +13,15 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/movie")
 class MovieController {
-    val logger : Logger = LoggerFactory.getLogger(this.javaClass);
-
     @Autowired
     lateinit var movieDetailRepository: MovieDetailRepository
 
-    @Autowired
-    lateinit var movieListRepository: MovieListRepository
-
     @GetMapping
-    fun listPaginated(@RequestParam page: Int = 1, @RequestParam size: Int = 20): ResponseEntity<Map<String, Any>> {
-        val data = movieListRepository.findAll(PageRequest.of(page - 1, size, Sort.by("modified").descending()))
+    fun listPaginated(@RequestParam page: Int = 1, @RequestParam size: Int = 20, @RequestParam tags: Collection<String>?): ResponseEntity<Map<String, Any>> {
+        val data = if (tags.isNullOrEmpty())
+            movieDetailRepository.findAllBy(PageRequest.of(page - 1, size, Sort.by("modified").descending()))
+        else
+            movieDetailRepository.findAllByTagsPaginated(tags, PageRequest.of(page - 1, size, Sort.by("modified").descending()))
         val response = mapOf(
             "pageable" to mapOf(
                 "page" to page,
@@ -43,18 +38,6 @@ class MovieController {
     @GetMapping("/{id}")
     fun index(@PathVariable id: String): ResponseEntity<MovieDetail> {
         val movie = movieDetailRepository.findByIdOrNull(id) ?: return ResponseEntity.notFound().build()
-        var newMovie = MovieDetail(
-            "a",
-            "b",
-            "c",
-            null,
-            "e",
-            "d",
-            1,
-            listOf()
-        )
-
-        movieDetailRepository.existsById("")
         return ResponseEntity.ok(movie)
     }
 
