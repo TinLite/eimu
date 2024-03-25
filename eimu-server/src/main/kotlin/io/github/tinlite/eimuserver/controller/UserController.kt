@@ -8,12 +8,11 @@ import io.github.tinlite.eimuserver.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.text.SimpleDateFormat
 
-@RestController()
+@RestController
 @RequestMapping("/user")
 class UserController {
     @Autowired
@@ -42,9 +41,19 @@ class UserController {
     }
 
     @PostMapping("/update")
-    fun updateAccount(@RequestBody user: User): User {
-//        return user;
-        return userRepository.save(user)
+    fun updateAccount(@RequestBody user: Map<String, String>): ResponseEntity<Map<String, Any?>> {
+        val dataUser = userRepository.findByIdOrNull(user["id"]) ?: return ResponseEntity.notFound().build()
+        user.forEach {
+            when (it.key) {
+                "name" -> dataUser.name = it.value
+                "phone" -> dataUser.phone = it.value
+                "email" -> dataUser.email = it.value
+                // "dateOfBirth" -> dataUser.dateOfBirth = it.value
+                "role" -> dataUser.role = it.value
+            }
+        }
+        userRepository.save(dataUser)
+        return ResponseEntity.ok(user)
     }
 
     @GetMapping("/listuser")
@@ -70,6 +79,6 @@ class UserController {
     @GetMapping("/detail/{name}")
     fun detail(@PathVariable name: String): ResponseEntity<List<User>> {
         val data = userRepository.findByName(name)
-        return ResponseEntity(data, HttpStatus.OK)
+        return ResponseEntity.ok(data)
     }
 }
