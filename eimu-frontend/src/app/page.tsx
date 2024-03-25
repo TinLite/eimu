@@ -4,8 +4,7 @@ import SideList from "@/app/components/SideList";
 import Link from "next/link";
 
 export default async function Home() {
-  const res = await fetch("http://51.79.144.118:12594/movie")
-  const new_movie_list = await res.json();
+  const new_movie_list = await (await fetch(`${process.env.BACKEND_ADDRESS}/movie`)).json()
   return (
     <main>
       <div className="relative overflow-hidden h-[450px]">
