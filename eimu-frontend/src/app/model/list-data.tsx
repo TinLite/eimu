@@ -3,4 +3,6 @@ export interface MovieListEntry {
     name: string,
     thumbUrl: string,
     posterUrl: string,
+    tags: string,
+    description: string,
 }
