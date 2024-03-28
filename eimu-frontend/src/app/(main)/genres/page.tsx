@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "../components/Footer";
 import Genres from "./genres";
 import Link from "next/link";
 
@@ -8,8 +7,7 @@ export default async function Genre() {
 
     return (
         <>
-            <Genres data = {new_movie_list["items"]}/>
-            <Footer />
+            <Genres data={new_movie_list["items"]} />
         </>
     )
 }

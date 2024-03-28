@@ -1,9 +1,10 @@
 
+// import '../global'
+import '@/app/globals.css'
 export default function Login() {
     return (
         <div className="fixed justify-center py-10 px-10  w-[450px] -translate-x-1/2 -translate-y-1/2 bg-[#001731] top-1/2 left-1/2 rounded-lg">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-
                 <h2 className="mt-3 text-center text-2xl font-bold leading-9 tracking-tight text-[#F0FCFF]">
                     Đăng nhập
                 </h2>
