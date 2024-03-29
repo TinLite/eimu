@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "./components/Footer"
 import SideList from "@/app/components/SideList";
 import Link from "next/link";
 
@@ -100,7 +99,6 @@ export default async function Home() {
       <SideList title="Phim mới" link="#" data={new_movie_list["items"]} />
       <SideList title="Phim bộ" link="#" data={new_movie_list["items"]} />
       <SideList title="Phim lẻ" link="#" data={new_movie_list["items"]} />
-      <Footer />
     </main>
   );
 };

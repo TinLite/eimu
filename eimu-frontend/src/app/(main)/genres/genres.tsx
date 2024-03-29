@@ -1,13 +1,12 @@
 import React from 'react';
-import { MovieListEntry } from '../model/list-data';
+import { MovieListEntry } from '../../model/list-data';
 
 
-export default function Genre( {    
-  data,
+export default function Genre({
+    data,
 }: {
-  data: [MovieListEntry]
-}) 
-{
+    data: [MovieListEntry]
+}) {
     return (
         <div className="bg-gray-900 text-white min-h-screen ">
             <div className="container mx-auto p-8">
@@ -21,10 +20,10 @@ export default function Genre( {
                             className="p-4 rounded-lg relative"
                         >
                             <a href="#">
-                            <div
-                            className="aspect-[2/3] place-items-center w-50"
-                            style={{ "background": `center / cover no-repeat url('${entry.thumbUrl}')` }}>{}
-                        </div>
+                                <div
+                                    className="aspect-[2/3] place-items-center w-50"
+                                    style={{ "background": `center / cover no-repeat url('${entry.thumbUrl}')` }}>{ }
+                                </div>
                                 <h3 className="text-lg font-semibold">{entry.name}</h3>
                             </a>
                         </div>
