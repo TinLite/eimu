@@ -11,6 +11,7 @@ data class MovieDetail(
     @Field("original_name") var originalName: String?,
     var description: String?,
     val tags: Collection<String>,
+    val flags: Collection<String>?,
     @Field("thumb_url") var thumbUrl: String,
     @Field("poster_url") var posterUrl: String,
     var modified: Long,
@@ -28,7 +29,7 @@ data class Episode(
     val embed: String
 )
 
-data class MovieListEntryNew(
+data class MovieListEntry(
     @Id val id: String,
     var name: String,
     @Field("original_name") var originalName: String?,
