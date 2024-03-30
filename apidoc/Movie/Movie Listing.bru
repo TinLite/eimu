@@ -5,12 +5,14 @@ meta {
 }
 
 get {
-  url: {{baseUrl}}/movie
+  url: {{baseUrl}}/movie?tag=d2ddea18f00665ce8623e36bd4e3c7c5&tag=45c48cce2e2d7fbdea1afc51c7c6ad26
   body: none
   auth: none
 }
 
 query {
+  tag: d2ddea18f00665ce8623e36bd4e3c7c5
+  tag: 45c48cce2e2d7fbdea1afc51c7c6ad26
   ~page: 1
   ~size: 20
 }
