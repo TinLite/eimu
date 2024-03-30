@@ -4,8 +4,7 @@ import Link from "next/link";
 
 
 export default async function Home() {
-  const res = await fetch(`http://51.79.144.118:12594/movie`, { cache: 'no-store' });
-  const new_movie_list = await res.json();
+  const new_movie_list = await (await fetch("http://51.79.144.118:12594/movie")).json()
   return (
     <main>
       <div className="carousel w-full">
