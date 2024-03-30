@@ -1,0 +1,24 @@
+meta {
+  name: Search
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/user/search
+[
+  {
+    "name": "Teo",
+    "dateOfBirth": null,
+    "phone": "1234567890",
+    "email": "teo1002@gmail.com",
+    "role": "beco"
+  }
+]
+  body: none
+  auth: none
+}
+
+query {
+  ~name: Teo
+}
