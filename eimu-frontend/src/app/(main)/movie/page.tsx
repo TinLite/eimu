@@ -97,30 +97,32 @@ export default async function Detail() {
                         placeholder="Nhập bình luận của bạn..."
                         className="col-span-12 md:col-span-12 mb-6 md:mb-0"
                     />
-                    <Button color='primary' className='relative'>Gửi</Button>
+                    <Button color='primary' className=''>Gửi</Button>
                 </div>
-                <div className='flex'>
-                    <div className="chat chat-start">
-                        <div className="chat-image avatar">
-                            <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" className="w-20 h-20 text-large mr-10" />
+                <div className='flex max-h'>
+                    <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" className="w-20 h-20 text-large mr-7" />
+                    <div className='bg-sky-950 w-full rounded-md px-5 py-2'>
+                        <div>Tao tên là OOP</div>
+                        <div>Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo</div>
+                        <div className='flex justify-between'>
+                            <div className='flex'>
+                                <div className=' mr-4'>like</div>
+                                <div>trả lời</div>
+                            </div>
+                            <div>
+                                <div className="collapse">
+                                    <input type="checkbox" />
+                                    <div className="collapse-title">
+                                        Xem thêm
+                                    </div>
+                                    <div className="collapse-content">
+                                        <div className='flex'>
+                                            <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" className="w-20 h-20 text-large mr-7" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="chat-bubble"> Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo </div>
-                    </div>
-                </div>
-                <div className='flex'>
-                    <div className="chat chat-start">
-                        <div className="chat-image avatar">
-                            <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" className="w-20 h-20 text-large mr-10" />
-                        </div>
-                        <div className="chat-bubble"> Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo </div>
-                    </div>
-                </div>
-                <div className='flex'>
-                    <div className="chat chat-start">
-                        <div className="chat-image avatar">
-                            <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" className="w-20 h-20 text-large mr-10" />
-                        </div>
-                        <div className="chat-bubble"> Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo </div>
                     </div>
                 </div>
             </div>
