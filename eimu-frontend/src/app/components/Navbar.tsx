@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Navbar: React.FC = () => {
     return (
-        <nav className="fixed top-0 left-0 w-full h-16 xl:px-20 bg-[#001731] text-white z-50">
+        <nav className="fixed top-0 left-0 w-full h-16 xl:px-20 bg-[#001731] text-gray-200 z-50">
             <div className="flex items-center justify-between">
                 <div className="flex ">
                     <Link href={"/"} className="">
@@ -12,9 +12,9 @@ const Navbar: React.FC = () => {
                             width={65}
                             height={20} />
                     </Link>
-                    <Link href={"/genres"} className="px-4 flex items-center hover:bg-sky-200 hover:text-black">Phim mới</Link>
-                    <Link href={"/genres"} className="px-4 flex items-center hover:bg-sky-200 hover:text-black">Phim bộ</Link>
-                    <Link href={"/genres"} className="px-4 flex items-center hover:bg-sky-200 hover:text-black">Phim lẻ</Link>
+                    <Link href={"/genres"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim mới</Link>
+                    <Link href={"/genres"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim bộ</Link>
+                    <Link href={"/genres"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim lẻ</Link>
                     <div className="dropdown dropdown-hover px-4 content-center">
                         <div tabIndex={0} role="button" className=""><Link href={"/genres"} className="flex items-center hover:text-sky-400">
                             Thể loại
@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
                             </svg>
                         </Link>
                         </div>
-                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-sky-50 text-black rounded-box w-52">
+                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-200 text-white rounded-box w-52">
                             <li><Link href={"/genres"}>Hành động</Link></li>
                             <li><Link href={"/genres"}>Tìm cảm</Link></li>
                         </ul>

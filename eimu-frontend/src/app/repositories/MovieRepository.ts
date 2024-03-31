@@ -8,4 +8,3 @@ export async function getLatestMoviesByTag(tagId: string) {
     // noStore();
     return await (await fetch(`${process.env.BACKEND_ADDRESS}/movie?tags=${tagId}`)).json();
 }
-
