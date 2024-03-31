@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
                             </svg>
                         </Link>
                         </div>
-                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-sky-50 text-black rounded-box w-52">
                             <li><Link href={"/genres"}>Hành động</Link></li>
                             <li><Link href={"/genres"}>Tìm cảm</Link></li>
                         </ul>
@@ -50,7 +50,6 @@ const Navbar: React.FC = () => {
                         </svg>
                         <span className="ml-1">Đăng nhập</span></Link>
                 </div>
-                {/* Add more menu items as needed */}
             </div>
         </nav >
     )
