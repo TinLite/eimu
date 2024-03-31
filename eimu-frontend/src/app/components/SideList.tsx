@@ -12,11 +12,11 @@ export default async function SideList({
     data: [MovieListEntry]
 }) {
     return <div className="mt-2">
-        <div className=" px-14 py-2 flex justify-between items-center">
+        <div className=" px-16 py-2 flex justify-between items-center">
             <div className="text-3xl">{title}</div>
             <div><Link href={link} className=" hover:text-red-400">Xem thêm</Link></div>
         </div>
-        <div className="flex px-14 gap-5 w-screen overflow-x-auto items-start snap-x">
+        <div className="flex px-16 gap-5 w-screen overflow-x-auto items-start snap-x">
             <div className="flex flex-wrap gap-4 items-center border-2 rounded-full hover:bg-white hover:text-black absolute left-5 my-32">
                 <Button color="primary" variant="ghost">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

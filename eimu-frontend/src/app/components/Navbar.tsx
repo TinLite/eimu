@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+
 const Navbar: React.FC = () => {
     return (
         <nav className="fixed top-0 left-0 w-full h-16 xl:px-20 bg-[#001731] text-white z-50">
@@ -11,18 +12,24 @@ const Navbar: React.FC = () => {
                             width={65}
                             height={20} />
                     </Link>
-                    <Link href={"/genres"} className="px-4 flex items-center hover:bg-sky-200">Phim mới</Link>
-                    <Link href={"/genres"} className="px-4 flex items-center hover:bg-sky-200">Phim bộ</Link>
-                    <Link href={"/genres"} className="px-4 flex items-center hover:bg-sky-200">Phim lẻ</Link>
-                    <Link href={"/genres"} className="pl-4 flex items-center">
-                        Thể loại
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3 ml-1">
-                            <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clipRule="evenodd" />
-                        </svg>
-
-                    </Link>
+                    <Link href={"/genres"} className="px-4 flex items-center hover:bg-sky-200 hover:text-black">Phim mới</Link>
+                    <Link href={"/genres"} className="px-4 flex items-center hover:bg-sky-200 hover:text-black">Phim bộ</Link>
+                    <Link href={"/genres"} className="px-4 flex items-center hover:bg-sky-200 hover:text-black">Phim lẻ</Link>
+                    <div className="dropdown dropdown-hover px-4 content-center">
+                        <div tabIndex={0} role="button" className=""><Link href={"/genres"} className="flex items-center hover:text-sky-400">
+                            Thể loại
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3 ml-1">
+                                <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clipRule="evenodd" />
+                            </svg>
+                        </Link>
+                        </div>
+                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                            <li><Link href={"/genres"}>Hành động</Link></li>
+                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                        </ul>
+                    </div>
                 </div>
-                <div><input className="w-60 h-8 bg-[#000D1C] text-cyan-50" type="text" name="" id="" placeholder=" Tìm kiếm..." /></div>
+                <div><input type="text" placeholder="Tìm kiếm..." className="input input-bordered w-full h-10 bg-blue-50 max-w-xs text-black" /></div>
                 <div className="flex items-center">
                     <Link href={""} className="flex items-center hover:text-green-400 mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -45,7 +52,7 @@ const Navbar: React.FC = () => {
                 </div>
                 {/* Add more menu items as needed */}
             </div>
-        </nav>
+        </nav >
     )
 };
 export default Navbar;
