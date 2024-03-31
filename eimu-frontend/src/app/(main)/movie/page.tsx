@@ -7,6 +7,7 @@ import SideList from '@/app/components/SideList';
 import { getLatestMovies, getLatestMoviesByTag } from "@/app/repositories/MovieRepository";
 import { Textarea } from "@nextui-org/react";
 import { Avatar } from "@nextui-org/react";
+import { User } from "@nextui-org/react";
 
 export default async function Detail() {
     const new_movie_list = await getLatestMovies()
@@ -28,7 +29,7 @@ export default async function Detail() {
                         </div>
                     </div>
                     <div className=' infor my-5 mx-5' >
-                        <h1 className='mb-6 uppercase text-3xl'>Phim Sẽ Gầy</h1>
+                        <h1 className='mb-6 uppercase text-3xl'>Phim </h1>
                         <div className='flex my-2'>
                             <Link href={""} className='bg-black mr-3 p-1'>Hành động</Link>
                             <Link href={""} className='bg-black mr-3 p-1'>Viễn Tưởng</Link>
@@ -71,7 +72,7 @@ export default async function Detail() {
                     <div className='mx-5'>
                         <div className="text-sm breadcrumbs">
                             <ul>
-                                <li><span className='font-bold text-lg'>Phim sẽ gầy</span></li>
+                                <li><span className='font-bold text-lg'>Phim nè</span></li>
                                 <li><span className='font-bold text-lg'>Tập fullHD</span></li>
                             </ul>
                         </div>
@@ -89,38 +90,28 @@ export default async function Detail() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
                     </svg>
                 </div>
-                <div className="w-full grid grid-cols-12 gap-4 bg-black rounded-lg mb-10">
+                <form className="w-full grid grid-cols-12 gap-4 bg-black rounded-lg mb-10">
                     <Textarea
-                        key="bordered"
-                        variant="bordered"
+                        key="underlined"
+                        variant="underlined"
                         labelPlacement="outside"
                         placeholder="Nhập bình luận của bạn..."
                         className="col-span-12 md:col-span-12 mb-6 md:mb-0"
                     />
-                    <Button color='primary' className=''>Gửi</Button>
-                </div>
+                    <Button color='primary' type='submit' className='w-20 h-10'>Gửi</Button>
+                </form>
                 <div className='flex max-h'>
                     <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" className="w-20 h-20 text-large mr-7" />
                     <div className='bg-sky-950 w-full rounded-md px-5 py-2'>
-                        <div>Tao tên là OOP</div>
-                        <div>Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo</div>
+                        <div className='mb-2'>Tao tên là OOP</div>
+                        <div className='mb-2'>Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo</div>
                         <div className='flex justify-between'>
                             <div className='flex'>
-                                <div className=' mr-4'>like</div>
-                                <div>trả lời</div>
+                                <div className=' mr-5'>like</div>
+                                <div>phản hồi</div>
                             </div>
                             <div>
-                                <div className="collapse">
-                                    <input type="checkbox" />
-                                    <div className="collapse-title">
-                                        Xem thêm
-                                    </div>
-                                    <div className="collapse-content">
-                                        <div className='flex'>
-                                            <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" className="w-20 h-20 text-large mr-7" />
-                                        </div>
-                                    </div>
-                                </div>
+                                xem thêm
                             </div>
                         </div>
                     </div>
