@@ -13,19 +13,19 @@ const Navbar: React.FC = () => {
                             height={20} />
                     </Link>
                     <Link href={"/genres"} className="px-4 flex items-center hover:bg-sky-200 hover:text-black">Phim mới</Link>
-                    <Link href={"/genres"} className="px-4 flex items-center hover:bg-sky-200 hover:text-black">Phim bộ</Link>
-                    <Link href={"/genres"} className="px-4 flex items-center hover:bg-sky-200 hover:text-black">Phim lẻ</Link>
+                    <Link href={"/genres/tv"} className="px-4 flex items-center hover:bg-sky-200 hover:text-black">Phim bộ</Link>
+                    <Link href={"/genres/movie"} className="px-4 flex items-center hover:bg-sky-200 hover:text-black">Phim lẻ</Link>
                     <div className="dropdown dropdown-hover px-4 content-center">
-                        <div tabIndex={0} role="button" className=""><Link href={"/genres"} className="flex items-center hover:text-sky-400">
+                        <div tabIndex={0} role="button" className=""><Link href={""} className="flex items-center hover:text-sky-400">
                             Thể loại
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3 ml-1">
                                 <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clipRule="evenodd" />
                             </svg>
                         </Link>
                         </div>
-                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><Link href={"/genres"}>Hành động</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-black">
+                            <li><Link href={"/genres/action"}>Hành động</Link></li>
+                            <li><Link href={"/genres/romance"}>Tìm cảm</Link></li>
                         </ul>
                     </div>
                 </div>

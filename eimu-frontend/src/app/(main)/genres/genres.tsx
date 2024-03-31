@@ -1,5 +1,5 @@
 import React from 'react';
-import { MovieListEntry } from '../@/app/model/list-data';
+import { MovieListEntry } from '@/app/model/MovieModels';
 
 
 export default function Genre({

@@ -13,13 +13,13 @@ export default async function Home() {
   const chinese_movie_list = await getLatestMoviesByTag("c0c7c76d30bd3dcaefc96f40275bdc0a")
   const tag_list = await getAllTag()
   return (
-    <main className="text-white">
+    <div className="text-white">
       <Carousel items={new_movie_list.items} tagList={tag_list} />
       <SideList title="Vừa cập nhật!" link="#" data={new_movie_list["items"]} />
       <SideList title="Phim bộ" link="#" data={tv_movie_list["items"]} />
       <SideList title="Phim lẻ" link="#" data={theater_movie_list["items"]} />
       <SideList title="Trung Quốc" link="#" data={chinese_movie_list["items"]} />
       <SideList title="Anime" link="#" data={anime_movie_list["items"]} />
-    </main>
+    </div>
   );
 };
