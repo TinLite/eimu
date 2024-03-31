@@ -8,7 +8,7 @@ import java.util.*
 @Document("user")
 data class User(
 //    @Field("_id") val id: ObjectId,
-    @Id val id: ObjectId,
+    @Id val id: ObjectId?,
     var name: String,
     var dateOfBirth: Date?,
     var phone: String?,

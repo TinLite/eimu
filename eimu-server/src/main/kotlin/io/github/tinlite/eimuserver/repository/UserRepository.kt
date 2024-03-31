@@ -14,8 +14,6 @@ interface UserRepository
 
     fun findByPhone(phone: String): List<User>
 
-//    fun
-
-    //        @Query("{ 'email' :{ '\$regex' : ?0, '\$options' : 'i' } }")
     fun findByEmailIgnoreCase(email: String): List<User>
+
 }
