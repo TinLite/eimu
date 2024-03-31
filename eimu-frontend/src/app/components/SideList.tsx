@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { MovieListEntry } from "../model/list-data"
+import { MovieListEntry } from "@/app/model/MovieModels"
 import Image from "next/image"
 import { Button } from "@nextui-org/react"
 export default async function SideList({
