@@ -1,17 +1,14 @@
 import React from 'react';
 import { MovieListEntry } from '@/app/model/MovieModels';
+import { MovieTag } from '@/app/model/MovieTagModels';
 
 
-export default function Genre({
-    data,
-}: {
-    data: [MovieListEntry]
-}) {
+export default function Genre({genre,data}: {genre : string ,data: [MovieListEntry]}) {
     return (
         <div className="bg-gray-900 text-white min-h-screen ">
             <div className="container mx-auto p-8">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-2xl font-semibold ">Trang chủ </h2>
+                    <h2 className="text-2xl font-semibold ">Trang chủ / {genre}</h2>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
                     {data.map((entry) => (

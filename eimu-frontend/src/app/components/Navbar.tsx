@@ -26,12 +26,12 @@ const Navbar: React.FC = () => {
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-black">
                             <li><Link href={"/genres/action"}>Hành động</Link></li>
                             <li><Link href={"/genres/romance"}>Tìm cảm</Link></li>
-                            <li><Link href={""}>Hài Hước</Link></li>
-                            <li><Link href={""}>Phiêu Lưu</Link></li>
-                            <li><Link href={""}>Chính Kịch</Link></li>
-                            <li><Link href={""}>Giả Tưởng</Link></li>
-                            <li><Link href={""}>Lịch Sử</Link></li>
-                            <li><Link href={""}>Kinh Dị </Link></li>
+                            <li><Link href={"/genres/comedy"}>Hài Hước</Link></li>
+                            <li><Link href={"/genres/aventure"}>Phiêu Lưu</Link></li>
+                            <li><Link href={"/genres/drama"}>Chính Kịch</Link></li>
+                            <li><Link href={"/genres/fantasy"}>Giả Tưởng</Link></li>
+                            <li><Link href={"/genres/historical"}>Lịch Sử</Link></li>
+                            <li><Link href={"/genres/horror"}>Kinh Dị </Link></li>
                         </ul>
                     </div>
                 </div>

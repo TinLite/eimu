@@ -5,11 +5,11 @@ import { useParams } from "next/navigation";
 import { getLatestMovies , getLatestMoviesByTag} from "@/app/repositories/MovieRepository";
 
 export default async function Genre() {
-    const tv_movie_list = await getLatestMoviesByTag("eccbc87e4b5ce2fe28308fd9f2a7baf3")
+    const fantasy_movie_list = await getLatestMoviesByTag("9bf31c7ff062936a96d3c8bd1f8f2ff3")
 
     return (
         <>
-            <Genres genre = "Phim bộ" data={tv_movie_list["items"]} />
+            <Genres genre = "Giả Tưởng" data={fantasy_movie_list["items"]} />
         </>
     )
 }

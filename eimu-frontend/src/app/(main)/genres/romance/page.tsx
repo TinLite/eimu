@@ -9,7 +9,7 @@ export default async function Genre() {
 
     return (
         <>
-            <Genres data={romance_movie_list["items"]} />
+            <Genres genre = "Tình cảm" data={romance_movie_list["items"]} />
         </>
     )
 }
