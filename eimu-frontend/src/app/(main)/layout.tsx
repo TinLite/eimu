@@ -6,10 +6,13 @@ import Footer from "@/app/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Trang chủ",
-  description: "",
-};
+export const metadata = {
+  title: {
+    template: '%s | Project Eimu',
+    default: 'Project Eimu'
+  },
+  description: '',
+}
 
 export default async function RootLayout({
   children,

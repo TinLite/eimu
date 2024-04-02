@@ -5,6 +5,10 @@ import InforMovie from '@/app/components/InforMovie';
 import Movie from '@/app/components/Movie';
 import Comment from '@/app/components/Comment';
 
+export const metadata = {
+    title: 'Tên phim'
+}
+
 export default async function Detail() {
     const new_movie_list = await getLatestMovies()
     return (

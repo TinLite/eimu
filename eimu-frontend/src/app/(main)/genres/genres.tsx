@@ -1,7 +1,6 @@
 import React from 'react';
 import { MovieListEntry } from '@/app/model/list-data';
 
-
 export default function Genre({
     data,
 }: {

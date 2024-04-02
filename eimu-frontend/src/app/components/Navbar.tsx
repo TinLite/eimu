@@ -23,8 +23,26 @@ const Navbar: React.FC = () => {
                             </svg>
                         </Link>
                         </div>
-                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-200 text-white rounded-box w-52">
+                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-200 text-white rounded-box w-max grid grid-cols-4 gap-3">
                             <li><Link href={"/genres"}>Hành động</Link></li>
+                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                            <li><Link href={"/genres"}>Hành động</Link></li>
+                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                            <li><Link href={"/genres"}>Hành động</Link></li>
+                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                            <li><Link href={"/genres"}>Hành động</Link></li>
+                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                            <li><Link href={"/genres"}>Hành động</Link></li>
+                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
                             <li><Link href={"/genres"}>Tìm cảm</Link></li>
                         </ul>
                     </div>
