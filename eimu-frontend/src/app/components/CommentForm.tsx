@@ -4,7 +4,7 @@ import { Button } from '@nextui-org/react'
 import { Avatar } from '@nextui-org/react'
 export default function CommentForm() {
   return (
-    <div className='flex items-center'>
+    <div className='flex items-center w-max'>
       <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" className="w-16 h-16 mr-6" />
       <form action="">
         <label className="form-control">
@@ -13,7 +13,7 @@ export default function CommentForm() {
           </div>
           <Textarea
             placeholder="Nhập nội dung bình luận..."
-            className="w-[1200px] border-b-8 border-sky-900 rounded-2xl"
+            className="w-[1000px]  border-b-8 border-sky-900 rounded-2xl"
             maxLength={200}
           />
         </label>

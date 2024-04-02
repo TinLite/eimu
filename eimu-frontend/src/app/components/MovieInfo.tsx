@@ -10,14 +10,15 @@ export default async function MovieInfo({ movie }: { movie: Movie }) {
         <div className='bg-[#1A1C22] rounded-sm'>
             <div className='grid grid-cols-6'>
                 <div className='mx-5 my-5'>
-                    <div><div
-                        className="rounded-sm aspect-[2/3] w-full"
-                        style={{ "background": `center / cover no-repeat url('${movie.thumbUrl}')` }}>
-                    </div>
+                    <div>
+                        <div
+                            className="rounded-sm aspect-[2/3] w-full"
+                            style={{ "background": `center / cover no-repeat url('${movie.thumbUrl}')` }}>
+                        </div>
                     </div>
                     <div className='flex mt-5'>
-                        <Button className='bg-blue-500 rounded-lg'>Theo dõi</Button>
-                        <Button className='bg-yellow-400 rounded-lg'>Đánh giá</Button>
+                        <Button className='bg-blue-500  border-2 border-pink-600'>Theo dõi</Button>
+                        <Button className='bg-yellow-400 border-2 border-pink-600'>Đánh giá</Button>
                     </div>
                 </div>
                 <div className='col-span-5 my-5 mx-5'>

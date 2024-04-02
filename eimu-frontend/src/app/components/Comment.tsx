@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function comment() {
     return (
-        <div className='bg-[#1A1C22] max-h-full px-6 py-4 mx-14 my-5'>
+        <div className='border-t-4 rounded-3xl max-h-full px-6 py-4 mx-14 my-5'>
             <div className='flex'>
                 <div className='mr-2 mb-5'>Bình luận</div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
