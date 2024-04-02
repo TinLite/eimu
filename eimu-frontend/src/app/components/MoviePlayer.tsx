@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function MoviePlayer() {
     return (
-        <div className='bg-[#1A1C22] my-14'>
+        <div className='bg-[#1A1C22] my-4'>
             <div className='flex'>
                 <div className='mx-5'>
                     <div className="text-sm breadcrumbs">

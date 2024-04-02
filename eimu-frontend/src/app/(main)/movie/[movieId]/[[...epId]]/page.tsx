@@ -11,7 +11,7 @@ export default async function Detail({ params }: { params: { movieId: string, ep
     const movieDetail = await getMovieDetail(movieId)
     const new_movie_list = await getLatestMovies()
     return (
-        <div className='text-gray-200 max-w-screen-xl mx-auto'>
+        <div className='text-gray-200 max-w-screen-xl mx-auto mt-4'>
             <MovieInfo movie={movieDetail} />
             <MoviePlayer />
             <SideList title="Đề xuất cho bạn" link="#" data={new_movie_list.items} />
