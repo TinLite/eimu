@@ -7,3 +7,15 @@ export interface MovieListEntry {
     tags: [string],
     description?: string,
 }
+
+export interface Movie {
+    id: string,
+    name: string,
+    originalName?: string,
+    thumbUrl: string,
+    posterUrl: string,
+    director?: string,
+    casts?: string,
+    tags: [string],
+    description?: string,
+}
