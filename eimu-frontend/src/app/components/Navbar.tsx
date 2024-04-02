@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Navbar: React.FC = () => {
     return (
-        <nav className="fixed top-0 left-0 w-full h-16 xl:px-20 bg-[#001731] text-white z-50">
+        <nav className="fixed top-0 left-0 w-full h-16 xl:px-20 bg-[#001731] text-gray-200 z-50">
             <div className="flex items-center justify-between">
                 <div className="flex ">
                     <Link href={"/"} className="">
@@ -12,9 +12,9 @@ const Navbar: React.FC = () => {
                             width={65}
                             height={20} />
                     </Link>
-                    <Link href={"/genres"} className="px-4 flex items-center hover:bg-sky-200 hover:text-black">Phim mới</Link>
-                    <Link href={"/genres"} className="px-4 flex items-center hover:bg-sky-200 hover:text-black">Phim bộ</Link>
-                    <Link href={"/genres"} className="px-4 flex items-center hover:bg-sky-200 hover:text-black">Phim lẻ</Link>
+                    <Link href={"/genres"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim mới</Link>
+                    <Link href={"/genres"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim bộ</Link>
+                    <Link href={"/genres"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim lẻ</Link>
                     <div className="dropdown dropdown-hover px-4 content-center">
                         <div tabIndex={0} role="button" className=""><Link href={"/genres"} className="flex items-center hover:text-sky-400">
                             Thể loại
@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
                             </svg>
                         </Link>
                         </div>
-                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-200 text-white rounded-box w-52">
                             <li><Link href={"/genres"}>Hành động</Link></li>
                             <li><Link href={"/genres"}>Tìm cảm</Link></li>
                         </ul>
@@ -46,11 +46,10 @@ const Navbar: React.FC = () => {
                     </Link>
                     <Link href={"/login"} className="px-4 py-2 rounded-md bg-blue-50 text-[#006FEE] flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9" />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
                         </svg>
                         <span className="ml-1">Đăng nhập</span></Link>
                 </div>
-                {/* Add more menu items as needed */}
             </div>
         </nav >
     )
