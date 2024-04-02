@@ -9,7 +9,7 @@ export default async function Genre() {
 
     return (
         <>
-            <Genres genre = "Lịch Sử" data={horror_movie_list["items"]} />
+            <Genres genre = "Kinh Dị" data={horror_movie_list["items"]} />
         </>
     )
 }
