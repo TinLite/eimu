@@ -15,7 +15,11 @@ data class MovieDetail(
     @Field("thumb_url") var thumbUrl: String,
     @Field("poster_url") var posterUrl: String,
     var modified: Long,
-    val episodes: List<EpisodeServer>
+    val episodes: List<EpisodeServer>,
+    val director: String?,
+    val language: String?,
+    val casts: String?,
+    @Field("total_episodes") val totalEpisodes : Int?,
 )
 
 data class EpisodeServer(

@@ -37,7 +37,7 @@ export default function Carousel({
   return <div className="w-full relative">
     {items.map((entry) => (
       <div key={entry.id} className={`w-screen ${(items[index].id == entry.id ? "relative" : "hidden")}`}>
-        <div className="w-full h-[450px] inset-0 z-0 absolute overflow-hidden" style={{ "background": `10% / cover no-repeat url('${entry.posterUrl}')` }}></div>
+        <div className="w-full h-[450px] inset-0 z-0 absolute" style={{ "background": `10% / cover no-repeat url('${entry.posterUrl}')` }}></div>
         <div className="relative h-[450px] flex items-center px-36 backdrop-brightness-50 backdrop-blur-sm">
           <div>
             <div className="flex mb-4">

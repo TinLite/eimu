@@ -23,7 +23,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-[#000D1C]`}>
         <Navbar />
-        <div className="mt-16">{children}
+        <div className="pt-16">{children}
         </div>
         <Footer />
       </body>

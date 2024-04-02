@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function movie() {
+export default function MoviePlayer() {
     return (
-        <div className='bg-[#1A1C22] mx-14 my-14 max-h'>
+        <div className='bg-[#1A1C22] my-14'>
             <div className='flex'>
                 <div className='mx-5'>
                     <div className="text-sm breadcrumbs">
