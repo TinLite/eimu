@@ -16,7 +16,7 @@ export default function SideList({
     return <div className="mt-2 relative">
         <div className=" px-16 py-2 flex justify-between items-center">
             <div className="text-3xl">{title}</div>
-            <div><Link href={link} className=" hover:text-red-400">Xem thêm</Link></div>
+            <div><Link href={link} className=" hover:text-sky-400">Xem thêm</Link></div>
         </div>
         <div className="flex px-16 gap-5 w-full overflow-x-scroll items-start">
             {data.map((entry) => (
