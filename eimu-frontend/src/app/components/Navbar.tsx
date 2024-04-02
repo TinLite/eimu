@@ -31,7 +31,11 @@ const Navbar: React.FC = () => {
                             <li><Link href={"/genres/drama"}>Chính Kịch</Link></li>
                             <li><Link href={"/genres/fantasy"}>Giả Tưởng</Link></li>
                             <li><Link href={"/genres/historical"}>Lịch Sử</Link></li>
-                            <li><Link href={"/genres/horror"}>Kinh Dị </Link></li>
+                            <li><Link href={"/genres/horror"}>Kinh Dị</Link></li>
+                            <li><Link href={"/genres/family"}>Gia Đình</Link></li>
+                            <li><Link href={"/genres/chinese_historical"}>Cổ Trang</Link></li>
+                            <li><Link href={"/genres/cartoon"}>Cartoon</Link></li>
+                            <li><Link href={"/genres/anime"}>Anime</Link></li>
                         </ul>
                     </div>
                 </div>

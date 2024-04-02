@@ -1,6 +1,7 @@
 import React from 'react';
 import { MovieListEntry } from '@/app/model/MovieModels';
 import { MovieTag } from '@/app/model/MovieTagModels';
+import Link from 'next/link';
 
 
 export default function Genre({genre,data}: {genre : string ,data: [MovieListEntry]}) {
@@ -16,13 +17,13 @@ export default function Genre({genre,data}: {genre : string ,data: [MovieListEnt
                             key={entry.id}
                             className="p-4 rounded-lg relative"
                         >
-                            <a href="#">
+                            <Link href="/details">
                                 <div
                                     className="aspect-[2/3] place-items-center w-50"
                                     style={{ "background": `center / cover no-repeat url('${entry.thumbUrl}')` }}>{ }
                                 </div>
                                 <h3 className="text-lg font-semibold">{entry.name}</h3>
-                            </a>
+                            </Link>
                         </div>
                     ))}
                 </div>
