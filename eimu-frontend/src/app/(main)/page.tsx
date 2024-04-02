@@ -15,11 +15,11 @@ export default async function Home() {
   return (
     <main className="text-white">
       <Carousel items={new_movie_list.items} tagList={tag_list} />
-      <SideList title="Vừa cập nhật!" link="#" data={new_movie_list.items} />
-      <SideList title="Phim bộ" link="#" data={tv_movie_list.items} />
-      <SideList title="Phim lẻ" link="#" data={theater_movie_list.items} />
-      <SideList title="Trung Quốc" link="#" data={anime_movie_list.items} />
-      <SideList title="Anime" link="#" data={anime_movie_list.items} />
+      <SideList title="Vừa cập nhật!" link="/genres" data={new_movie_list.items} />
+      <SideList title="Phim bộ" link="/genres" data={tv_movie_list.items} />
+      <SideList title="Phim lẻ" link="/genres" data={theater_movie_list.items} />
+      <SideList title="Trung Quốc" link="/genres" data={anime_movie_list.items} />
+      <SideList title="Anime" link="/genres" data={anime_movie_list.items} />
     </main>
   );
 };

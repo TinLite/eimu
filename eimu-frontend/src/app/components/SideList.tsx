@@ -20,13 +20,13 @@ export default function SideList({
         </div>
         <div className="flex px-16 gap-5 w-full overflow-x-scroll items-start">
             {data.map((entry) => (
-                <a href={`/movie/${entry.id}`} key={entry.id} className="block">
+                <Link href={`/movie/${entry.id}`} key={entry.id} className="block">
                     <div
                         className="aspect-[2/3] grid place-items-center w-44"
                         style={{ "background": `center / cover no-repeat url('${entry.thumbUrl}')` }}>
                     </div>
                     <div className="mt-2 hover:text-sky-300">{entry.name}</div>
-                </a>
+                </Link>
             ))
             }
         </div>

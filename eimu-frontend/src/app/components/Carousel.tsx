@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import { MovieListEntry } from "@/app/model/MovieModels";
-import { getAllTag, getTagsDetail } from "@/app/repositories/MovieTagRepository";
 import { MovieTag } from "@/app/model/MovieTagModels";
 
 export default function Carousel({
@@ -42,7 +41,7 @@ export default function Carousel({
           <div>
             <div className="flex mb-4">
               <div className="grid">
-                <h1 className="font-bold sm:text-4xl">{entry.name}</h1>
+                <Link href={`/movie/${entry.id}`} className="font-bold sm:text-4xl">{entry.name}</Link>
                 <div className="place-self-end">{entry.originalName}</div>
               </div>
             </div>
