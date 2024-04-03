@@ -8,10 +8,7 @@ export default function Genre({
     data: [MovieListEntry]
 }) {
     return (
-        <div className='text-white max-w-screen-xl mx-auto px-12'>
-            <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-semibold py-8">Trang chủ /</h2>
-            </div>
+        <div className=' max-w-screen-xl mx-auto'>
             <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
                 {data.map((entry) => (
                     <div className='max-w-44' key={entry.id}>

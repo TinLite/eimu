@@ -1,7 +1,6 @@
 import React from 'react'
 import { Avatar, Button, Textarea } from '@nextui-org/react'
 import Link from 'next/link'
-import CommentForm from '@/app/components/CommentForm'
 
 export default function UserComments() {
     return (
