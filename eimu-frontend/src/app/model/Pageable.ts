@@ -16,7 +16,7 @@ export interface PaginatedMovieList {
 
 export interface PaginatedMovieListWithTags {
     pageable: Pageable,
-    tags: String,
+    tags: [MovieTag],
     items: [MovieListEntry]
 }
 
