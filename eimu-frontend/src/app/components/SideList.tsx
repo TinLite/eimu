@@ -14,7 +14,7 @@ export default function SideList({
     data: [MovieListEntry]
 }) {
     return <div className="mt-2 relative">
-        <div className=" px-16 py-2 flex justify-between items-center">
+        <div className=" px-16 py-2 flex justify-between items-end">
             <div className="text-3xl">{title}</div>
             <div><Link href={link} className=" hover:text-sky-400">Xem thêm</Link></div>
         </div>
