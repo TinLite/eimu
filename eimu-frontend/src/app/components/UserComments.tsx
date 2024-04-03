@@ -12,7 +12,7 @@ export default function UserComments() {
                     <div className="label">
                         <span className="label-text font-bold">TÊN LÀ GÌ Ạ</span>
                     </div>
-                    <div className='bg-sky-900 border-8 max-w-[1000px] rounded-2xl px-5 py-2'>
+                    <div className='bg-white max-w-[1000px] rounded-2xl px-5 py-2 text-black'>
                         <div className='mb-2'>Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo Mẹ Mày Béo</div>
                     </div>
                 </label >
@@ -49,7 +49,7 @@ export default function UserComments() {
                     </div>
                 </details>
             </div>
-            <div className="label-text font-bold flex">
+            <div className="label-text flex">
                 <details className="collapse mx-24">
                     <summary className="collapse-title text-xl font-medium flex">
                         <span>Xem thêm bình luận</span>
@@ -59,9 +59,9 @@ export default function UserComments() {
                             <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" className="w-16 h-16 mr-6" />
                             <label className="form-control">
                                 <div className="label">
-                                    <span className="label-text font-bold">TÊN LÀ GÌ Ạ</span>
+                                    <span className="label-text">TÊN LÀ GÌ Ạ</span>
                                 </div>
-                                <div className='bg-sky-900 border-8 max-w-[1000px] rounded-2xl px-5 py-2'>
+                                <div className='bg-white text-black max-w-[1000px] rounded-2xl px-5 py-2'>
                                     <div className='mb-2'>Mẹ Mày Ngu Mẹ Mày Ngu Mẹ Mày Ngu Mẹ Mày Ngu Mẹ Mày Ngu Mẹ Mày Ngu Mẹ Mày Ngu Mẹ Mày Ngu Mẹ Mày Ngu Mẹ Mày Ngu Mẹ Mày Ngu Mẹ Mày Ngu Mẹ Mày Ngu</div>
                                 </div>
                                 <div className="label">
