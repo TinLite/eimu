@@ -13,8 +13,8 @@ const Navbar: React.FC = () => {
                             height={20} />
                     </Link>
                     <Link href={"/genres"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim mới</Link>
-                    <Link href={"/genres"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim bộ</Link>
-                    <Link href={"/genres"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim lẻ</Link>
+                    <Link href={"/genres/eccbc87e4b5ce2fe28308fd9f2a7baf3"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim bộ</Link>
+                    <Link href={"/genres/a87ff679a2f3e71d9181a67b7542122c"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim lẻ</Link>
                     <div className="dropdown dropdown-hover px-4 content-center">
                         <div tabIndex={0} role="button" className=""><Link href={"/genres"} className="flex items-center hover:text-sky-400">
                             Thể loại
@@ -23,27 +23,10 @@ const Navbar: React.FC = () => {
                             </svg>
                         </Link>
                         </div>
-                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-200 text-white rounded-box w-max grid grid-cols-4 gap-3">
-                            <li><Link href={"/genres"}>Hành động</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
-                            <li><Link href={"/genres"}>Hành động</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
-                            <li><Link href={"/genres"}>Hành động</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
-                            <li><Link href={"/genres"}>Hành động</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
-                            <li><Link href={"/genres"}>Hành động</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
-                            <li><Link href={"/genres"}>Tìm cảm</Link></li>
+                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-200 text-white rounded-box w-52">
+                            <li><Link href={"/genres/8f14e45fceea167a5a36dedd4bea2543"}>Hành động</Link></li>
+                            <li><Link href={"/genres/2a79ea27c279e471f4d180b08d62b00a"}>Tình cảm</Link></li>
+                            <li><Link href={"/genres/45c48cce2e2d7fbdea1afc51c7c6ad26/d2ddea18f00665ce8623e36bd4e3c7c5"}>Anime</Link></li>
                         </ul>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import Navbar from "@/app/components/Navbar";
