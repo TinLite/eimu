@@ -18,4 +18,16 @@ export interface Movie {
     casts?: string,
     tags: [string],
     description?: string,
+    episodes: [EpisodeServer]
+}
+
+export interface EpisodeServer {
+    serverName: string,
+    episodeList: [Episode]
+}
+
+export interface Episode {
+    id: string,
+    name: string,
+    embed: string
 }
