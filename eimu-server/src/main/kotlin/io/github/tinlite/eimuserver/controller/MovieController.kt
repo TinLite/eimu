@@ -3,6 +3,7 @@ package io.github.tinlite.eimuserver.controller
 import io.github.tinlite.eimuserver.model.EpisodeServer
 import io.github.tinlite.eimuserver.model.MovieDetail
 import io.github.tinlite.eimuserver.repository.MovieDetailRepository
+import io.github.tinlite.eimuserver.repository.MovieTagRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
@@ -16,13 +17,16 @@ class MovieController {
     @Autowired
     lateinit var movieDetailRepository: MovieDetailRepository
 
+    @Autowired
+    lateinit var tagRepository: MovieTagRepository
+
     @GetMapping
     fun listPaginated(@RequestParam page: Int = 1, @RequestParam size: Int = 20, @RequestParam tags: Collection<String>?): ResponseEntity<Map<String, Any>> {
         val data = if (tags.isNullOrEmpty())
             movieDetailRepository.findAllBy(PageRequest.of(page - 1, size, Sort.by("modified").descending()))
         else
             movieDetailRepository.findAllByTagsPaginated(tags, PageRequest.of(page - 1, size, Sort.by("modified").descending()))
-        val response = mapOf(
+        val response = mutableMapOf(
             "pageable" to mapOf(
                 "page" to page,
                 "totalPages" to data.totalPages,
@@ -32,6 +36,8 @@ class MovieController {
             ),
             "items" to data.content
         )
+        if (!tags.isNullOrEmpty())
+            response["tags"] = tagRepository.findAllByIdIn(tags)
         return ResponseEntity.ok(response)
     }
 

@@ -2,7 +2,7 @@ package io.github.tinlite.eimuserver.repository
 
 import io.github.tinlite.eimuserver.model.EpisodeServer
 import io.github.tinlite.eimuserver.model.MovieDetail
-import io.github.tinlite.eimuserver.model.MovieListEntryNew
+import io.github.tinlite.eimuserver.model.MovieListEntry
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.mongodb.repository.MongoRepository
@@ -15,8 +15,10 @@ interface MovieDetailRepository : MongoRepository<MovieDetail, String> {
     @Update("{'\$set': ?1 }")
     fun findAndUpdateEpisodesById(id: String, episodes: List<EpisodeServer>)
 
-    fun findAllBy(pageable: Pageable) : Page<MovieListEntryNew>
+    fun findAllBy(pageable: Pageable) : Page<MovieListEntry>
 
     @Query(value="{ 'tags': { \$all : ?0 } }")
-    fun findAllByTagsPaginated(tags: Collection<String>, pageable: Pageable) : Page<MovieListEntryNew>
+    fun findAllByTagsPaginated(tags: Collection<String>, pageable: Pageable) : Page<MovieListEntry>
+
+    fun findAllByFlagsContaining(flags: MutableCollection<String>, pageable: Pageable) : Page<MovieListEntry>
 }
