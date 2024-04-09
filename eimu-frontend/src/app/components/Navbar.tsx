@@ -32,14 +32,14 @@ const Navbar: React.FC = () => {
                 </div>
                 <div><input type="text" placeholder="Tìm kiếm..." className="input input-bordered w-full h-10 bg-blue-50 max-w-xs text-black" /></div>
                 <div className="flex items-center">
-                    <Link href={"/personal/history"} className="flex items-center hover:text-green-400 mr-3">
+                    <Link href={"/user/history"} className="flex items-center hover:text-green-400 mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
 
                         <div className="flex-initial w-20 ml-1">Lịch sử</div>
                     </Link>
-                    <Link href={"/personal/favorite"} className="flex items-center hover:text-green-400 mr-3">
+                    <Link href={"/user/follows"} className="flex items-center hover:text-green-400 mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9" />
                         </svg>
