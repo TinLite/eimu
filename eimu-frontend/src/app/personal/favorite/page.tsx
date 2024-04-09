@@ -1,5 +1,5 @@
 
-import MenuAccY from '@/app/components/MenuAccY'
+import MenuAccY from '@/app/components/Sidebar'
 import { Button } from '@nextui-org/react'
 import Link from 'next/link'
 import React from 'react'

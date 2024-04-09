@@ -16,10 +16,9 @@ export default async function Home() {
     <main className="text-white">
       <Carousel items={new_movie_list.items} tagList={tag_list} />
       <SideList title="Vừa cập nhật!" link="/genres" data={new_movie_list.items} />
-      <SideList title="Phim bộ" link="/genres" data={tv_movie_list.items} />
-      <SideList title="Phim lẻ" link="/genres" data={theater_movie_list.items} />
-      <SideList title="Trung Quốc" link="/genres" data={anime_movie_list.items} />
-      <SideList title="Anime" link="/genres" data={anime_movie_list.items} />
+      <SideList title="Phim bộ" link="/genres/eccbc87e4b5ce2fe28308fd9f2a7baf3" data={tv_movie_list.items} />
+      <SideList title="Phim lẻ" link="/genres/a87ff679a2f3e71d9181a67b7542122c" data={theater_movie_list.items} />
+      <SideList title="Anime" link="/genres/45c48cce2e2d7fbdea1afc51c7c6ad26,d2ddea18f00665ce8623e36bd4e3c7c5" data={anime_movie_list.items} />
     </main>
   );
 };

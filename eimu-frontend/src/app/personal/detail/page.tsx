@@ -1,4 +1,4 @@
-import MenuAccY from '@/app/components/MenuAccY'
+import MenuAccY from '@/app/components/Sidebar'
 import { Avatar, Button, useDisclosure, Input } from '@nextui-org/react'
 import React from 'react'
 import { Select, SelectItem } from "@nextui-org/react";
@@ -23,7 +23,7 @@ export default function page() {
                             <input type="checkbox" id="my_modal_6" className="modal-toggle" />
                             <div className="modal" role="dialog">
                                 <div className="modal-box">
-                                    <h3 className="font-bold text-lg mb-5">Chỉnh sửa thông tin cá nhân</h3>
+                                    <h3 className="text-lg mb-5">Chỉnh sửa thông tin cá nhân</h3>
                                     <form action="">
                                         <div className='mb-5'>
                                             <label className='mr-5' htmlFor="avatar">Tải ảnh đại diện: </label>
@@ -62,24 +62,24 @@ export default function page() {
                             </div>
                         </div>
                         <div className='flex border-b-2 py-5'>
-                            <div className='mr-5 text-xl'>Họ tên:</div>
-                            <div className='text-xl'>Lê Quang Tiến</div>
+                            <div className='mr-5 '>Họ tên:</div>
+                            <div className=''>Lê Quang Tiến</div>
                         </div>
                         <div className='flex border-b-2 py-5'>
-                            <div className='mr-5 text-xl'>Ngày sinh:</div>
-                            <div className='text-xl'>10/05/2003</div>
+                            <div className='mr-5 '>Ngày sinh:</div>
+                            <div className=''>10/05/2003</div>
                         </div>
                         <div className='flex border-b-2 py-5'>
-                            <div className='mr-5 text-xl'>Giới tính:</div>
-                            <div className='text-xl'>Nam</div>
+                            <div className='mr-5 '>Giới tính:</div>
+                            <div className=''>Nam</div>
                         </div>
                         <div className='flex border-b-2 py-5'>
-                            <div className='mr-5 text-xl'>Email:</div>
-                            <div className='text-xl'>LeQuangTien@gmail.com</div>
+                            <div className='mr-5 '>Email:</div>
+                            <div className=''>LeQuangTien@gmail.com</div>
                         </div>
                         <div className='flex py-5'>
-                            <div className='mr-5 text-xl'>Số điện thoại:</div>
-                            <div className='text-xl'>0935964574</div>
+                            <div className='mr-5 '>Số điện thoại:</div>
+                            <div className=''>0935964574</div>
                         </div>
                     </div>
                 </div>

@@ -14,17 +14,17 @@ export default function MenuAccY() {
                 </Link>
             </li>
             <li className=''>
-                <Link href={'/personal'} className='text-white hover:text-green-500 font-bold py-5'>
+                <Link href={'/personal/detail'} className='text-white hover:text-green-500 py-5'>
                     Thông tin tài khoản
                 </Link>
             </li>
             <li className=''>
-                <Link href={'/history'} className='text-white hover:text-green-500 font-bold py-5'>
+                <Link href={'/personal/history'} className='text-white hover:text-green-500 py-5'>
                     Lịch sử xem
                 </Link>
             </li>
             <li className=' border-b-2'>
-                <Link href={'/favorite'} className='text-white hover:text-green-500 font-bold py-5'>
+                <Link href={'/personal/favorite'} className='text-white hover:text-green-500 py-5'>
                     Danh sách theo dõi
                 </Link>
             </li>
