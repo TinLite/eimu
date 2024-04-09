@@ -1,14 +1,17 @@
 package io.github.tinlite.eimuserver.model
 
 import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.index.TextIndexed
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
+import org.springframework.data.mongodb.core.mapping.TextScore
 
 @Document("movie")
 data class MovieDetail(
     @Id val id: String,
-    var name: String,
-    @Field("original_name") var originalName: String?,
+    @TextIndexed var name: String,
+    val year: Int?,
+    @TextIndexed @Field("original_name") var originalName: String?,
     var description: String?,
     val tags: Collection<String>,
     val flags: Collection<String>?,
@@ -20,6 +23,7 @@ data class MovieDetail(
     val language: String?,
     val casts: String?,
     @Field("total_episodes") val totalEpisodes : Int?,
+    @TextScore val score: Float?
 )
 
 data class EpisodeServer(
@@ -30,7 +34,7 @@ data class EpisodeServer(
 data class Episode(
     @Field("slug") val id: String,
     val name: String,
-    val embed: String
+    val embed: String?
 )
 
 data class MovieListEntry(
@@ -41,5 +45,5 @@ data class MovieListEntry(
     val tags: Collection<String>,
     @Field("thumb_url") var thumbUrl: String,
     @Field("poster_url") var posterUrl: String,
-    var modified: Long,
+    var modified: Long
 )

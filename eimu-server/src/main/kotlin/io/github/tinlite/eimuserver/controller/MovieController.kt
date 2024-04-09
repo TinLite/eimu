@@ -7,6 +7,7 @@ import io.github.tinlite.eimuserver.repository.MovieTagRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
+import org.springframework.data.mongodb.core.query.TextCriteria
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -21,11 +22,18 @@ class MovieController {
     lateinit var tagRepository: MovieTagRepository
 
     @GetMapping
-    fun listPaginated(@RequestParam page: Int = 1, @RequestParam size: Int = 20, @RequestParam tags: Collection<String>?): ResponseEntity<Map<String, Any>> {
-        val data = if (tags.isNullOrEmpty())
-            movieDetailRepository.findAllBy(PageRequest.of(page - 1, size, Sort.by("modified").descending()))
+    fun listPaginated(@RequestParam page: Int = 1, @RequestParam size: Int = 20, @RequestParam tags: Collection<String>?, @RequestParam query: String?): ResponseEntity<Map<String, Any>> {
+        val pageRequest = PageRequest.of(page - 1, size)
+        val data = if (!tags.isNullOrEmpty())
+            movieDetailRepository.findAllByTagsPaginated(tags, pageRequest.withSort(Sort.by("modified").descending()))
+        else if (!query.isNullOrEmpty())
+            movieDetailRepository.findAllBy(
+                TextCriteria.forDefaultLanguage().matchingAny(query),
+//                pageRequest.withSort(Sort.by("score").descending())
+                pageRequest.withSort(Sort.by("modified").descending())
+            )
         else
-            movieDetailRepository.findAllByTagsPaginated(tags, PageRequest.of(page - 1, size, Sort.by("modified").descending()))
+            movieDetailRepository.findAllBy(pageRequest.withSort(Sort.by("modified").descending()))
         val response = mutableMapOf(
             "pageable" to mapOf(
                 "page" to page,
