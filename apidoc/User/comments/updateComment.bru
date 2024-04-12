@@ -1,0 +1,18 @@
+meta {
+  name: updateComment
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/comments/update
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id":"",
+    "content":"Phim Hay that day"
+  }
+}
