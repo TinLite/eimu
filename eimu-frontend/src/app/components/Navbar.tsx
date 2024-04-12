@@ -30,7 +30,18 @@ const Navbar: React.FC = () => {
                         </ul>
                     </div>
                 </div>
-                <div><input type="text" placeholder="Tìm kiếm..." className="input input-bordered w-full h-10 bg-blue-50 max-w-xs text-black" /></div>
+                <div>
+                    <form action="search/">
+                        <label htmlFor="">
+                            <input type="text" placeholder="Tìm kiếm..." className="input input-bordered w-full h-10 bg-blue-50 max-w-xs text-black" />
+                            <button className="absolute top-5 right-[36rem]" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="black" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                </svg>
+                            </button>
+                        </label>
+                    </form>
+                </div>
                 <div className="flex items-center">
                     <Link href={"/user/history"} className="flex items-center hover:text-green-400 mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
