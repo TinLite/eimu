@@ -1,7 +1,6 @@
 package io.github.tinlite.eimuserver.model
 
 import org.springframework.data.annotation.Id
-import org.springframework.data.mongodb.core.index.TextIndexed
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
 import org.springframework.data.mongodb.core.mapping.TextScore
@@ -9,9 +8,9 @@ import org.springframework.data.mongodb.core.mapping.TextScore
 @Document("movie")
 data class MovieDetail(
     @Id val id: String,
-    @TextIndexed var name: String,
+    var name: String,
     val year: Int?,
-    @TextIndexed @Field("original_name") var originalName: String?,
+    @Field("original_name") var originalName: String?,
     var description: String?,
     val tags: Collection<String>,
     val flags: Collection<String>?,

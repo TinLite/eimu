@@ -29,8 +29,8 @@ class MovieController {
         else if (!query.isNullOrEmpty())
             movieDetailRepository.findAllBy(
                 TextCriteria.forDefaultLanguage().matchingAny(query),
-//                pageRequest.withSort(Sort.by("score").descending())
-                pageRequest.withSort(Sort.by("modified").descending())
+                pageRequest.withSort(Sort.by("score").descending())
+//                pageRequest.withSort(Sort.by("modified").descending())
             )
         else
             movieDetailRepository.findAllBy(pageRequest.withSort(Sort.by("modified").descending()))
