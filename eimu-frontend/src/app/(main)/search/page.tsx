@@ -7,13 +7,7 @@ import { MovieTileListing } from '@/app/components/MovieListing';
 import { Image, ScrollShadow } from "@nextui-org/react";
 import Link from 'next/link';
 
-export default function search({
-    data,
-    tags
-}: {
-    data: [MovieListEntry],
-    tags?: [MovieTag]
-}) {
+export default function search() {
     noCache(); // Do not cache the render of this page
     return (
         <div className='text-white max-w-screen-xl mx-auto px-12'>
