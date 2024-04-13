@@ -1,7 +1,6 @@
 import React from "react";
 import Genres from "../genres";
 import { getLatestMoviesByTag } from "@/app/repositories/MovieRepository";
-import { unstable_noStore as noCache } from "next/cache";
 
 export default async function Genre({
     params

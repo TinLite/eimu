@@ -1,6 +1,5 @@
 import React from "react";
 import SideList from "@/app/components/SideList";
-import Link from "next/link";
 import Carousel from "@/app/components/Carousel";
 import { getLatestMovies, getLatestMoviesByTag } from "@/app/repositories/MovieRepository";
 import { getAllTag } from "@/app/repositories/MovieTagRepository";
@@ -18,7 +17,7 @@ export default async function Home() {
       <SideList title="Vừa cập nhật!" link="/genres" data={new_movie_list.items} />
       <SideList title="Phim bộ" link="/genres" data={tv_movie_list.items} />
       <SideList title="Phim lẻ" link="/genres" data={theater_movie_list.items} />
-      <SideList title="Trung Quốc" link="/genres" data={anime_movie_list.items} />
+      <SideList title="Trung Quốc" link="/genres" data={chinese_movie_list.items} />
       <SideList title="Anime" link="/genres" data={anime_movie_list.items} />
     </div>
   );

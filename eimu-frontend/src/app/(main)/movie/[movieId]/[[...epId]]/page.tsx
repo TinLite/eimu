@@ -1,6 +1,6 @@
 import React from 'react'
 import SideList from '@/app/components/SideList';
-import { getLatestMovies, getLatestMoviesByTag, getMovieDetail } from "@/app/repositories/MovieRepository";
+import { getLatestMoviesByTag, getMovieDetail } from "@/app/repositories/MovieRepository";
 import MovieInfo from '@/app/components/MovieInfo';
 import MoviePlayer from '@/app/components/MoviePlayer';
 import Comment from '@/app/components/Comment';

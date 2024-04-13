@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { MovieListEntry } from "@/app/model/MovieModels";
-import Image from "next/image";
-import { Button } from "@nextui-org/react";
 import { useRef } from "react";
 export default function SideList({
     title,

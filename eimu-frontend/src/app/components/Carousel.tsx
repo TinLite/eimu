@@ -2,7 +2,6 @@
 import { useRef } from "react";
 import { MovieListEntry } from "@/app/model/MovieModels";
 import { MovieTag } from "@/app/model/MovieTagModels";
-import Link from "next/link";
 
 export default function Carousel({
   items,
