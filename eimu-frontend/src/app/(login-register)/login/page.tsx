@@ -1,6 +1,7 @@
 import Image from 'next/image'
 // import '../global'
 import '@/app/globals.css'
+
 export const metadata = {
     title: 'Đăng nhập'
 }
