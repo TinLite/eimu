@@ -20,6 +20,6 @@ export default async function Home() {
       <SideList title="Phim lẻ" link="/genres" data={theater_movie_list.items} />
       <SideList title="Trung Quốc" link="/genres" data={anime_movie_list.items} />
       <SideList title="Anime" link="/genres" data={anime_movie_list.items} />
-    </main>
+    </div>
   );
 };

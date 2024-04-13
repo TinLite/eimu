@@ -1,3 +1,4 @@
+'use server';
 import { MovieTag } from "@/app/model/MovieTagModels";
 import { PaginatedMovieList } from "@/app/model/Pageable";
 

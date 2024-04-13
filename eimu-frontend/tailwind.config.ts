@@ -20,6 +20,11 @@ const config: Config = {
   },
   darkMode: "class",
   plugins: [
-    require("daisyui"), nextui()],
+    require("daisyui"),
+    nextui({
+      // See https://nextui.org/docs/customization/theme#default-plugin-options
+      defaultTheme: "dark"
+    })
+  ],
 };
 export default config;
