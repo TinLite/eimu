@@ -19,11 +19,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <body className={`${inter.className} bg-[#000D1C]`}>
-        <Navbar />
-        <div className="pt-16">{children}
-        </div>
-        <Footer />
-      </body>
+    <html lang="en">{children}</html>
   );
 }
