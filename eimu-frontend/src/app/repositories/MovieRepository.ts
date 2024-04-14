@@ -15,6 +15,6 @@ export async function getMovieDetail(movieId: string): Promise<Movie> {
     return await (await fetch(`${process.env.BACKEND_ADDRESS}/movie/${movieId}`)).json() as Movie;
 }
 
-export async function getSearchMovie(movieName: string): Promise<MovieListEntry> {
-    return await (await fetch(`${process.env.BACKEND_ADDRESS}/movie?query=${movieName}`)).json() as MovieListEntry;
+export async function getSearchMovie(movieName: string): Promise<PaginatedMovieList> {
+    return await (await fetch(`${process.env.BACKEND_ADDRESS}/movie?query=${movieName}`)).json() as PaginatedMovieList;
 } 
