@@ -8,6 +8,6 @@ export default async function Genre({
     params: { id?: [string] }
 }) {
     const movie_list = await getLatestMoviesByTag(params.id ?? [])
-    return (<Genres data={movie_list.items} tags={movie_list.tags}/>)
+    return (<Genres data={movie_list} tags={movie_list.tags}/>)
 }
 
