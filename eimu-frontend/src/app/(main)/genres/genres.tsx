@@ -1,13 +1,12 @@
 'use client'
-import React, { useState, useEffect } from 'react';
-import { MovieListEntry } from '@/app/model/MovieModels';
+import React from 'react';
 import '@/app/globals.css'
 import { MovieTag } from '@/app/model/MovieTagModels';
 import { MovieTileListing } from '@/app/components/MovieListing';
 import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react';
 import {Pagination} from "@nextui-org/react";
 import { PaginatedMovieListWithTags } from '@/app/model/Pageable';
-import { getLatestMovies } from '@/app/repositories/MovieRepository';
+import { usePathname,useRouter,useSearchParams } from 'next/navigation';
 export default function Genre({
     data,
     tags
@@ -16,13 +15,13 @@ export default function Genre({
     tags?: [MovieTag]
 }) 
 {
-    const [currentPage, setCurrentPage] = useState(1);  
-    useEffect(() => {
-       getLatestMovies();
-    }, [currentPage]);
-
+    const router= useRouter()
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
     const handlePageChange = (newPage:number) => {
-        setCurrentPage(newPage + 1 );
+        const params = new URLSearchParams(searchParams)
+        params.set("page",newPage.toString())
+        router.push(`${pathname}?${params.toString()}`)
     };
     return (
         <div className='text-white max-w-screen-xl mx-auto px-12'>
@@ -32,7 +31,7 @@ export default function Genre({
             </Breadcrumbs>
             <MovieTileListing data={data.items} />
             <div className='flex justify-center'>
-            <Pagination showControls total={10} initialPage={1} onChange={handlePageChange} />         
+            <Pagination showControls total={data.pageable.totalPages} initialPage={data.pageable.page} onChange={handlePageChange} />         
             </div>
         </div>   
     );
