@@ -3,13 +3,11 @@ import Genres from "../genres";
 import { getLatestMoviesByTag } from "@/app/repositories/MovieRepository";
 
 export default async function Genre({
-    params,
-    searchParams
+    params
 }: {
     params: { id?: [string] }
-    searchParams : {page?:string}
 }) {
-    const movie_list = await getLatestMoviesByTag(params.id ?? [],Number(searchParams.page))
+    const movie_list = await getLatestMoviesByTag(params.id ?? [])
     return (<Genres data={movie_list} tags={movie_list.tags}/>)
 }
 
