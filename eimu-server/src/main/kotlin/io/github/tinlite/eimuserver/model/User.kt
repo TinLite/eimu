@@ -7,12 +7,26 @@ import java.util.*
 
 @Document("user")
 data class User(
-//    @Field("_id") val id: ObjectId,
     @Id val id: ObjectId?,
     var name: String,
     var dateOfBirth: Date?,
     var phone: String?,
     var email: String?,
-    var role: String
+    var role: String,
+    val hashedPassword: String
+)
 
+data class UserLoginDetail(
+    @Id val id: ObjectId,
+    val name: String,
+    val hashedPassword: String
+)
+
+data class UserDetail(
+    @Id val id: ObjectId,
+    var name: String,
+    var dateOfBirth: Date?,
+    var phone: String?,
+    var email: String?,
+    var role: String,
 )

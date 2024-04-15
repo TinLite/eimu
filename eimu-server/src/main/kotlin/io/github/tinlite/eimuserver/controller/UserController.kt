@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import io.github.tinlite.eimuserver.model.User
+import io.github.tinlite.eimuserver.model.UserLoginDetail
 import io.github.tinlite.eimuserver.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
@@ -85,5 +86,11 @@ class UserController {
     fun deleteUser(@PathVariable id: String):ResponseEntity<Any>{
         val datadelete = userRepository.deleteById(id)
         return ResponseEntity.ok().build()
+    }
+
+    @GetMapping("/getLoginDetail")
+    fun getLoginDetail(@RequestParam v: String): ResponseEntity<UserLoginDetail> {
+        val userLoginDetail = userRepository.findFirstByEmailIgnoreCaseOrPhone(v, v) ?: return ResponseEntity.notFound().build()
+        return ResponseEntity.ok(userLoginDetail)
     }
 }
