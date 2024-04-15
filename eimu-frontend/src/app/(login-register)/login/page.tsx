@@ -1,6 +1,5 @@
-import Image from 'next/image'
-// import '../global'
 import '@/app/globals.css'
+
 export const metadata = {
     title: 'Đăng nhập'
 }
@@ -40,7 +39,7 @@ export default function Login() {
                     </form>
 
                     <p className="mt-4 text-center text-sm text-cyan-50 mb-4">
-                        Bạn chưa có tài khoản?{' '}
+                        Bạn chưa có tài khoản?
                         <a href="../register" className="font-semibold leading-6 text-blue-400">
                             Tạo tài khoản
                         </a>

@@ -1,0 +1,16 @@
+meta {
+  name: searchComments
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/comments/search?query=co-di-ma-lay-chong-toi&field=movieId
+  body: none
+  auth: none
+}
+
+query {
+  query: co-di-ma-lay-chong-toi
+  field: movieId
+}

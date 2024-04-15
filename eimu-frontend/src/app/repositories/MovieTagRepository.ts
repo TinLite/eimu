@@ -1,5 +1,5 @@
+'use server';
 import { MovieTag } from "@/app/model/MovieTagModels";
-import { PaginatedMovieList } from "@/app/model/Pageable";
 
 export async function getTagsDetail(tagIds: string | string[]) : Promise<[MovieTag]> {
     var combinedTagIds = (typeof tagIds == "string" ? tagIds : tagIds.join(","))

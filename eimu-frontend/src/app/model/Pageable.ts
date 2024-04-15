@@ -1,7 +1,7 @@
 import { MovieListEntry } from "./MovieModels"
 import { MovieTag } from "./MovieTagModels"
 
-export interface Pageable {
+export type Pageable = {
     page: Number,
     totalPages: Number,
     totalElements: Number,
@@ -9,18 +9,18 @@ export interface Pageable {
     hasNext: Boolean,
 }
 
-export interface PaginatedMovieList {
+export type PaginatedMovieList = {
     pageable: Pageable,
     items: [MovieListEntry]
 }
 
-export interface PaginatedMovieListWithTags {
+export type PaginatedMovieListWithTags = {
     pageable: Pageable,
-    tags: [MovieTag],
+    tags?: [MovieTag],
     items: [MovieListEntry]
 }
 
-export interface PaginatedMovieTags {
+export type PaginatedMovieTags = {
     pageable: Pageable,
     tags: String,
     items: [MovieTag]
