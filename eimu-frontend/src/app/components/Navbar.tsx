@@ -1,8 +1,16 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../../auth.config";
+import { LoginButton, UserNavComponent } from "./navbar/LoginLogout";
+import { getUserDetail } from "../repositories/UserRepository";
 
-const Navbar: React.FC = () => {
+const Navbar = async () => {
+    const session = await getServerSession(authOptions);
+    var userDetail = undefined;
+    if (session?.user?.email)
+        userDetail = await getUserDetail(session.user.email)
     return (
         <nav className="fixed top-0 left-0 w-full h-16 xl:px-20 bg-[#001731] text-gray-200 z-50">
             <div className="flex items-center justify-between">
@@ -45,14 +53,14 @@ const Navbar: React.FC = () => {
                         </svg>
                         <div className="flex-initial w-20 ml-1">Theo dõi</div>
                     </Link>
-                    <Link href={"/login"} className="px-4 py-2 rounded-md bg-blue-50 text-[#006FEE] flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
-                        </svg>
-                        <span className="ml-1">Đăng nhập</span></Link>
+                    { userDetail 
+                        ? ( <UserNavComponent user={userDetail} /> )
+                        : ( <LoginButton /> )
+                    }
                 </div>
             </div>
         </nav >
     )
 };
+
 export default Navbar;

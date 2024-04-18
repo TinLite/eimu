@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 // import "/globals.css";
 import '@/app/globals.css'
 import Image from "next/image";
+import { getServerSession } from "next-auth";
 
 export const metadata = {
   title: {
@@ -18,7 +19,6 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="">
       <body>
         <div>
           <Image src="/images/hagiang.jpg"
@@ -32,6 +32,5 @@ export default function RootLayout({
           {children}
         </div>
       </body>
-    </html>
   )
 }
