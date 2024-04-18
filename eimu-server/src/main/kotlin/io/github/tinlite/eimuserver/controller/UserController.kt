@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import io.github.tinlite.eimuserver.model.User
-import io.github.tinlite.eimuserver.model.UserLoginDetail
 import io.github.tinlite.eimuserver.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
@@ -89,8 +88,12 @@ class UserController {
     }
 
     @GetMapping("/getLoginDetail")
-    fun getLoginDetail(@RequestParam v: String): ResponseEntity<UserLoginDetail> {
+    fun getLoginDetail(@RequestParam v: String): ResponseEntity<Map<String, String>> {
         val userLoginDetail = userRepository.findFirstByEmailIgnoreCaseOrPhone(v, v) ?: return ResponseEntity.notFound().build()
-        return ResponseEntity.ok(userLoginDetail)
+        return ResponseEntity.ok(mapOf(
+            "id" to userLoginDetail.id.toHexString(),
+            "name" to userLoginDetail.name,
+            "hashedPassword" to userLoginDetail.hashedPassword
+        ))
     }
 }
