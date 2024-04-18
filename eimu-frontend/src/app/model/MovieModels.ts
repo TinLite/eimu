@@ -6,6 +6,7 @@ export interface MovieListEntry {
     posterUrl: string,
     tags: [string],
     description?: string,
+    year?: number,
 }
 
 export interface Movie {

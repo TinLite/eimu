@@ -1,10 +1,24 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Dropdown, Input } from "@nextui-org/react";
 import DropdownSearch from "@/app/components/DropdownSearch";
-
+import { useRouter } from "next/navigation";
 const Navbar: React.FC = () => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const router = useRouter();
+
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const handleSubmit = (event: React.FormEvent) => {
+        event.preventDefault();
+        if (searchTerm) {
+            router.push(`/search?query=${searchTerm}`);
+        }
+    };
     return (
         <nav className="fixed top-0 left-0 w-full h-16 xl:px-20 bg-[#001731] text-gray-200 z-50">
             <div className="flex items-center justify-between">
@@ -37,25 +51,31 @@ const Navbar: React.FC = () => {
                     </div>
                 </div>
                 <div>
-                    <form method="get">
+                    <form method="get" onSubmit={handleSubmit}>
                         <Input
                             classNames={{
                                 base: "max-w-full w-[18rem] h-10",
                                 mainWrapper: "h-full",
                                 input: "text-small",
-                                inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+                                inputWrapper: "h-full font-normal text-default-500",
                             }}
                             placeholder="Tìm kiếm..."
                             size="sm"
                             type="search"
+                            id="search"
+                            name="search"
+                            onChange={handleSearchChange}
+                            value={searchTerm}
                             startContent={
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                                </svg>
+                                <button type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                    </svg>
+                                </button>
                             }
                         />
                     </form>
-                    <DropdownSearch />
+                    {/* <DropdownSearch /> */}
                 </div>
                 <div className="flex items-center">
                     <Link href={"/user/history"} className="flex items-center hover:text-green-400 mr-3">
