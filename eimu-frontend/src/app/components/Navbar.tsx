@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../../auth.config";
+import { authOptions } from "@app/../../auth.config";
 import { LoginButton, UserNavComponent } from "./navbar/LoginLogout";
 import { getUserDetail } from "../repositories/UserRepository";
-
+import { Dropdown, Input } from "@nextui-org/react";
+import DropdownSearch from "@/app/components/DropdownSearch";
+import { useRouter } from "next/navigation";
+import SearchBar from "./navbar/SearchBar";
 const Navbar = async () => {
     const session = await getServerSession(authOptions);
     var userDetail = undefined;
@@ -31,23 +34,27 @@ const Navbar = async () => {
                             </svg>
                         </Link>
                         </div>
-                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-200 text-white rounded-box w-52">
+                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-200 text-white rounded-box w-[22rem] grid grid-cols-12 lg:grid-cols-3">
                             <li><Link href={"/genres/8f14e45fceea167a5a36dedd4bea2543"}>Hành động</Link></li>
                             <li><Link href={"/genres/2a79ea27c279e471f4d180b08d62b00a"}>Tình cảm</Link></li>
+                            <li><Link href={"/genres/45c48cce2e2d7fbdea1afc51c7c6ad26/d2ddea18f00665ce8623e36bd4e3c7c5"}>Anime</Link></li>
+                            <li><Link href={"/genres/45c48cce2e2d7fbdea1afc51c7c6ad26/d2ddea18f00665ce8623e36bd4e3c7c5"}>Anime</Link></li>
+                            <li><Link href={"/genres/45c48cce2e2d7fbdea1afc51c7c6ad26/d2ddea18f00665ce8623e36bd4e3c7c5"}>Anime</Link></li>
+                            <li><Link href={"/genres/45c48cce2e2d7fbdea1afc51c7c6ad26/d2ddea18f00665ce8623e36bd4e3c7c5"}>Anime</Link></li>
                             <li><Link href={"/genres/45c48cce2e2d7fbdea1afc51c7c6ad26/d2ddea18f00665ce8623e36bd4e3c7c5"}>Anime</Link></li>
                         </ul>
                     </div>
                 </div>
-                <div><input type="text" placeholder="Tìm kiếm..." className="input input-bordered w-full h-10 bg-blue-50 max-w-xs text-black" /></div>
+                <SearchBar />
                 <div className="flex items-center">
-                    <Link href={""} className="flex items-center hover:text-green-400 mr-3">
+                    <Link href={"/user/history"} className="flex items-center hover:text-green-400 mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
 
                         <div className="flex-initial w-20 ml-1">Lịch sử</div>
                     </Link>
-                    <Link href={""} className="flex items-center hover:text-green-400 mr-3">
+                    <Link href={"/user/follows"} className="flex items-center hover:text-green-400 mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9" />
                         </svg>
