@@ -2,9 +2,9 @@ import { MovieListEntry } from "./MovieModels"
 import { MovieTag } from "./MovieTagModels"
 
 export type Pageable = {
-    page: Number,
-    totalPages: Number,
-    totalElements: Number,
+    page: number,
+    totalPages: number,
+    totalElements: number,
     hasPrevious: Boolean,
     hasNext: Boolean,
 }

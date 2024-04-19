@@ -86,4 +86,14 @@ class UserController {
         val datadelete = userRepository.deleteById(id)
         return ResponseEntity.ok().build()
     }
+
+    @GetMapping("/getLoginDetail")
+    fun getLoginDetail(@RequestParam v: String): ResponseEntity<Map<String, String>> {
+        val userLoginDetail = userRepository.findFirstByEmailIgnoreCaseOrPhone(v, v) ?: return ResponseEntity.notFound().build()
+        return ResponseEntity.ok(mapOf(
+            "id" to userLoginDetail.id.toHexString(),
+            "name" to userLoginDetail.name,
+            "hashedPassword" to userLoginDetail.hashedPassword
+        ))
+    }
 }

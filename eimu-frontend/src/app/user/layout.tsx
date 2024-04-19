@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 // import "/globals.css";
 import '@/app/globals.css'
 import Image from "next/image";
-import { getServerSession } from "next-auth";
+import Footer from "@/app/components/Footer";
 
 export const metadata = {
   title: {
@@ -19,18 +19,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-      <body>
-        <div>
-          <Image src="/images/hagiang.jpg"
-            className=''
-            // placeholder='blur'
-            fill={true}
-            style={{
-              "objectFit": "cover"
-            }}
-            alt="Background image" />
+    <html lang="en" className=" bg-[#111319] h-screen">
+      <body className="">
+        <div className="">
           {children}
         </div>
       </body>
+    </html>
   )
 }

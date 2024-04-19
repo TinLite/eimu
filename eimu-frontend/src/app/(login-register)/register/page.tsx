@@ -1,5 +1,33 @@
+'use client';
+import { handleRegister } from "@/app/services/UserService";
+import { Input } from "@nextui-org/react";
+import { useState } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 
 export default function Register() {
+    const {pending} = useFormStatus();
+    const [errorMessage, dispatch] = useFormState(handleRegister, undefined);
+
+    const [password, setPassword] = useState('');
+    const [repeatPassword, setRepeatPassword] = useState('');
+
+    // Error messages
+    const [passwordError, setPasswordError] = useState('');
+    const [repeatPasswordError, setRepeatPasswordError] = useState('');
+
+    function validatePassword(password: string, repeatPassword: string) {
+            if (password.length < 8) {
+                setPasswordError("Mật khẩu quá ngắn")
+            } else {
+                setPasswordError("")
+            }
+            if (repeatPassword !== password) {
+                setRepeatPasswordError("Mật khẩu nhập lại không khớp")
+            } else {
+                setRepeatPasswordError("")
+            }
+    }
+
     return (
         <div className='h-screen w-screen bg-blue-950 bg-opacity-25 backdrop-blur-sm grid place-items-center'>
             <div className="justify-center px-10 py-2 w-full max-w-sm bg-[#001731] rounded-xl shadow-2xl">
@@ -7,57 +35,74 @@ export default function Register() {
                     Đăng kí tài khoản
                 </h2>
                 <div className="">
-                    <form className="space-y-3" action="#" method="POST">
-                        <input
-                            id="name"
-                            name="name"
-                            type="text"
-                            autoComplete="name"
-                            required
-                            className="block w-full bg-[#002E62] px-4 rounded-xl border-0 py-2 placeholder:text-cyan-50 text-white outline-none focus:outline-blue-500 transition-all -outline-offset-2"
-                            placeholder="Tên của bạn"
+                    <form className="space-y-3" action={dispatch}>
+                        <Input name="name" isRequired type='text' label='Tên người dùng' size='sm' classNames={{
+                            inputWrapper: [
+                                "bg-[#002E62]",
+                                "data-[hover=true]:bg-[#00244D]",
+                                "group-data-[focus-within=true]:bg-[#00244D]",
+                                "group-data-[focus=true]:bg-[#00244D]",
+                            ]
+                        }} />
+                        <Input name="email" isRequired type='email' label='Email' size='sm' classNames={{
+                            inputWrapper: [
+                                "bg-[#002E62]",
+                                "data-[hover=true]:bg-[#00244D]",
+                                "group-data-[focus-within=true]:bg-[#00244D]",
+                                "group-data-[focus=true]:bg-[#00244D]",
+                            ]
+                        }}
                         />
-                        <input
-                            id="email"
-                            name="email"
-                            type="email"
-                            autoComplete="email"
-                            required
-                            className="block w-full bg-[#002E62] px-4 rounded-xl border-0 py-2 placeholder:text-cyan-50 text-white outline-none focus:outline-blue-500 transition-all -outline-offset-2"
-                            placeholder="Email"
-                        />
-                        <input
-                            id="phone"
-                            name="phone"
-                            type="tel"
-                            autoComplete="tel"
-                            minLength={10}
-                            maxLength={11}
-                            required
-                            className="block w-full bg-[#002E62] px-4 rounded-xl border-0 py-2 placeholder:text-cyan-50 text-white outline-none focus:outline-blue-500 transition-all -outline-offset-2"
-                            placeholder="Số điện thoại"
-                        />
-                        <input
-                            id="password"
+                        <Input name="phone" isRequired type='tel' label='Số điện thoại' size='sm' classNames={{
+                            inputWrapper: [
+                                "bg-[#002E62]",
+                                "data-[hover=true]:bg-[#00244D]",
+                                "group-data-[focus-within=true]:bg-[#00244D]",
+                                "group-data-[focus=true]:bg-[#00244D]",
+                            ]
+                        }} />
+                        <Input
                             name="password"
-                            type="password"
-                            autoComplete="current-password"
-                            required
-                            className="block w-full bg-[#002E62] px-4 rounded-xl border-0 py-2 placeholder:text-cyan-50 text-white outline-none focus:outline-blue-500 transition-all -outline-offset-2"
-                            placeholder="Mật khẩu"
+                            isRequired
+                            type='password'
+                            label='Mật khẩu'
+                            size='sm'
+                            classNames={{
+                                inputWrapper: [
+                                    "bg-[#002E62]",
+                                    "data-[hover=true]:bg-[#00244D]",
+                                    "group-data-[focus-within=true]:bg-[#00244D]",
+                                    "group-data-[focus=true]:bg-[#00244D]",
+                                ]
+                            }}
+                            isInvalid={passwordError !== ''}
+                            errorMessage={passwordError}
+                            onChange={(e) => {
+                                setPassword(e.target.value);
+                                validatePassword(e.target.value, repeatPassword)
+                            }} />
+                        <Input isRequired type='password' label='Nhập lại mật khẩu' size='sm' classNames={{
+                            inputWrapper: [
+                                "bg-[#002E62]",
+                                "data-[hover=true]:bg-[#00244D]",
+                                "group-data-[focus-within=true]:bg-[#00244D]",
+                                "group-data-[focus=true]:bg-[#00244D]",
+                            ]
+                        }}
+                        isInvalid={repeatPasswordError !== ""}
+                        errorMessage={repeatPasswordError}
+                        onChange={(e) => {
+                            setRepeatPassword(e.target.value);
+                            validatePassword(password, e.target.value)
+                        }}
                         />
-                        <input
-                            id="repeat-password"
-                            // name="password"
-                            type="password"
-                            autoComplete="current-password"
-                            required
-                            className="block w-full bg-[#002E62] px-4 rounded-xl border-0 py-2 placeholder:text-cyan-50 text-white outline-none focus:outline-blue-500 transition-all -outline-offset-2"
-                            placeholder="Nhập lại mật khẩu"
-                        />
+                        {errorMessage && !pending && (
+                            <div className='text-danger text-sm'>{errorMessage}</div>
+                        )}
                         <button
+                            disabled={repeatPasswordError !== "" || passwordError !== ""}
                             type="submit"
-                            className="w-full px-4 py-2 bg-blue-500 rounded-xl text-white hover:bg-blue-600 transition-colors"
+                            className={`w-full px-4 py-2 rounded-xl transition-colors ${repeatPasswordError || passwordError ? "cursor-not-allowed bg-blue-900 text-gray-500" : "bg-blue-500 hover:bg-blue-600 text-white"}`}
                         >
                             Đăng ký
                         </button>
