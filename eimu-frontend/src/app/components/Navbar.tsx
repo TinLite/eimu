@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@app/../../auth.config";
 import { LoginButton, UserNavComponent } from "./navbar/LoginLogout";
 import { getUserDetail } from "../repositories/UserRepository";
-import { Dropdown, Input } from "@nextui-org/react";
-import DropdownSearch from "@/app/components/DropdownSearch";
-import { useRouter } from "next/navigation";
 import SearchBar from "./navbar/SearchBar";
 const Navbar = async () => {
     const session = await getServerSession(authOptions);
