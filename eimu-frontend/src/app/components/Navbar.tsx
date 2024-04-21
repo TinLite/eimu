@@ -6,37 +6,28 @@ import { authOptions } from "@app/../../auth.config";
 import { LoginButton, UserNavComponent } from "./navbar/LoginLogout";
 import { getUserDetail } from "../repositories/UserRepository";
 import SearchBar from "./navbar/SearchBar";
+import { getAllTag } from "@/app/repositories/MovieTagRepository";
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, dropdownItem } from "@nextui-org/react";
+import GenresDropdown from "@/app/components/navbar/GenresDropdown";
 const Navbar = async () => {
     const session = await getServerSession(authOptions);
+    const genresTag = await getAllTag();
     var userDetail = undefined;
     if (session?.user?.email)
         userDetail = await getUserDetail(session.user.email)
     return (
         <nav className="fixed top-0 left-0 w-full h-16 xl:px-20 bg-[#001731] text-gray-200 z-50">
             <div className="flex items-center justify-between">
-                <div className="flex ">
+                <div className="flex items-center">
                     <Link href={"/"} className="">
                         <Image src='/images/Eimu-logo-removebg-preview.png' alt='eimu'
                             width={65}
                             height={20} />
                     </Link>
-                    <Link href={"/genres"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim mới</Link>
-                    <Link href={"/genres/eccbc87e4b5ce2fe28308fd9f2a7baf3"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim bộ</Link>
-                    <Link href={"/genres/a87ff679a2f3e71d9181a67b7542122c"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim lẻ</Link>
-                    <div className="dropdown dropdown-hover px-4 content-center">
-                        <div tabIndex={0} role="button" className=""><Link href={""} className="flex items-center hover:text-sky-400">
-                            Thể loại
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3 ml-1">
-                                <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clipRule="evenodd" />
-                            </svg>
-                        </Link>
-                        </div>
-                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-200 text-white rounded-box w-52">
-                            <li><Link className="text-black" href={"/genres/8f14e45fceea167a5a36dedd4bea2543"}>Hành động</Link></li>
-                            <li><Link className="text-black" href={"/genres/2a79ea27c279e471f4d180b08d62b00a"}>Tình cảm</Link></li>
-                            <li><Link className="text-black" href={"/genres/45c48cce2e2d7fbdea1afc51c7c6ad26/d2ddea18f00665ce8623e36bd4e3c7c5"}>Anime</Link></li>
-                        </ul>
-                    </div>
+                    <Link href={"/genres"} className="px-4 hover:text-sky-400 transition-colors">Phim mới</Link>
+                    <Link href={"/genres/eccbc87e4b5ce2fe28308fd9f2a7baf3"} className="px-4 hover:text-sky-400 transition-colors">Phim bộ</Link>
+                    <Link href={"/genres/a87ff679a2f3e71d9181a67b7542122c"} className="px-4 hover:text-sky-400 transition-colors">Phim lẻ</Link>
+                    <GenresDropdown genresTag={genresTag} />
                 </div>
                 <SearchBar />
                 <div className="flex items-center">
@@ -53,9 +44,9 @@ const Navbar = async () => {
                         </svg>
                         <div className="flex-initial w-20 ml-1">Theo dõi</div>
                     </Link>
-                    { userDetail 
-                        ? ( <UserNavComponent user={userDetail} /> )
-                        : ( <LoginButton /> )
+                    {userDetail
+                        ? (<UserNavComponent user={userDetail} />)
+                        : (<LoginButton />)
                     }
                 </div>
             </div>
