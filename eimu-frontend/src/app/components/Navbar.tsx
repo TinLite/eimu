@@ -31,9 +31,18 @@ const Navbar = async () => {
                             </svg>
                         </Link>
                         </div>
-                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-200 text-white rounded-box w-52">
+                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-max grid grid-cols-3 gap-1 text-black">
                             <li><Link className="text-black" href={"/genres/8f14e45fceea167a5a36dedd4bea2543"}>Hành động</Link></li>
                             <li><Link className="text-black" href={"/genres/2a79ea27c279e471f4d180b08d62b00a"}>Tình cảm</Link></li>
+                            <li><Link className="text-black" href={"/genres/d3d9446802a44259755d38e6d163e820"}>Hài Hước</Link></li>
+                            <li><Link className="text-black" href={"/genres/c9f0f895fb98ab9159f51fd0297e236d"}>Phiêu Lưu</Link></li>
+                            <li><Link className="text-black" href={"/genres/c51ce410c124a10e0db5e4b97fc2af39"}>Chính Kịch</Link></li>
+                            <li><Link className="text-black" href={"/genres/9bf31c7ff062936a96d3c8bd1f8f2ff3"}>Giả Tưởng</Link></li>
+                            <li><Link className="text-black" href={"/genres/c74d97b01eae257e44aa9d5bade97baf"}>Lịch Sử</Link></li>
+                            <li><Link className="text-black" href={"/genres/70efdf2ec9b086079795c442636b55fb"}>Kinh Dị </Link></li>
+                            <li><Link className="text-black" href={"/genres/aab3238922bcc25a6f606eb525ffdc56"}>Gia Đình</Link></li>
+                            <li><Link className="text-black" href={"/genres/a8baa56554f96369ab93e4f3bb068c22"}>Cổ trang</Link></li>
+                            <li><Link className="text-black" href={"/genres/45c48cce2e2d7fbdea1afc51c7c6ad26,fbd7939d674997cdb4692d34de8633c4"}>Cartoon</Link></li>
                             <li><Link className="text-black" href={"/genres/45c48cce2e2d7fbdea1afc51c7c6ad26/d2ddea18f00665ce8623e36bd4e3c7c5"}>Anime</Link></li>
                         </ul>
                     </div>
