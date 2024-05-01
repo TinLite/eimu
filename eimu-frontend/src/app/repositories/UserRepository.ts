@@ -3,7 +3,7 @@
 import { FUser, UserDetail, UserLoginDetail } from "@/app/model/UserModels";
 import { PaginatedUserList } from "../model/Pageable";
 
-export async function getUserLoginDetail(v: string) : Promise<UserLoginDetail | undefined> {
+export async function getUserLoginDetail(v: string): Promise<UserLoginDetail | undefined> {
     var request = await fetch(`${process.env.BACKEND_ADDRESS}/user/getLoginDetail?v=${v}`, {
         next: {
             revalidate: 1
@@ -16,7 +16,7 @@ export async function getUserLoginDetail(v: string) : Promise<UserLoginDetail | 
     }
 }
 
-export async function getUserDetail(v: string) : Promise<UserDetail | undefined> {
+export async function getUserDetail(v: string): Promise<UserDetail | undefined> {
     var request = await fetch(`${process.env.BACKEND_ADDRESS}/user/detail/${v}`, {
         next: {
             revalidate: 60
