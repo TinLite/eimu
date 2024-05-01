@@ -3,10 +3,15 @@ import MenuAccY from '@/app/components/Sidebar'
 import React from 'react'
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Avatar, Input } from "@nextui-org/react";
 import { RadioGroup, Radio } from "@nextui-org/react";
+import { getServerSession } from "next-auth";
+import { authOptions } from '../../../../auth.config';
+import { getUserDetail } from '@/app/repositories/UserRepository';
+import { InformationUser } from '@/app/components/InformationUser';
 
-
-export default function UserDetail() {
+export async function UserDetail() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const session = await getServerSession(authOptions);
+    var userDetail = await getUserDetail(session?.user?.email!);
     return (
         <div className='flex text-white'>
             <MenuAccY />
@@ -33,7 +38,7 @@ export default function UserDetail() {
                                                             <input type="file" name='avatar' id='avatar' className=" w-full max-w-xs" />
                                                         </div>
                                                         <div className=" w-full mb-5">
-                                                            <Input type="text" label="Họ tên" placeholder="Lê Quang Tiến" />
+                                                            <Input type="text" label="Họ tên" placeholder={"userDetail.email"} />
                                                         </div>
                                                         <div className=" w-full mb-5">
                                                             <Input type="date" label="Ngày sinh" placeholder="" />
@@ -68,26 +73,7 @@ export default function UserDetail() {
                                 </Modal>
                             </>
                         </div>
-                        <div className='flex border-b-2 py-5'>
-                            <div className='mr-5 '>Họ tên:</div>
-                            <div className=''>Lê Quang Tiến</div>
-                        </div>
-                        <div className='flex border-b-2 py-5'>
-                            <div className='mr-5 '>Ngày sinh:</div>
-                            <div className=''>10/05/2003</div>
-                        </div>
-                        <div className='flex border-b-2 py-5'>
-                            <div className='mr-5 '>Giới tính:</div>
-                            <div className=''>Nam</div>
-                        </div>
-                        <div className='flex border-b-2 py-5'>
-                            <div className='mr-5 '>Email:</div>
-                            <div className=''>LeQuangTien@gmail.com</div>
-                        </div>
-                        <div className='flex py-5'>
-                            <div className='mr-5 '>Số điện thoại:</div>
-                            <div className=''>0935964574</div>
-                        </div>
+                        (<InformationUser user={userDetail!} />)
                     </div>
                 </div>
             </div>
