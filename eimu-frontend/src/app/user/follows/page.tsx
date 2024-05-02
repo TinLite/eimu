@@ -1,17 +1,38 @@
+// Import các modules cần thiết
+import React, { useState } from 'react';
+import './styles.css'; // File css với Tailwind CSS
+import { Movie , MovieListEntry} from '@/app/model/MovieModels';;
 
-import MenuAccY from '@/app/components/Sidebar'
-import { Button } from '@nextui-org/react'
-import Link from 'next/link'
-import React from 'react'
-import FavoriteTableList from '@/app/components/FollowTableList'
-import FollowTableList from '@/app/components/FollowTableList'
+// Định nghĩa một component MovieHistory
+const MovieHistory: React.FC = () => {
+  // Dữ liệu giả định cho lịch sử phim đã xem
+  const [movies, setMovies] = useState<MovieListEntry[]>([
+   
+  ]);
 
-export default async function Follow() {
-  const new_movie_list = await (await fetch("http://51.79.144.118:12594/movie")).json()
   return (
-    <div className='flex text-white'>
-      <MenuAccY />
-      <FollowTableList />
+    <div className="container mx-auto mt-8">
+      <h1 className="text-2xl font-bold mb-4">Phim theo dõi</h1>
+      <table className="table-auto">
+        <thead>
+          <tr>
+            <th className="px-4 py-2">ID</th>
+            <th className="px-4 py-2">Tên phim</th>
+            <th className="px-4 py-2">Năm sản xuất</th>
+          </tr>
+        </thead>
+        <tbody>
+          {movies.map(movie => (
+            <tr key={movie.id}>
+              <td className="border px-4 py-2">{movie.id}</td>
+              <td className="border px-4 py-2">{movie.name}</td>
+              <td className="border px-4 py-2">{movie.year}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-  )
-}
+  );
+};
+
+export default MovieHistory;

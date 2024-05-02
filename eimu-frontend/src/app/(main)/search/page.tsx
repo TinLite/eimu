@@ -15,8 +15,7 @@ export default async function search(
             }
         }
 ) {
-    console.log(searchParams.query)
-    var searchMovie = await getSearchMovie(searchParams.query || "")
+    const searchMovie = await getSearchMovie(searchParams.query || "")
     noCache(); // Do not cache the render of this page
     return (
         <div className='text-white px-12'>
