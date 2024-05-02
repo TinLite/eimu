@@ -12,6 +12,7 @@ data class User(
     var dateOfBirth: Date?,
     var phone: String?,
     var email: String?,
+    var follows: MutableList<String>?,
     var role: String,
     val hashedPassword: String
 )

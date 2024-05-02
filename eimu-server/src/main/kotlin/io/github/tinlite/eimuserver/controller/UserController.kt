@@ -76,11 +76,6 @@ class UserController {
         return ResponseEntity.ok(data)
     }
 
-    @GetMapping("/detail/{id}")
-    fun detail(@PathVariable id: String): ResponseEntity<User> {
-        val data = userRepository.findByIdOrNull(id)
-        return ResponseEntity.ok(data)
-    }
     @PostMapping("/delete/{id}")
     fun deleteUser(@PathVariable id: String):ResponseEntity<Any>{
         val datadelete = userRepository.deleteById(id)
@@ -96,4 +91,6 @@ class UserController {
             "hashedPassword" to userLoginDetail.hashedPassword
         ))
     }
+
+
 }
