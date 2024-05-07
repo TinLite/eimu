@@ -48,7 +48,7 @@ class CommentsController {
         val data = when (field.lowercase()) {
             "userid" -> commentsRepository.findByUserId(query)
             "movieid" -> commentsRepository.findByMovieId(query)
-            "content" -> commentsRepository.findByContent(query)
+            "content" -> commentsRepository.findByContentContainsIgnoreCase(query)
             else -> return ResponseEntity.notFound().build()
         }
         return ResponseEntity.ok(data)
