@@ -8,6 +8,5 @@ interface CommentsRepository : MongoRepository<DataComments,String> {
     fun findByMovieId(movieId: String): List<DataComments>
 
     fun findByContent(content: String): List<DataComments>
-    fun deleteByIdAndUserId(id: String,userId: String ): Long
 
 }
