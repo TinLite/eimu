@@ -9,7 +9,7 @@ data class Comments (
      val movieId: String,
      val userId: String,
      val content: String,
-     val replyTo: String?
+     val replyTo: ObjectId?
  )
 
 data class ContentComment(
@@ -23,6 +23,6 @@ data class DataComments(
     val movieId: String,
     val userId: String,
     var content: String,
-    val replyTo: String?,
+    val replyTo: ObjectId?,
     val timestamp: Date
 )

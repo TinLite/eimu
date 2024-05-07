@@ -58,16 +58,9 @@ class CommentsController {
     }
 
     @PostMapping("/delete/{id}")
-    fun deleteComment(
-        @PathVariable id: String,
-        @RequestParam userId: String    )
-    : ResponseEntity<Any> {
-        val data = commentsRepository.deleteByIdAndUserId(id, userId)
-        return if (data > 0) {
-            ResponseEntity.ok().build()
-        } else {
-            ResponseEntity.notFound().build()
-        }
+    fun deleteComment(@PathVariable id: String): ResponseEntity<Any> {
+        commentsRepository.deleteById(id)
+        return ResponseEntity.ok().build()
     }
     @PostMapping("/update")
     fun updateComment(@RequestBody updatecomment: ContentComment )
@@ -82,10 +75,26 @@ class CommentsController {
         }
     }
 
-//    @PostMapping("/reply/{id}")
-//    fun replyComment(@PathVariable id: String,
-//                     @RequestParam userId: String)
-//    : ResponseEntity<Any>{
-//
-//    }
+    @PostMapping("/reply/")
+    fun replyComment(@RequestBody replyComments: Comments)
+            : ResponseEntity<DataComments> {
+        if (
+            replyComments.replyTo != null && commentsRepository.existsById(replyComments.replyTo.toHexString())
+            && userRepository.existsById(replyComments.userId)
+            && movieDetailRepository.existsById(replyComments.movieId)
+        ) {
+            commentsRepository.save(
+                DataComments(
+                    id = ObjectId(),
+                    movieId = replyComments.movieId,
+                    userId = replyComments.userId,
+                    content = replyComments.content,
+                    replyTo = replyComments.replyTo,
+                    timestamp = Date(System.currentTimeMillis())
+                )
+            )
+            return ResponseEntity.ok().build()
+        }
+        return ResponseEntity.badRequest().build()
+    }
 }

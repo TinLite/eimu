@@ -57,9 +57,27 @@ class UserController {
     }
 
     @GetMapping("/listuser")
-    fun showList(@RequestParam page: Int = 1, @RequestParam size: Int = 10): List<User> {
-        val data = userRepository.findAll(PageRequest.of(page - 1, size))
-        return data.content
+    fun showList(@RequestParam page: Int = 1, @RequestParam size: Int = 10): ResponseEntity<Map<String, Any>> {
+        val result = userRepository.findAll(PageRequest.of(page - 1, size))
+        val show = result.content.map { user ->
+            mapOf(
+                "id" to user.id,
+                "name" to user.name,
+                "email" to user.email,
+                "phone" to user.phone
+            )
+        }
+        val pagination = mapOf(
+            "totalPages" to result.totalPages,
+            "totalElements" to result.totalElements,
+            "currentPage" to result.number + 1,
+
+            )
+        val response = mapOf(
+            "pagination" to pagination,
+            "data" to show
+        )
+        return ResponseEntity.ok(response)
     }
 
     @GetMapping("/search")
@@ -77,8 +95,8 @@ class UserController {
     }
 
     @PostMapping("/delete/{id}")
-    fun deleteUser(@PathVariable id: String):ResponseEntity<Any>{
-        val datadelete = userRepository.deleteById(id)
+    fun deleteUser(@PathVariable id: String): ResponseEntity<Unit> {
+        userRepository.deleteById(id)
         return ResponseEntity.ok().build()
     }
 
