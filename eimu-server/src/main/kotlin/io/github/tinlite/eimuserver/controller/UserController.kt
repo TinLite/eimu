@@ -1,8 +1,5 @@
 package io.github.tinlite.eimuserver.controller
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.module.kotlin.KotlinModule
 import io.github.tinlite.eimuserver.model.User
 import io.github.tinlite.eimuserver.model.UserDetail
 import io.github.tinlite.eimuserver.repository.UserRepository
@@ -10,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.json.MappingJacksonValue
 import org.springframework.web.bind.annotation.*
-import java.text.SimpleDateFormat
 
 @RestController
 @RequestMapping("/user")
@@ -19,26 +16,17 @@ class UserController {
     @Autowired
     lateinit var userRepository: UserRepository
 
-    val DEFAULT_JACKSON_MAPPER = ObjectMapper().registerModule(
-        KotlinModule
-            .Builder()
-            .build()
-    )
-        .apply {
-            disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-            dateFormat = SimpleDateFormat("dd-MM-yyyy")
-        }
-
     @PostMapping("/create")
     fun createAccount(@RequestBody user: User): User {
         return userRepository.insert(user)
     }
 
     @GetMapping("/show")
-    fun showAccount(@RequestParam id: String): ResponseEntity<MutableMap<*, *>> {
-        val user = userRepository.findByIdOrNull(id) ?: return ResponseEntity.notFound().build()
-        val userJson = DEFAULT_JACKSON_MAPPER.convertValue(user, MutableMap::class.java)
-        return ResponseEntity.ok(userJson)
+    fun showAccount(@RequestParam id: String): ResponseEntity<MappingJacksonValue> {
+        val user = (userRepository.findByIdOrNull(id) ?: return ResponseEntity.notFound().build())
+        val map = MappingJacksonValue(user)
+        map.serializationView = User.UserDetail::class.java
+        return ResponseEntity.ok(map)
     }
 
     @PostMapping("/update")
