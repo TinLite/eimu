@@ -4,7 +4,7 @@ export interface MovieListEntry {
     originalName?: string,
     thumbUrl: string,
     posterUrl: string,
-    tags: [string],
+    tags: string[],
     description?: string,
     year?: number,
 }
@@ -12,19 +12,20 @@ export interface MovieListEntry {
 export interface Movie {
     id: string,
     name: string,
+    year?: number,
     originalName?: string,
     thumbUrl: string,
     posterUrl: string,
     director?: string,
     casts?: string,
-    tags: [string],
+    tags: string[],
     description?: string,
-    episodes: [EpisodeServer]
+    episodes: EpisodeServer[]
 }
 
 export interface EpisodeServer {
     serverName: string,
-    episodeList: [Episode]
+    episodeList: Episode[]
 }
 
 export interface Episode {
