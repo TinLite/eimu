@@ -5,7 +5,14 @@ meta {
 }
 
 post {
-  url: 
-  body: none
+  url: {{baseUrl}}/comments/removelike
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "id":"6639c35e7439a02f6ff17377",
+    "userId":"66306210cb57e62fd9f885c8"
+  }
 }
