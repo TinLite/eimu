@@ -24,5 +24,24 @@ data class DataComments(
     val userId: String,
     var content: String,
     val replyTo: ObjectId?,
-    val timestamp: Date
+    val timestamp: Date,
+    val likes: MutableList<ObjectId>
+) {
+    constructor(
+        movieId: String,
+        userId: String,
+        content: String,
+        replyTo: ObjectId
+    ) : this(id = ObjectId(), movieId, userId, content, replyTo, Date(System.currentTimeMillis()), mutableListOf())
+
+    constructor(
+        movieId: String,
+        userId: String,
+        content: String
+    ) : this(id = ObjectId(), movieId, userId, content, null, Date(System.currentTimeMillis()), mutableListOf())
+}
+
+data class LikeAction(
+    val id: ObjectId,
+    val userId: ObjectId
 )

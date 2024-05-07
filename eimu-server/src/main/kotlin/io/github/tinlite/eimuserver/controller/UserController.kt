@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import io.github.tinlite.eimuserver.model.User
+import io.github.tinlite.eimuserver.model.UserDetail
 import io.github.tinlite.eimuserver.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
@@ -84,9 +85,9 @@ class UserController {
     fun searchUser(
         @RequestParam query: String,
         @RequestParam field: String
-    ): ResponseEntity<List<User>> {
+    ): ResponseEntity<List<UserDetail>> {
         val data = when (field.lowercase()) {
-            "name" -> userRepository.findByName(query)
+            "name" -> userRepository.findByNameContainsIgnoreCase(query)
             "phone" -> userRepository.findByPhone(query)
             "email" -> userRepository.findByEmailIgnoreCase(query)
             else -> return ResponseEntity.notFound().build()

@@ -3,15 +3,14 @@ package io.github.tinlite.eimuserver.controller
 import io.github.tinlite.eimuserver.model.Comments
 import io.github.tinlite.eimuserver.model.ContentComment
 import io.github.tinlite.eimuserver.model.DataComments
+import io.github.tinlite.eimuserver.model.LikeAction
 import io.github.tinlite.eimuserver.repository.CommentsRepository
 import io.github.tinlite.eimuserver.repository.MovieDetailRepository
 import io.github.tinlite.eimuserver.repository.UserRepository
-import org.bson.types.ObjectId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.util.*
 
 @RestController
 @RequestMapping("/comments")
@@ -32,11 +31,9 @@ class CommentsController {
         ) {
             commentsRepository.save(
                 DataComments(
-                    ObjectId(), movieId = comments.movieId,
+                    movieId = comments.movieId,
                     userId = comments.userId,
-                    content = comments.content,
-                    timestamp = Date(),
-                    replyTo = comments.replyTo
+                    content = comments.content
                 )
             )
             return ResponseEntity.ok().build()
@@ -85,16 +82,39 @@ class CommentsController {
         ) {
             commentsRepository.save(
                 DataComments(
-                    id = ObjectId(),
                     movieId = replyComments.movieId,
                     userId = replyComments.userId,
                     content = replyComments.content,
                     replyTo = replyComments.replyTo,
-                    timestamp = Date(System.currentTimeMillis())
                 )
             )
             return ResponseEntity.ok().build()
         }
         return ResponseEntity.badRequest().build()
+    }
+
+
+    @PostMapping("/addlike")
+    fun addLike(@RequestBody likeAction: LikeAction): ResponseEntity<Unit> {
+        val comment =
+            commentsRepository.findByIdOrNull(likeAction.id.toHexString()) ?: return ResponseEntity.notFound().build()
+        if (!userRepository.existsById(likeAction.userId.toHexString())) {
+            return ResponseEntity.badRequest().build()
+        }
+        if (!comment.likes.contains(likeAction.userId)) {
+            comment.likes.add(likeAction.userId)
+            commentsRepository.save(comment)
+        }
+        return ResponseEntity.ok().build()
+    }
+
+    @PostMapping("/removelike")
+    fun remove(@RequestBody likeAction: LikeAction): ResponseEntity<Unit> {
+        val comment =
+            commentsRepository.findByIdOrNull(likeAction.id.toHexString()) ?: return ResponseEntity.notFound().build()
+        if (comment.likes.remove(likeAction.userId)) {
+            commentsRepository.save(comment)
+        }
+        return ResponseEntity.ok().build()
     }
 }
