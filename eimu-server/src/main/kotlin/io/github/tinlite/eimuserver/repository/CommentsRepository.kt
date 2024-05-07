@@ -7,6 +7,6 @@ interface CommentsRepository : MongoRepository<DataComments,String> {
     fun findByUserId(userId: String): List<DataComments>
     fun findByMovieId(movieId: String): List<DataComments>
 
-    fun findByContent(content: String): List<DataComments>
+    fun findByContentContainsIgnoreCase(content: String): List<DataComments>
 
 }
