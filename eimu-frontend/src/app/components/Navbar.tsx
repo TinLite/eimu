@@ -7,7 +7,6 @@ import { LoginButton, UserNavComponent } from "./navbar/LoginLogout";
 import { getUserDetail } from "../repositories/UserRepository";
 import SearchBar from "./navbar/SearchBar";
 import { getAllTag } from "@/app/repositories/MovieTagRepository";
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, dropdownItem } from "@nextui-org/react";
 import GenresDropdown from "@/app/components/navbar/GenresDropdown";
 const Navbar = async () => {
     const session = await getServerSession(authOptions);

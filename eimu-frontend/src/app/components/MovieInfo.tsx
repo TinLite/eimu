@@ -1,13 +1,12 @@
-import React from 'react'
-import Link from 'next/link'
-import { Button } from '@nextui-org/react'
-import { ScrollShadow } from '@nextui-org/react'
 import { Movie } from '@/app/model/MovieModels'
-import { getTagsDetail } from '../repositories/MovieTagRepository'
+import { Button, ScrollShadow } from '@nextui-org/react'
 import { unstable_noStore as noCache } from 'next/cache'
+import Link from 'next/link'
+import { getTagsDetail } from '../repositories/MovieTagRepository'
 export default async function MovieInfo({ movie }: { movie: Movie }) {
     noCache();
     const tags = await getTagsDetail(movie.tags)
+
     return (
         <div className='bg-gray-950 rounded-sm'>
             <div className='grid grid-cols-6'>
@@ -20,6 +19,7 @@ export default async function MovieInfo({ movie }: { movie: Movie }) {
                     </div>
                     <div className='flex mt-5 gap-2'>
                         <Button className='bg-yellow-400 flex-grow'>Đánh giá</Button>
+                        {/* btn fllow film */}
                         <Button className='border-2 bg-transparent min-w-0 text-blue-500 border-blue-600 rounded-xl aspect-square w-10 grid place-items-center'>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />

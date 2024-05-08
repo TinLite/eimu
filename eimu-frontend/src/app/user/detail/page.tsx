@@ -1,11 +1,10 @@
-import MenuAccY from '@/app/components/Sidebar'
-import React from 'react'
+import { InformationUser } from '@/app/components/InformationUser';
+import ModalUpdateUser from '@/app/components/ModalUpdateUser';
+import MenuAccY from '@/app/components/Sidebar';
+import { getUserDetail } from '@/app/repositories/UserRepository';
+import { Avatar } from '@nextui-org/react';
 import { getServerSession } from "next-auth";
 import { authOptions } from '../../../../auth.config';
-import { getUserDetail } from '@/app/repositories/UserRepository';
-import { InformationUser } from '@/app/components/InformationUser';
-import { Avatar } from '@nextui-org/react';
-import ModalUpdateUser from '@/app/components/ModalUpdateUser';
 
 export default async function UserDetail() {
     const session = await getServerSession(authOptions);
@@ -22,7 +21,7 @@ export default async function UserDetail() {
                                 <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" className="w-20 h-20 text-large mr-7" />
                                 <div className='font-bold text-2xl'>{userDetail?.name}</div>
                             </div>
-                            <ModalUpdateUser />
+                            <ModalUpdateUser user={userDetail!} />
                         </div>
                         <InformationUser user={userDetail!} />
                     </div>

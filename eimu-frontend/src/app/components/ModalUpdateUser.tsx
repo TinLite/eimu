@@ -1,7 +1,11 @@
 'use client'
-import React from 'react'
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Avatar, Input, RadioGroup, Radio } from "@nextui-org/react";
-export default function ModalUpdateUser() {
+import { UserDetail } from "@/app/model/UserModels";
+import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Radio, RadioGroup, useDisclosure } from "@nextui-org/react";
+export default function ModalUpdateUser({
+    user
+}: {
+    user: UserDetail
+}) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     return (
         <>
@@ -18,7 +22,7 @@ export default function ModalUpdateUser() {
                                         <input type="file" name='avatar' id='avatar' className=" w-full max-w-xs" />
                                     </div>
                                     <div className=" w-full mb-5">
-                                        <Input type="text" label="Họ tên" placeholder={"userDetail.email"} />
+                                        <Input type="text" label="Họ tên" value={user.name} />
                                     </div>
                                     <div className=" w-full mb-5">
                                         <Input type="date" label="Ngày sinh" placeholder="" />
@@ -32,10 +36,10 @@ export default function ModalUpdateUser() {
                                         <Radio value="nu">Nữ</Radio>
                                     </RadioGroup>
                                     <div className=" w-full mb-5">
-                                        <Input type="Email" label="Email" placeholder="LeQuangTien@gmail.com" />
+                                        <Input type="Email" label="Email" value={user.email} />
                                     </div>
                                     <div className=" w-full mb-5">
-                                        <Input type="tel" label="Số điện thoại" placeholder="0935964574" />
+                                        <Input type="tel" label="Số điện thoại" value={user.phone} />
                                     </div>
                                 </form>
                             </ModalBody>
