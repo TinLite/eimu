@@ -1,15 +1,17 @@
-import React from 'react'
-import { Textarea } from '@nextui-org/react'
-import { Button } from '@nextui-org/react'
-import { Avatar } from '@nextui-org/react'
-export default function CommentForm() {
+import { getUserDetail } from '@/app/repositories/UserRepository';
+import { Avatar, Button, Textarea } from '@nextui-org/react';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../../../auth.config';
+export default async function CommentForm() {
+  const session = await getServerSession(authOptions);
+  var userDetail = await getUserDetail(session?.user?.email!);
   return (
     <div className='flex items-center w-max'>
       <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" className="w-16 h-16 mr-6" />
       <form action="">
         <label className="form-control">
           <div className="label">
-            <span className="label-text font-bold">Tên của bạn</span>
+            <span className="label-text font-bold">{userDetail?.name}</span>
           </div>
           <Textarea
             placeholder="Nhập nội dung bình luận..."
