@@ -1,7 +1,7 @@
 'use client'
 
-import Link from "next/link";
 import { MovieListEntry } from "@/app/model/MovieModels";
+import Link from "next/link";
 import { useRef } from "react";
 export default function SideList({
     title,
@@ -10,7 +10,7 @@ export default function SideList({
 }: {
     title: string,
     link: string,
-    data: [MovieListEntry]
+    data: MovieListEntry[]
 }) {
     const ref = useRef<any>(null)
 

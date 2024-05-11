@@ -1,13 +1,13 @@
-import React from "react";
+import DropdownSearch from "@/app/components/DropdownSearch";
+import GenresDropdown from "@/app/components/navbar/GenresDropdown";
+import { getAllTag } from "@/app/repositories/MovieTagRepository";
+import { authOptions } from "@app/../../auth.config";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@app/../../auth.config";
-import { LoginButton, UserNavComponent } from "./navbar/LoginLogout";
 import { getUserDetail } from "../repositories/UserRepository";
+import { LoginButton, UserNavComponent } from "./navbar/LoginLogout";
 import SearchBar from "./navbar/SearchBar";
-import { getAllTag } from "@/app/repositories/MovieTagRepository";
-import GenresDropdown from "@/app/components/navbar/GenresDropdown";
 const Navbar = async () => {
     const session = await getServerSession(authOptions);
     const genresTag = await getAllTag();
@@ -29,6 +29,7 @@ const Navbar = async () => {
                     <GenresDropdown genresTag={genresTag} />
                 </div>
                 <SearchBar />
+
                 <div className="flex items-center">
                     <Link href={"/user/history"} className="flex items-center hover:text-green-400 mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

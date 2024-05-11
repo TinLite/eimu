@@ -1,6 +1,4 @@
-import { Link } from '@nextui-org/react'
-import React from 'react'
-import { Image } from '@nextui-org/react'
+import { Image, Link } from '@nextui-org/react'
 export default function DropdownSearch() {
     return (
         <ul className='absolute top-16 bg-[#263238] max-w-full w-[18rem] p-2 rounded-sm hidden'>
