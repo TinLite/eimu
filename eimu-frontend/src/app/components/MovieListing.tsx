@@ -1,10 +1,10 @@
-import { MovieListEntry } from "../model/MovieModels";
 import { unstable_noStore as noCache } from "next/cache";
+import { MovieListEntry } from "../model/MovieModels";
 
 export async function MovieTileListing({
     data
 }: {
-    data: [MovieListEntry]
+    data: MovieListEntry[]
 }) {
     noCache(); // Do not cache the render of this page, because it's a waste of memory for this
     return (<div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">

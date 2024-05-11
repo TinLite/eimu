@@ -1,14 +1,14 @@
 'use client'
-import { useRef } from "react";
 import { MovieListEntry } from "@/app/model/MovieModels";
 import { MovieTag } from "@/app/model/MovieTagModels";
+import { useRef } from "react";
 
 export default function Carousel({
   items,
   tagList
 }: {
-  items: [MovieListEntry],
-  tagList: [MovieTag]
+  items: MovieListEntry[],
+  tagList: MovieTag[]
 }) {
   const ref = useRef<any>(null);
   function getTag(id: string): MovieTag | void {
