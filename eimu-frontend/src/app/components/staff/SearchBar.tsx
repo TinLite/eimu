@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 export default function SearchBar() {
     const searchParams = useSearchParams();
     const pathname = usePathname();
-    const {replace} = useRouter();
+    const { replace } = useRouter();
 
     function handleSearch(term: string) {
         const params = new URLSearchParams(searchParams);
@@ -26,7 +26,7 @@ export default function SearchBar() {
 
     return (
         <input type="text" className="input w-full input-ghost input-bordered mb-4" placeholder="Tìm kiếm..."
-        onChange={(e) => debounceSearch(e.target.value)}
-        defaultValue={searchParams.get("query")?.toString()}/>
+            onChange={(e) => debounceSearch(e.target.value)}
+            defaultValue={searchParams.get("query")?.toString()} />
     )
 }
