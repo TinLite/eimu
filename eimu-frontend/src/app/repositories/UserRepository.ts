@@ -44,11 +44,11 @@ export async function createAccount(userDetail: FUser) {
 }
 
 export async function getUserList() {
-    return await (await fetch(`${process.env.BACKEND_ADDRESS}/user/listuser`, {next: {revalidate: 1}})).json() as PaginatedUserList;
+    return await (await fetch(`${process.env.BACKEND_ADDRESS}/user/listuser`, { next: { revalidate: 1 } })).json() as PaginatedUserList;
 }
 
 export async function findUser(field: "name" | "email" | "phone", query: string) {
-    return await (await fetch(`${process.env.BACKEND_ADDRESS}/user/search?field=${field}&query=${query}`, {cache: "no-cache"})).json() as PaginatedUserList;
+    return await (await fetch(`${process.env.BACKEND_ADDRESS}/user/search?field=${field}&query=${query}`, { cache: "no-cache" })).json() as PaginatedUserList;
 }
 
 export async function updateUser(userDetail: UserDetail) {

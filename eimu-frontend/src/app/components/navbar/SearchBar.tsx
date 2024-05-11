@@ -1,6 +1,7 @@
 'use client';
 
-import DropdownSearch from "@/app/components/DropdownSearch";
+import { MovieListEntry } from "@/app/model/MovieModels";
+import { getSearchMovie } from "@/app/repositories/MovieRepository";
 import { Input } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -8,11 +9,17 @@ import { useState } from "react";
 export default function SearchBar() {
     const [searchTerm, setSearchTerm] = useState('');
     const router = useRouter();
+    const [result, setResult] = useState<MovieListEntry[]>([]);
 
-    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearchChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
+        if (event.target.value.trim() !== '') {
+            const searchResults = await getSearchMovie(event.target.value);
+            setResult(searchResults.items);
+        } else {
+            setResult([])
+        }
     };
-
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         if (searchTerm) {
@@ -44,8 +51,25 @@ export default function SearchBar() {
                         </button>
                     }
                 />
+                {result.length !== 0 && (
+                    <ul className="absolute bg-[#263238] w-[18rem] p-2 rounded-sm">
+                        {result?.map((e) => (
+                            <li key={e.id} className="py-2 border-b-1 border-black">
+                                <a href={`/movie/${e.id}`} className="flex">
+                                    <div
+                                        className="max-w-16 w-full h-20"
+                                        style={{ "background": `center / cover no-repeat url('${e.posterUrl}')` }}>{ }
+                                    </div>
+                                    <div className='ml-2'>
+                                        <div>{e.name}</div>
+                                        <div>{e.year}</div>
+                                    </div>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </form>
-            <DropdownSearch />
             {/* <DropdownSearch /> */}
         </div>
     )
