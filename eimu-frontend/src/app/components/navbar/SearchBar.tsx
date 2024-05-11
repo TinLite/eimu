@@ -52,7 +52,7 @@ export default function SearchBar() {
                     }
                 />
                 {result.length !== 0 && (
-                    <ul className="absolute bg-[#263238] w-[18rem] p-2 rounded-sm">
+                    <ul className="absolute my-3 bg-[#263238] w-[18rem] p-2 rounded-sm">
                         {result?.map((e) => (
                             <li key={e.id} className="py-2 border-b-1 border-black">
                                 <a href={`/movie/${e.id}`} className="flex">
