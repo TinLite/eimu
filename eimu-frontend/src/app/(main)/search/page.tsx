@@ -1,30 +1,42 @@
-import React from 'react';
+'use client'
 import { MovieListEntry } from '@/app/model/MovieModels';
 import '@/app/globals.css'
 import { unstable_noStore as noCache } from 'next/cache';
 import { Image, ScrollShadow } from "@nextui-org/react";
 import Link from 'next/link';
 import { getSearchMovie } from '@/app/repositories/MovieRepository';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Pagination } from '@nextui-org/react';
 
-export default async function search(
-    { searchParams }
-        : {
-            searchParams: {
-                query?: string,
-                page?: string
-            }
+export default function SearchPage() {
+    const router = useRouter();
+    const { query, page = 1 } = router.query;
+    const [searchResults, setSearchResults] = useState<MovieListEntry[] | null>(null);
+    const [totalPages, setTotalPages] = useState(0);
+
+    useEffect(() => {
+        if (query) {
+            const fetchMovies = async () => {
+                const queryString = Array.isArray(query) ? query.join(' ') : query;
+                const data = await getSearchMovie(queryString, Number(page));
+                setSearchResults(data.items);         
+            };
+            fetchMovies();
         }
-) {
-    const searchMovie = await getSearchMovie(searchParams.query || "")
-    noCache(); // Do not cache the render of this page
+    }, [query, page]);
+
+    const handlePageChange = (newPage: number) => {
+        router.push(`/search?query=${query}&page=${newPage}`);
+    };
+
     return (
         <div className='text-white px-12'>
-            <h2 className="text-2xl font-semibold py-8">Kết quả tìm kiếm: {searchParams.query}</h2>
-            {/* <MovieTileListing data={data} />  */}
+            <h2 className="text-2xl font-semibold py-8">Kết quả tìm kiếm: {query}</h2>
             <div className='grid grid-cols-3 gap-8'>
-                {searchMovie.items.map((e) => (
-                    <Link key={e.id} href={`/movie/${e.id}`} className='grid grid-cols-4 '>
-                        <div
+                {searchResults && searchResults.map((e) => (
+                   <Link key={e.id} href={`/movie/${e.id}`} className='grid grid-cols-4 '>
+                    <div
                             className="aspect-[2/3] grid place-items-center w-24"
                             style={{ "background": `center / cover no-repeat url('${e.thumbUrl}')` }}>
                         </div>
@@ -43,7 +55,8 @@ export default async function search(
                         </div>
                     </Link>
                 ))}
-            </div >
-        </div >
+            </div>
+            <Pagination total={totalPages} page={Number(page)} onChange={handlePageChange} />
+        </div>
     );
-};
+}
