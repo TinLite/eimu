@@ -1,6 +1,5 @@
 import { InformationUser } from '@/app/components/InformationUser';
 import ModalUpdateUser from '@/app/components/ModalUpdateUser';
-import MenuAccY from '@/app/components/Sidebar';
 import { getUserDetail } from '@/app/repositories/UserRepository';
 import { Avatar } from '@nextui-org/react';
 import { getServerSession } from "next-auth";
@@ -13,7 +12,7 @@ export default async function UserDetail() {
         <div className=' text-white'>
             <div className='w-full px-32'>
                 <div className='grid justify-center py-10 border-b-2 border-white font-bold text-3xl mb-4'>Thông tin cá nhân</div>
-                <div className=' bg-gray-800 rounded-lg'>
+                <div className=' bg-[#18181B] rounded-lg'>
                     <div className='mx-10 py-6'>
                         <div className='flex border-b-2 pb-6 items-center justify-between'>
                             <div className='flex items-center'>
