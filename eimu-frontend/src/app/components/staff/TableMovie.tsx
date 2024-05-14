@@ -2,8 +2,8 @@
 
 import { MovieListEntry } from "@/app/model/MovieModels";
 
-export default function MovieTable({ movieList }: { movieList: [MovieListEntry] }) {
-    
+export default function MovieTable({ movieList }: { movieList: MovieListEntry[] }) {
+
     return (
         <div className=" max-h-[50vh]">
             <table className="table table-pin-rows table-pin-cols">

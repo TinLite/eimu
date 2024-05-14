@@ -1,4 +1,4 @@
-import DropdownSearch from "@/app/components/DropdownSearch";
+
 import GenresDropdown from "@/app/components/navbar/GenresDropdown";
 import { getAllTag } from "@/app/repositories/MovieTagRepository";
 import { authOptions } from "@app/../../auth.config";

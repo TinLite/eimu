@@ -1,6 +1,6 @@
 'use client';
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
 import React from "react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, RadioGroup, Radio } from "@nextui-org/react";
 const colors = ["default", "primary", "secondary", "success", "warning", "danger"];
 
 export default function HistoryTableList() {
@@ -10,9 +10,9 @@ export default function HistoryTableList() {
             <div className='grid justify-center py-10 border-b-2 border-white font-bold text-3xl mb-4'>Lịch sử xem</div>
             <div className="flex flex-col gap-3 text-black">
                 <Table
+                    className="text-white"
                     bgcolor={selectedColor}
                     selectionMode="multiple"
-                    defaultSelectedKeys={["2", "3"]}
                     aria-label="Example static collection table"
                 >
                     <TableHeader>
