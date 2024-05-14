@@ -1,6 +1,6 @@
 export default async function dashboard() {
     return (
-    <div className="flex justify-evenly flex-wrap lg:flex-col gap-4">
+    <div className="flex justify-evenly flex-wrap lg:flex-col gap-4 w-fit mx-auto">
         <div className="stats shadow stats-vertical lg:stats-horizontal">
             <div className="stat">
                 <div className="stat-title">Tổng số phim</div>
