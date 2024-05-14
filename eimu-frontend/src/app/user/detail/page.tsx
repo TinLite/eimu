@@ -10,8 +10,7 @@ export default async function UserDetail() {
     const session = await getServerSession(authOptions);
     var userDetail = await getUserDetail(session?.user?.email!);
     return (
-        <div className='flex text-white'>
-            <MenuAccY />
+        <div className=' text-white'>
             <div className='w-full px-32'>
                 <div className='grid justify-center py-10 border-b-2 border-white font-bold text-3xl mb-4'>Thông tin cá nhân</div>
                 <div className=' bg-gray-800 rounded-lg'>
