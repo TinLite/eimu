@@ -8,6 +8,7 @@ import { Image, ScrollShadow } from "@nextui-org/react";
 import Link from 'next/link';
 import { getSearchMovie } from '@/app/repositories/MovieRepository';
 import { PaginatedMovieList } from '@/app/model/Pageable';
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function SearchPage({ searchParams }: 
     { searchParams: 
@@ -22,15 +23,23 @@ export default function SearchPage({ searchParams }:
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await getSearchMovie(searchParams.query || "", currentPage);
+            const result = await getSearchMovie(searchParams.query || "", currentPage, 21);
             setData(result);
         };
         fetchData();
     }, [searchParams.query, currentPage]);
 
-    const handlePageChange = (page: number) => {
-        setCurrentPage(page);
+    const router = useRouter();
+    const pathname = usePathname();
+    const handlePageChange = (newPage:number) => {
+        const params = new URLSearchParams(searchParams)
+        params.set("page",newPage.toString())
+        router.push(`${pathname}?${params.toString()}`)
     };
+
+    // const handlePageChange = (page: number) => {
+    //     setCurrentPage(page);
+    // };
 
     noCache(); // Do not cache the render of this page
 
@@ -51,7 +60,6 @@ export default function SearchPage({ searchParams }:
                     </Link>
                 ))}
             </div>
-            
             {data && (
                  <div className='flex justify-center'>
                 <Pagination showControls total={data.pageable.totalPages} initialPage={data.pageable.page} onChange={handlePageChange} />
