@@ -1,24 +1,35 @@
+"use server";
 export async function addFollow(userId: string, movieId: string) {
-    return (await fetch(`${process.env.BACKEND_ADDRESS}/follow/add?userId=${userId}&movieId=${movieId}`, {
+    const response = await fetch(`${process.env.BACKEND_ADDRESS}/follow/add?userId=${userId}&movieId=${movieId}`, {
         method: "POST",
+        cache: "no-cache",
         headers: {
             "Content-Type": "application/json"
         },
-    })).ok;
+    })
+    return response.ok;
 }
 
 export async function removeFollow(userId: string, movieId: string) {
-    return (await fetch(`${process.env.BACKEND_ADDRESS}/follow/delete?userId=${userId}&movieId=${movieId}`, {
-        method: "DELETE",
+    const response = await fetch(`${process.env.BACKEND_ADDRESS}/follow/delete?userId=${userId}&movieId=${movieId}`, {
+        method: "POST",
+        cache: "no-cache",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         },
-    })).ok;
+    })
+    return response.ok;
 }
 
 export async function getFollowList(userId: string) {
-    var request = await fetch(`${process.env.BACKEND_ADDRESS}/follow/list?userId=${userId}`);
+    var request = await fetch(
+        `${process.env.BACKEND_ADDRESS}/follow/list?userId=${userId}`,
+        {
+            cache: "no-cache",
+        }
+    );
     if (request.ok) {
+        console.log(request.url)
         return await request.json() as string[];
     } else {
         return [];
