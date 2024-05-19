@@ -42,7 +42,7 @@ export default async function Detail({ params }: { params: { movieId: string, ep
     }
     return (
         <div className='text-gray-200 max-w-screen-xl mx-auto mt-4'>
-            <MovieInfo movie={movieDetail} tags={tags} isLogged={userDetail !== null} isFollowed={isUserFollowedMovie} followClick={followHandler} unfollowClick={unfollowHandler} />
+            <MovieInfo movie={movieDetail} tags={tags} isLogged={userDetail !== undefined} isFollowed={isUserFollowedMovie} followClick={followHandler} unfollowClick={unfollowHandler} />
             <MoviePlayer movie={movieDetail} episodeNumber={epId} />
             <SideList title="Đề xuất cho bạn" link="#" data={recommended_list.items} />
             <Comment />
