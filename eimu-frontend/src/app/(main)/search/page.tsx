@@ -1,10 +1,7 @@
-import React from 'react';
-import { MovieListEntry } from '@/app/model/MovieModels';
-import '@/app/globals.css'
-import { unstable_noStore as noCache } from 'next/cache';
-import { Image, ScrollShadow } from "@nextui-org/react";
-import Link from 'next/link';
+import '@/app/globals.css';
 import { getSearchMovie } from '@/app/repositories/MovieRepository';
+import { unstable_noStore as noCache } from 'next/cache';
+import Link from 'next/link';
 
 export default async function search(
     { searchParams }
@@ -15,7 +12,6 @@ export default async function search(
             }
         }
 ) {
-    console.log(searchParams.query)
     var searchMovie = await getSearchMovie(searchParams.query || "")
     noCache(); // Do not cache the render of this page
     return (

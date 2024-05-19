@@ -8,7 +8,6 @@ import { getLatestMoviesByTag, getMovieDetail } from "@/app/repositories/MovieRe
 import { getTagsDetail } from '@/app/repositories/MovieTagRepository';
 import { getUserDetail } from '@/app/repositories/UserRepository';
 import { getServerSession } from 'next-auth';
-import { cookies } from 'next/headers';
 
 export default async function Detail({ params }: { params: { movieId: string, epId?: string } }) {
     const movieId = params.movieId
@@ -36,7 +35,6 @@ export default async function Detail({ params }: { params: { movieId: string, ep
     }
     const followHandler = async () => {
         "use server";
-        console.log(cookies().getAll())
         if (!userId) {
             return false;
         }

@@ -29,7 +29,6 @@ export async function getFollowList(userId: string) {
         }
     );
     if (request.ok) {
-        console.log(request.url)
         return await request.json() as string[];
     } else {
         return [];
