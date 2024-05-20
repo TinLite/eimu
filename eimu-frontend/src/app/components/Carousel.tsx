@@ -7,7 +7,7 @@ export default function Carousel({
   items,
   tagList
 }: {
-  items: [MovieListEntry],
+  items: MovieListEntry[],
   tagList: [MovieTag]
 }) {
   const ref = useRef<any>(null);
