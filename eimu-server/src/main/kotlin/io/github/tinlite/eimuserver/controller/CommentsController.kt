@@ -117,4 +117,36 @@ class CommentsController {
         }
         return ResponseEntity.ok().build()
     }
+
+    @GetMapping("/replies")
+    fun getAllReply(@RequestParam movieId: String): ResponseEntity<List<Map<String, Any?>>> {
+        if (!movieDetailRepository.existsById(movieId)) {
+            return ResponseEntity.notFound().build()
+        }
+        val comments = commentsRepository.findByMovieId(movieId)
+        val userIds = comments.map {
+            it.userId
+        }
+        val userList = userRepository.findAllByIdIn(userIds)
+
+        fun map(it1: DataComments): Map<String, Any?> {
+            return mapOf(
+                "id" to it1.id.toHexString(),
+                "userId" to it1.userId,
+                "username" to userList.first { it2 -> it1.userId == it2.id.toHexString() }.name,
+                "movieId" to it1.movieId,
+                "likes" to it1.likes,
+                "content" to it1.content,
+                "replyTo" to it1.replyTo,
+                "replies" to comments.filter { it2 -> it2.replyTo == it1.id }
+                    .map { it3 -> map(it3) },//Goi lai fun map(it1: DataComments) để lấy username
+                "timestamp" to it1.timestamp,
+            )
+        }
+
+        val result = comments.filter { it.replyTo == null }.map { it1 ->
+            map(it1)
+        }
+        return ResponseEntity.ok(result);
+    }
 }
