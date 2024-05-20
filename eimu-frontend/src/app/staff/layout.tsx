@@ -22,7 +22,7 @@ export default function RootLayout({
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
                         </svg>
                     </label>
-                    <div className="mx-auto w-fit my-8">{children}</div>
+                    <div className="my-8">{children}</div>
                 </div>
                 <div className="drawer-side z-10">
                     <label htmlFor="hDrawer" className="drawer-overlay"></label>

@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.core.query.TextCriteria
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.json.MappingJacksonValue
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -22,7 +23,29 @@ class MovieController {
     lateinit var tagRepository: MovieTagRepository
 
     @GetMapping
-    fun listPaginated(@RequestParam page: Int = 1, @RequestParam size: Int = 20, @RequestParam tags: Collection<String>?, @RequestParam query: String?): ResponseEntity<Map<String, Any>> {
+    fun listPaginated(
+        @RequestParam page: Int = 1,
+        @RequestParam size: Int = 20,
+        @RequestParam tags: Collection<String>?,
+        @RequestParam query: String?,
+        @RequestParam ids: Collection<String>?
+    ): ResponseEntity<out Any> {
+
+        if (!ids.isNullOrEmpty()) {
+            val dataMovies = movieDetailRepository.findAllById(ids)
+            val movies = mutableListOf<MovieDetail>()
+            ids.forEach { iid ->
+                dataMovies.find { dMov ->
+                    iid == dMov.id
+                }?.let {
+                    movies.add(it)
+                }
+            }
+            val map = MappingJacksonValue(movies)
+            map.serializationView = MovieDetail.MovieListEntry::class.java
+            return ResponseEntity.ok(map)
+        }
+
         val pageRequest = PageRequest.of(page - 1, size)
         val data = if (!tags.isNullOrEmpty())
             movieDetailRepository.findAllByTagsPaginated(tags, pageRequest.withSort(Sort.by("modified").descending()))
@@ -30,7 +53,6 @@ class MovieController {
             movieDetailRepository.findAllBy(
                 TextCriteria.forDefaultLanguage().matchingAny(query),
                 pageRequest.withSort(Sort.by("score").descending())
-//                pageRequest.withSort(Sort.by("modified").descending())
             )
         else
             movieDetailRepository.findAllBy(pageRequest.withSort(Sort.by("modified").descending()))
@@ -44,6 +66,7 @@ class MovieController {
             ),
             "items" to data.content
         )
+
         if (!tags.isNullOrEmpty())
             response["tags"] = tagRepository.findAllByIdIn(tags)
         return ResponseEntity.ok(response)
