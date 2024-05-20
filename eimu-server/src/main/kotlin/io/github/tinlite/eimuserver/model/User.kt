@@ -8,8 +8,8 @@ import java.util.*
 
 @Document("user")
 data class User(
-    @JsonView(UserDetail::class) @Id val id: ObjectId?,
-    @JsonView(UserDetail::class) var name: String,
+    @JsonView(UserBasic::class) @Id val id: ObjectId?,
+    @JsonView(UserBasic::class) var name: String,
     @JsonView(UserDetail::class) var dateOfBirth: Date?,
     @JsonView(UserDetail::class) var phone: String?,
     @JsonView(UserDetail::class) var email: String?,
@@ -17,7 +17,8 @@ data class User(
     @JsonView(UserDetail::class) var role: String,
     val hashedPassword: String
 ) {
-    interface UserDetail
+    interface UserBasic
+    interface UserDetail : UserBasic
 }
 
 data class UserLoginDetail(

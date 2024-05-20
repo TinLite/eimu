@@ -15,5 +15,6 @@ interface UserRepository
     fun findByEmailIgnoreCase(email: String): List<UserDetail>
 
     fun findFirstByEmailIgnoreCaseOrPhone(email: String, phone: String): UserLoginDetail?
+    fun findAllByIdIn(id: Collection<String>): List<UserDetail>
 
 }

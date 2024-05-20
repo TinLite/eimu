@@ -9,4 +9,5 @@ interface CommentsRepository : MongoRepository<DataComments,String> {
 
     fun findByContentContainsIgnoreCase(content: String): List<DataComments>
 
+//    fun findAllByIdIn(:Collection<String>): List<DataComments>
 }
