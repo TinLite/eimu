@@ -1,0 +1,15 @@
+meta {
+  name: CommentByMovie
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{baseUrl}}/comments/replies?movieId=co-di-ma-lay-chong-toi
+  body: none
+  auth: none
+}
+
+query {
+  movieId: co-di-ma-lay-chong-toi
+}
