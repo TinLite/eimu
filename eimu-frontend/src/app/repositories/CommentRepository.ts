@@ -1,4 +1,5 @@
-import { LikeAction, PendingComment, PendingReply } from "../model/CommentModels";
+'use server';
+import { CommentDetail, LikeAction, PendingComment, PendingReply, RecursiveCommentDetail } from "../model/CommentModels";
 
 export async function createComment(comment: PendingComment) {
     var request = await fetch(`${process.env.BACKEND_ADDRESS}/comments/create`, {
@@ -14,7 +15,7 @@ export async function createComment(comment: PendingComment) {
 export async function queryComment(field: "movieid" | "userid" | "content", query: string) {
     var request = await fetch(`${process.env.BACKEND_ADDRESS}/comments/query?field=${field}&query=${query}`);
     if (request.ok) {
-        return await request.json();
+        return await request.json() as CommentDetail[];
     } else {
         return [];
     }
@@ -64,4 +65,14 @@ export async function removeCommentLike(likeDataToRemove: LikeAction) {
         })
     });
     return request.ok;
+}
+
+export async function getRecursiveCommentByMovieId(movieId: String) {
+    var request = await fetch(`${process.env.BACKEND_ADDRESS}/comments/replies?movieId=${movieId}`);
+    if (request.ok) {
+        return await request.json() as RecursiveCommentDetail[];
+    } else {
+        console.error("Recursive fetch", movieId, request.status, request.statusText);
+        return [];
+    }
 }

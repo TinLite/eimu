@@ -17,7 +17,7 @@ export async function getUserLoginDetail(v: string): Promise<UserLoginDetail | u
 }
 
 export async function getUserDetail(v: string): Promise<UserDetail | undefined> {
-    var request = await fetch(`${process.env.BACKEND_ADDRESS}/user/detail/${v}`, {
+    var request = await fetch(`${process.env.BACKEND_ADDRESS}/user/show?id=${v}`, {
         next: {
             revalidate: 60
         }

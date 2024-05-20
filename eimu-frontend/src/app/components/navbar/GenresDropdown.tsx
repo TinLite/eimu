@@ -5,7 +5,7 @@ import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@
 export default function GenresDropdown({
     genresTag,
 }: {
-    genresTag: [MovieTag]
+    genresTag: MovieTag[]
 }) {
     return (
         <div className="dropdown dropdown-hover px-4">

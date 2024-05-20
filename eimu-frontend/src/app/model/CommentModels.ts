@@ -1,10 +1,24 @@
 export type CommentDetail = {
     id: string,
     movieId: string,
+    movieName: string,
     userId: string,
+    userName: string,
     content: string,
     timestamp: string,
     replyTo?: string,
+    likes: string[],
+}
+
+export type RecursiveCommentDetail = {
+    id: string,
+    movieId: string,
+    userId: string,
+    userName: string,
+    content: string,
+    timestamp: string,
+    replyTo?: string,
+    replies: RecursiveCommentDetail[],
     likes: string[],
 }
 

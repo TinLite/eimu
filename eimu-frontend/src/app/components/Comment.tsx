@@ -1,18 +1,34 @@
-import CommentForm from '@/app/components/CommentForm'
-import UserComments from '@/app/components/UserComments'
-import React from 'react'
+'use client';
+import CommentForm from '@/app/components/CommentForm';
+import UserComments from '@/app/components/UserComments';
+import { Movie } from '@/app/model/MovieModels';
+import { Suspense, useEffect, useState } from 'react';
+import { submitComment } from '../action/CommentFormAction';
+import { RecursiveCommentDetail } from '../model/CommentModels';
+import { UserDetail } from '../model/UserModels';
+import { getRecursiveCommentByMovieId } from '../repositories/CommentRepository';
 
-export default function comment() {
+export default function Comment({movie, userDetail, userId}: {movie: Movie, userDetail?: UserDetail, userId?: string}) {
+
+    const [comments, setComments] = useState<RecursiveCommentDetail[]>([]);
+    const [seed, setSeed] = useState(0);
+
+    useEffect(() => {
+        getRecursiveCommentByMovieId(movie.id).then(setComments)
+    }, [seed])
+
+    const submitHandler = async (movieId: string, userId: string, formData: FormData, replyTo?: string) =>
+        submitComment(movieId, userId, formData, replyTo).then(() => setSeed(seed + 1))
+    
     return (
-        <div className='border-t-4 rounded-3xl max-h-full px-6 py-4 mx-14 my-5'>
-            <div className='flex'>
-                <div className='mr-2 mb-5'>Bình luận</div>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
-                </svg>
+        <div className='px-6 py-4 mx-14 my-5'>
+            <div className='flex gap-2'>
+                <div className='text-xl font-bold'>Bình luận</div>
             </div>
-            <CommentForm />
-            <UserComments />
+            <CommentForm name={userDetail?.name ?? "Xin chào"} submitFunction={userDetail ? submitHandler.bind(null, movie.id, userId!) : undefined}/>
+            <Suspense fallback={<div>Đang tải...</div>}>
+                <UserComments comments={comments} commentSubmitHandler={userDetail ? submitHandler.bind(null, movie.id, userId!) : undefined} />
+            </Suspense>
         </div>
     )
 }

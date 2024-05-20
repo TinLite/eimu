@@ -45,7 +45,7 @@ export default async function Detail({ params }: { params: { movieId: string, ep
             <MovieInfo movie={movieDetail} tags={tags} isLogged={userDetail !== undefined} isFollowed={isUserFollowedMovie} followClick={followHandler} unfollowClick={unfollowHandler} />
             <MoviePlayer movie={movieDetail} episodeNumber={epId} />
             <SideList title="Đề xuất cho bạn" link="#" data={recommended_list.items} />
-            <Comment />
+            <Comment movie={movieDetail} userDetail={userDetail} userId={userId ?? undefined} />
         </div >
     )
 }
