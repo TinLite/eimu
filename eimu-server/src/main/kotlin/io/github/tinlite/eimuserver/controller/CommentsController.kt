@@ -142,7 +142,7 @@ class CommentsController {
         if (!movieDetailRepository.existsById(movieId)) {
             return ResponseEntity.notFound().build()
         }
-        val comments = commentsRepository.findByMovieId(movieId)
+        val comments = commentsRepository.findByMovieId(movieId).sortedByDescending { it.timestamp }
         val userIds = comments.map {
             it.userId
         }
