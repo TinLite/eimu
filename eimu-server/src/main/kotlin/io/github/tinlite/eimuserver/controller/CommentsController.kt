@@ -44,14 +44,37 @@ class CommentsController {
 
     @GetMapping("/search")
     fun searchComment(@RequestParam query: String, @RequestParam field: String)
-            : ResponseEntity<List<DataComments>> {
+            : ResponseEntity<List<Map<String, Any?>>> {
         val data = when (field.lowercase()) {
             "userid" -> commentsRepository.findByUserId(query)
             "movieid" -> commentsRepository.findByMovieId(query)
             "content" -> commentsRepository.findByContentContainsIgnoreCase(query)
             else -> return ResponseEntity.notFound().build()
         }
-        return ResponseEntity.ok(data)
+        val userIds = data.map {
+            it.userId
+        }
+        val movieIds = data.map {
+            it.movieId
+        }
+        val movieList = movieDetailRepository.findAllByIdIn(movieIds)
+        val userList = userRepository.findAllByIdIn(userIds)
+        fun map(it1: DataComments): Map<String, Any?> {
+            return mapOf(
+                "id" to it1.id.toHexString(),
+                "userId" to it1.userId,
+                "username" to userList.first { it2 -> it1.userId == it2.id.toHexString() }.name,
+                "movieId" to it1.movieId,
+                "movieName" to movieList.first { it2 -> it1.movieId == it2.id }.name,
+                "likes" to it1.likes,
+                "content" to it1.content,
+                "replyTo" to it1.replyTo,
+                "timestamp" to it1.timestamp,
+            )
+        }
+
+        val result = data.map { map(it) }
+        return ResponseEntity.ok(result)
     }
 
     @PostMapping("/delete/{id}")
@@ -92,8 +115,6 @@ class CommentsController {
         }
         return ResponseEntity.badRequest().build()
     }
-
-
     @PostMapping("/addlike")
     fun addLike(@RequestBody likeAction: LikeAction): ResponseEntity<Unit> {
         val comment =
@@ -107,7 +128,6 @@ class CommentsController {
         }
         return ResponseEntity.ok().build()
     }
-
     @PostMapping("/removelike")
     fun remove(@RequestBody likeAction: LikeAction): ResponseEntity<Unit> {
         val comment =
@@ -117,7 +137,6 @@ class CommentsController {
         }
         return ResponseEntity.ok().build()
     }
-
     @GetMapping("/replies")
     fun getAllReply(@RequestParam movieId: String): ResponseEntity<List<Map<String, Any?>>> {
         if (!movieDetailRepository.existsById(movieId)) {
@@ -128,12 +147,11 @@ class CommentsController {
             it.userId
         }
         val userList = userRepository.findAllByIdIn(userIds)
-
         fun map(it1: DataComments): Map<String, Any?> {
             return mapOf(
                 "id" to it1.id.toHexString(),
                 "userId" to it1.userId,
-                "username" to userList.first { it2 -> it1.userId == it2.id.toHexString() }.name,
+                "userName" to userList.first { it2 -> it1.userId == it2.id.toHexString() }.name,
                 "movieId" to it1.movieId,
                 "likes" to it1.likes,
                 "content" to it1.content,
@@ -144,8 +162,8 @@ class CommentsController {
             )
         }
 
-        val result = comments.filter { it.replyTo == null }.map { it1 ->
-            map(it1)
+        val result = comments.filter { it.replyTo == null }.map {
+            map(it)
         }
         return ResponseEntity.ok(result);
     }
