@@ -1,8 +1,11 @@
 package io.github.tinlite.eimuserver.controller
 
+import io.github.tinlite.eimuserver.model.MovieListEntry
 import io.github.tinlite.eimuserver.repository.MovieDetailRepository
 import io.github.tinlite.eimuserver.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -11,6 +14,9 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("follow")
 
 class UserMovieController {
+    @Autowired
+    private lateinit var movieDetailRepository: MovieDetailRepository
+
     @Autowired
     lateinit var userRepository: UserRepository
 
@@ -42,6 +48,21 @@ class UserMovieController {
         } else {
             ResponseEntity.notFound().build()
         }
+    }
+
+    @GetMapping("/listmoviedetail")
+    fun listWithMovieDetail(
+        @RequestParam userId: String,
+        @RequestParam page: Int = 1,
+        @RequestParam size: Int = 20
+    ): ResponseEntity<Page<MovieListEntry>> {
+        val user = userRepository.findByIdOrNull(userId) ?: return ResponseEntity.notFound().build()
+        return ResponseEntity.ok(
+            movieDetailRepository.findAllByIdIn(
+                user.follows ?: emptyList(),
+                PageRequest.of(page - 1, size)
+            )
+        )
     }
 
     @PostMapping("/delete")

@@ -26,5 +26,8 @@ interface MovieDetailRepository : MongoRepository<MovieDetail, String> {
     fun findAllBy(criteria: TextCriteria, pageable: Pageable) : Page<MovieDetail>
 
     fun findByNameOrCasts(name: String, casts: String)
+
     fun findAllByIdIn(id: Collection<String>): List<MovieListEntry>
+
+    fun findAllByIdIn(id: Collection<String>, pageable: Pageable): Page<MovieListEntry>
 }
