@@ -29,3 +29,14 @@ export type PaginatedUserList = {
     pageable: Pageable,
     data: UserDetail[]
 }
+
+export type Page<T> = {
+    data: T[],
+    pageable: {
+        page: number,
+        totalPages: number,
+        totalElements: number,
+        hasPrevious: boolean,
+        hasNext: boolean,
+    },
+}
