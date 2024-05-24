@@ -1,10 +1,8 @@
 package io.github.tinlite.eimuserver.controller
 
-import io.github.tinlite.eimuserver.model.MovieListEntry
 import io.github.tinlite.eimuserver.repository.MovieDetailRepository
 import io.github.tinlite.eimuserver.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.ResponseEntity
@@ -55,12 +53,22 @@ class UserMovieController {
         @RequestParam userId: String,
         @RequestParam page: Int = 1,
         @RequestParam size: Int = 20
-    ): ResponseEntity<Page<MovieListEntry>> {
+    ): ResponseEntity<Map<String, Any>> {
         val user = userRepository.findByIdOrNull(userId) ?: return ResponseEntity.notFound().build()
+        val movieList = movieDetailRepository.findAllByIdIn(
+            user.follows ?: emptyList(),
+            PageRequest.of(page - 1, size)
+        )
         return ResponseEntity.ok(
-            movieDetailRepository.findAllByIdIn(
-                user.follows ?: emptyList(),
-                PageRequest.of(page - 1, size)
+            mapOf(
+                "items" to movieList.content,
+                "pageable" to mapOf(
+                    "page" to page,
+                    "totalPages" to movieList.totalPages,
+                    "totalElements" to movieList.totalElements,
+                    "hasNext" to movieList.hasNext(),
+                    "hasPrevious" to movieList.hasPrevious()
+                )
             )
         )
     }
