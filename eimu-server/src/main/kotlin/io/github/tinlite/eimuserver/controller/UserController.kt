@@ -1,7 +1,10 @@
 package io.github.tinlite.eimuserver.controller
 
+import io.github.tinlite.eimuserver.model.SaveWatchHistoryRequest
 import io.github.tinlite.eimuserver.model.User
 import io.github.tinlite.eimuserver.model.UserDetail
+import io.github.tinlite.eimuserver.model.WatchHistory
+import io.github.tinlite.eimuserver.repository.MovieDetailRepository
 import io.github.tinlite.eimuserver.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
@@ -9,6 +12,7 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.json.MappingJacksonValue
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 @RequestMapping("/user")
@@ -16,6 +20,8 @@ class UserController {
     @Autowired
     lateinit var userRepository: UserRepository
 
+    @Autowired
+    lateinit var userMovieRepository: MovieDetailRepository
     @PostMapping("/create")
     fun createAccount(@RequestBody user: User): User {
         return userRepository.insert(user)
@@ -99,5 +105,33 @@ class UserController {
         ))
     }
 
-
+    @PostMapping("/watch")
+    fun saveWatchedMovie(@RequestBody watchRequest: SaveWatchHistoryRequest): ResponseEntity<Unit> {
+        val userId = userRepository.existsById(watchRequest.userId)
+        val movieId = userMovieRepository.existsById(watchRequest.movieId)
+        if (userId && movieId) {
+            val user = userRepository.findByIdOrNull(watchRequest.userId) ?: return ResponseEntity.notFound().build()
+            if (user.watchHistory == null) {
+                user.watchHistory = mutableListOf()
+            }
+            val mov = user.watchHistory?.filter {
+                it.movieId == watchRequest.movieId
+            }
+            if (mov.isNullOrEmpty()) {
+                val data = WatchHistory(
+                    movieId = watchRequest.movieId,
+                    watchedEpisode = watchRequest.watchedEpisode,
+                    timestamp = Date(System.currentTimeMillis())
+                )
+                user.watchHistory?.add(data)
+            } else {
+                mov[0].watchedEpisode = watchRequest.watchedEpisode
+                mov[0].timestamp = Date(System.currentTimeMillis())
+            }
+            userRepository.save(user)
+            return ResponseEntity.ok().build()
+        } else {
+            return ResponseEntity.badRequest().build()
+        }
+    }
 }

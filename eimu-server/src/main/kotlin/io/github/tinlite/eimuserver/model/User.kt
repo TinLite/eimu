@@ -15,7 +15,8 @@ data class User(
     @JsonView(UserDetail::class) var email: String?,
     var follows: MutableList<String>?,
     @JsonView(UserDetail::class) var role: String,
-    val hashedPassword: String
+    val hashedPassword: String,
+    var watchHistory: MutableList<WatchHistory>?
 ) {
     interface UserBasic
     interface UserDetail : UserBasic
@@ -34,4 +35,15 @@ data class UserDetail(
     var phone: String?,
     var email: String?,
     var role: String,
+)
+data class WatchHistory(
+    val movieId: String,
+    var watchedEpisode: String, // ID của tập phim
+    var timestamp: Date = Date()
+)
+
+data class SaveWatchHistoryRequest(
+    val userId: String,
+    val movieId: String,
+    val watchedEpisode: String // ID của tập phim
 )
