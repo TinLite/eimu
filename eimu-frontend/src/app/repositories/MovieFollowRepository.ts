@@ -39,7 +39,7 @@ export async function getFollowList(userId: string) {
     }
 }
 
-export async function getFollowListWithMovieDetail(userId: string, page: number = 1, size: number = 10) {
+export async function getFollowListWithMovieDetail(userId: string, page: number = 1, size: number = 20) {
     var request = await fetch(
         `${process.env.BACKEND_ADDRESS}/follow/listmoviedetail?userId=${userId}&page=${page}&size=${size}`,
         {

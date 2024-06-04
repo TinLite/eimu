@@ -9,7 +9,7 @@ import { authOptions } from '../../../../auth.config';
 export default async function Follow({ searchParams }: { searchParams: { page?: string } }) {
   const session = await getServerSession(authOptions);
   const userId = session?.user?.email!;
-  var getfollow = await getFollowListWithMovieDetail(userId,Number(searchParams.page));
+  var getfollow = await getFollowListWithMovieDetail(userId, Number(searchParams.page), 10);
 
   return (
     <div>
