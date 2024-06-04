@@ -1,7 +1,7 @@
 import { getUserDetail, getUserLoginDetail } from '@/app/repositories/UserRepository';
+import bcrypt from 'bcrypt';
 import type { NextAuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import bcrypt from 'bcrypt';
 import { z } from 'zod';
 
 export const authOptions: NextAuthOptions = {
@@ -18,16 +18,12 @@ export const authOptions: NextAuthOptions = {
                     .object({ username: z.string().min(4), password: z.string().min(8) })
                     .safeParse(credentials);
                 if (parsedCredentials.success) {
-                    console.log(parsedCredentials.data)
                     const { username, password } = parsedCredentials.data;
                     var data = await getUserLoginDetail(username);
-                    console.log("Data: " + data)
                     if (!data) return null;
                     const isMatch = await bcrypt.compare(password, data.hashedPassword);
-                    console.log("isMatch: " + isMatch )
                     if (isMatch) return { id: data.id };
                 }
-                console.log("We're here")
                 return null;
             },
             credentials: {
