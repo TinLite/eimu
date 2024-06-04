@@ -6,10 +6,10 @@ import { getUserDetail } from '@/app/repositories/UserRepository';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../../auth.config';
 
-export default async function Follow() {
+export default async function Follow({ searchParams }: { searchParams: { page?: string } }) {
   const session = await getServerSession(authOptions);
   const userId = session?.user?.email!;
-  var getfollow = await getFollowListWithMovieDetail(userId);
+  var getfollow = await getFollowListWithMovieDetail(userId,Number(searchParams.page));
 
   return (
     <div>

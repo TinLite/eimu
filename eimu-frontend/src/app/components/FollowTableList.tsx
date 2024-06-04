@@ -16,12 +16,7 @@ export default function FollowTableList({ movie }: { movie: Page<MovieListEntry>
         params.set("page", newPage.toString())
         router.push(`${pathname}?${params.toString()}`)
     };
-    // const handleDelete = async (movieId: string) => {
-    //     const confirmDelete = await window.confirm('Bạn có muốn xóa ra khỏi danh sách theo dõi?');
-    //     if (!confirmDelete) return;
-    //     const updatedMovieList = movie.items?.filter((item) => item.id !== movieId);
-        
-    // }
+
     return (
         <div className='w-full px-32'>
             <div className='grid justify-center py-10 border-b-2 border-white font-bold text-3xl mb-4'>Danh sách theo dõi</div>
