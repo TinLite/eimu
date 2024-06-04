@@ -86,4 +86,5 @@ class UserMovieController {
         userRepository.save(user)
         return ResponseEntity.ok(user.follows)
     }
+
 }

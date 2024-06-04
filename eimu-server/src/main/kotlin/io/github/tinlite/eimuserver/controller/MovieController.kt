@@ -1,9 +1,12 @@
 package io.github.tinlite.eimuserver.controller
 
+//import io.github.tinlite.eimuserver.model.MovieHistory
+//import io.github.tinlite.eimuserver.model.MovieWatched
 import io.github.tinlite.eimuserver.model.EpisodeServer
 import io.github.tinlite.eimuserver.model.MovieDetail
 import io.github.tinlite.eimuserver.repository.MovieDetailRepository
 import io.github.tinlite.eimuserver.repository.MovieTagRepository
+import io.github.tinlite.eimuserver.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
@@ -21,6 +24,9 @@ class MovieController {
 
     @Autowired
     lateinit var tagRepository: MovieTagRepository
+
+    @Autowired
+    lateinit var userRepository: UserRepository
 
     @GetMapping
     fun listPaginated(
@@ -84,4 +90,22 @@ class MovieController {
             movieDetailRepository.findAndUpdateEpisodesById(id, data)
         )
     }
+//    @PostMapping("/history/")
+//    fun addHistory(@RequestBody addhistory: MovieWatched):ResponseEntity<Unit>{
+//        if(movieDetailRepository.existsById(addhistory.movieId) &&
+//            userRepository.existsById(addhistory.userId))
+//        {
+//                movieDetailRepository.save(
+//                    MovieHistory(
+//                        userId = addhistory.movieId,
+//                        movieId = addhistory.movieId,
+//                        episodes = addhistory.episodes,
+//                        watched = LocalDateTime.now()
+//                    )
+//                )
+//            return ResponseEntity.ok().build()
+//        } else {
+//            return ResponseEntity.badRequest().build()
+//        }
+//    }
 }
