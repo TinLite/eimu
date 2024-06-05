@@ -4,6 +4,7 @@ import io.github.tinlite.eimuserver.model.User
 import io.github.tinlite.eimuserver.model.UserDetail
 import io.github.tinlite.eimuserver.model.UserLoginDetail
 import org.springframework.data.mongodb.repository.MongoRepository
+import java.util.*
 
 interface UserRepository
     : MongoRepository<User, String> {
@@ -17,4 +18,5 @@ interface UserRepository
     fun findFirstByEmailIgnoreCaseOrPhone(email: String, phone: String): UserLoginDetail?
     fun findAllByIdIn(id: Collection<String>): List<UserDetail>
 
+    fun findAllByTimestampBetween(start: Date, end: Date): List<User>
 }

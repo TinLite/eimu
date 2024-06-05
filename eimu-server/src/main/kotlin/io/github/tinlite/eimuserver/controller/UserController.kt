@@ -13,6 +13,8 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.json.MappingJacksonValue
 import org.springframework.web.bind.annotation.*
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.*
 
 @RestController
@@ -144,10 +146,20 @@ class UserController {
         val totalUsers = userRepository.count()
         val totalMovies = userMovieRepository.count()
         val totalComments = commentRepository.count()
+
+        val startOfDay: Date = Date.from(
+            LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()
+        ) //lây date k t lay time,sau do thiet lap thoi gian bat dau theo mui gio cua hethong
+        val endOfDate: Date =
+            Date.from(LocalDate.now().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant())//toInstant
+        val usersCreatedToday = userRepository.findAllByTimestampBetween(startOfDay, endOfDate)
+        val totalUsersCreatedToday = usersCreatedToday.size
         val stat = mapOf(
             "totalUsers" to totalUsers,
+            "newUsersToday" to totalUsersCreatedToday,
             "totalMovies" to totalMovies,
             "totalComments" to totalComments
+
         )
         return ResponseEntity.ok(stat)
     }
