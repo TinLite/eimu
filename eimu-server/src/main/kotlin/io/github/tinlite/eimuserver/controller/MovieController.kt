@@ -2,13 +2,17 @@ package io.github.tinlite.eimuserver.controller
 
 import io.github.tinlite.eimuserver.model.EpisodeServer
 import io.github.tinlite.eimuserver.model.MovieDetail
+import io.github.tinlite.eimuserver.model.MovieDetailUpdate
 import io.github.tinlite.eimuserver.repository.MovieDetailRepository
 import io.github.tinlite.eimuserver.repository.MovieTagRepository
-import io.github.tinlite.eimuserver.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
+import org.springframework.data.mongodb.core.MongoTemplate
+import org.springframework.data.mongodb.core.query.Criteria
+import org.springframework.data.mongodb.core.query.Query
 import org.springframework.data.mongodb.core.query.TextCriteria
+import org.springframework.data.mongodb.core.query.Update
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.json.MappingJacksonValue
@@ -24,7 +28,7 @@ class MovieController {
     lateinit var tagRepository: MovieTagRepository
 
     @Autowired
-    lateinit var userRepository: UserRepository
+    lateinit var mongoTemplate: MongoTemplate
 
     @GetMapping
     fun listPaginated(
@@ -84,26 +88,17 @@ class MovieController {
 
     @PostMapping("/{id}/update")
     fun update(@PathVariable id: String, @RequestBody data: List<EpisodeServer>) : ResponseEntity<Any> {
-        return ResponseEntity.ok(
-            movieDetailRepository.findAndUpdateEpisodesById(id, data)
-        )
+        val query = Query(Criteria.where("_id").`is`(id))
+        val update = Update().set("episodes", data)
+        return if (mongoTemplate.findAndModify(query, update, MovieDetail::class.java) == null) {
+            ResponseEntity.notFound().build()
+        } else {
+            ResponseEntity.ok().build()
+        }
     }
-//    @PostMapping("/history/")
-//    fun addHistory(@RequestBody addhistory: MovieWatched):ResponseEntity<Unit>{
-//        if(movieDetailRepository.existsById(addhistory.movieId) &&
-//            userRepository.existsById(addhistory.userId))
-//        {
-//                movieDetailRepository.save(
-//                    MovieHistory(
-//                        userId = addhistory.movieId,
-//                        movieId = addhistory.movieId,
-//                        episodes = addhistory.episodes,
-//                        watched = LocalDateTime.now()
-//                    )
-//                )
-//            return ResponseEntity.ok().build()
-//        } else {
-//            return ResponseEntity.badRequest().build()
-//        }
-//    }
+
+    @PostMapping("/{id}/updateDetail")
+    fun updateMovieDetail(@PathVariable id: String, @RequestBody data: MovieDetailUpdate) {
+
+    }
 }

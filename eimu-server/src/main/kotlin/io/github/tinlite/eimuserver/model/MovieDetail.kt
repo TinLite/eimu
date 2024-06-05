@@ -49,14 +49,16 @@ data class MovieListEntry(
     @Field("poster_url") var posterUrl: String,
     var modified: Long
 )
-//data class MovieHistory(
-//    val userId: String,
-//    val movieId: String,
-//    val episodes: String,
-//    val watched: LocalDateTime
-//)
-//data class  MovieWatched(
-//    val userId: String,
-//    val movieId: String,
-//    val episodes: String
-//)
+
+data class MovieDetailUpdate(
+    var name: String,
+    val year: Int?,
+    @Field("original_name") var originalName: String?,
+    var description: String?,
+    @Field("thumb_url") var thumbUrl: String,
+    @Field("poster_url") var posterUrl: String,
+    val director: String?,
+    val language: String?,
+    val casts: String?,
+    @Field("total_episodes") val totalEpisodes: Int?,
+)
