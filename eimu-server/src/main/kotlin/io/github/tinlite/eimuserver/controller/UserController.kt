@@ -4,6 +4,7 @@ import io.github.tinlite.eimuserver.model.SaveWatchHistoryRequest
 import io.github.tinlite.eimuserver.model.User
 import io.github.tinlite.eimuserver.model.UserDetail
 import io.github.tinlite.eimuserver.model.WatchHistory
+import io.github.tinlite.eimuserver.repository.CommentsRepository
 import io.github.tinlite.eimuserver.repository.MovieDetailRepository
 import io.github.tinlite.eimuserver.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,6 +23,9 @@ class UserController {
 
     @Autowired
     lateinit var userMovieRepository: MovieDetailRepository
+
+    @Autowired
+    lateinit var commentRepository: CommentsRepository
     @PostMapping("/create")
     fun createAccount(@RequestBody user: User): User {
         return userRepository.insert(user)
@@ -133,5 +137,18 @@ class UserController {
         } else {
             return ResponseEntity.badRequest().build()
         }
+    }
+
+    @GetMapping("/stat")
+    fun getUserStat(): ResponseEntity<Map<String, Any>> {
+        val totalUsers = userRepository.count()
+        val totalMovies = userMovieRepository.count()
+        val totalComments = commentRepository.count()
+        val stat = mapOf(
+            "totalUsers" to totalUsers,
+            "totalMovies" to totalMovies,
+            "totalComments" to totalComments
+        )
+        return ResponseEntity.ok(stat)
     }
 }

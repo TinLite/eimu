@@ -49,14 +49,3 @@ data class MovieListEntry(
     @Field("poster_url") var posterUrl: String,
     var modified: Long
 )
-//data class MovieHistory(
-//    val userId: String,
-//    val movieId: String,
-//    val episodes: String,
-//    val watched: LocalDateTime
-//)
-//data class  MovieWatched(
-//    val userId: String,
-//    val movieId: String,
-//    val episodes: String
-//)

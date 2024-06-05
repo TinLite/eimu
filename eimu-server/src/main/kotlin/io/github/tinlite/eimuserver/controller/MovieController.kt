@@ -88,22 +88,4 @@ class MovieController {
             movieDetailRepository.findAndUpdateEpisodesById(id, data)
         )
     }
-//    @PostMapping("/history/")
-//    fun addHistory(@RequestBody addhistory: MovieWatched):ResponseEntity<Unit>{
-//        if(movieDetailRepository.existsById(addhistory.movieId) &&
-//            userRepository.existsById(addhistory.userId))
-//        {
-//                movieDetailRepository.save(
-//                    MovieHistory(
-//                        userId = addhistory.movieId,
-//                        movieId = addhistory.movieId,
-//                        episodes = addhistory.episodes,
-//                        watched = LocalDateTime.now()
-//                    )
-//                )
-//            return ResponseEntity.ok().build()
-//        } else {
-//            return ResponseEntity.badRequest().build()
-//        }
-//    }
 }
