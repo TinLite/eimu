@@ -28,7 +28,7 @@ export default async function Sidebar({
                 </Link>
             </li>
             <li className=' border-b-2'>
-                <Link href={'/user/follows?page=1'} className='text-white hover:text-green-500 py-5'>
+                <Link href={'/user/follows'} className='text-white hover:text-green-500 py-5'>
                     Danh sách theo dõi
                 </Link>
             </li>
