@@ -139,6 +139,49 @@ class UserController {
         }
     }
 
+    @GetMapping("/history/{id}")
+    fun listHistory(@PathVariable id: String): ResponseEntity<List<WatchHistory>> {
+        val user = userRepository.findByIdOrNull(id)
+        return if (user != null) {
+            if (user.watchHistory != null) {
+                return ResponseEntity.ok(user.watchHistory?.sortedByDescending { it.timestamp })
+            } else {
+                return ResponseEntity.ok(emptyList())
+            }
+        } else {
+            ResponseEntity.notFound().build()
+        }
+    }
+
+    @GetMapping("/historyfilm/{userId}/{movieId}")
+    fun listOneHistoryMovie(
+        @PathVariable userId: String,
+        @PathVariable movieId: String
+    ): ResponseEntity<List<WatchHistory>> {
+        val user = userRepository.findByIdOrNull(userId) ?: return ResponseEntity.notFound().build()
+        val movie = user.watchHistory?.filter {
+            it.movieId == movieId
+        }
+        if (movie == null) {
+            return ResponseEntity.notFound().build()
+        }
+        return ResponseEntity.ok(movie)
+    }
+
+
+    @PostMapping("/deletehistory")
+    fun deleteHistory(
+        @RequestParam userId: String,
+        @RequestParam movieId: String,
+    ): ResponseEntity<Unit> {
+        val user = userRepository.findByIdOrNull(userId) ?: return ResponseEntity.notFound().build()
+        user.watchHistory = user.watchHistory?.filterNot {
+            it.movieId == movieId
+        }?.toMutableList()
+        userRepository.save(user)
+        return ResponseEntity.ok().build()
+    }
+
     @GetMapping("/stat")
     fun getUserStat(): ResponseEntity<Map<String, Any>> {
         val totalUsers = userRepository.count()
