@@ -4,6 +4,7 @@ import io.github.tinlite.eimuserver.model.SaveWatchHistoryRequest
 import io.github.tinlite.eimuserver.model.User
 import io.github.tinlite.eimuserver.model.UserDetail
 import io.github.tinlite.eimuserver.model.WatchHistory
+import io.github.tinlite.eimuserver.repository.CommentsRepository
 import io.github.tinlite.eimuserver.repository.MovieDetailRepository
 import io.github.tinlite.eimuserver.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,6 +23,9 @@ class UserController {
 
     @Autowired
     lateinit var userMovieRepository: MovieDetailRepository
+
+    @Autowired
+    lateinit var commentRepository: CommentsRepository
     @PostMapping("/create")
     fun createAccount(@RequestBody user: User): User {
         return userRepository.insert(user)
@@ -133,5 +137,69 @@ class UserController {
         } else {
             return ResponseEntity.badRequest().build()
         }
+    }
+
+    @GetMapping("/history/{id}")
+    fun listHistory(@PathVariable id: String): ResponseEntity<List<WatchHistory>> {
+        val user = userRepository.findByIdOrNull(id)
+        return if (user != null) {
+            if (user.watchHistory != null) {
+                return ResponseEntity.ok(user.watchHistory?.sortedByDescending { it.timestamp })
+            } else {
+                return ResponseEntity.ok(emptyList())
+            }
+        } else {
+            ResponseEntity.notFound().build()
+        }
+    }
+
+    @GetMapping("/historyfilm/{userId}/{movieId}")
+    fun listOneHistoryMovie(
+        @PathVariable userId: String,
+        @PathVariable movieId: String
+    ): ResponseEntity<List<WatchHistory>> {
+        val user = userRepository.findByIdOrNull(userId) ?: return ResponseEntity.notFound().build()
+        val movie = user.watchHistory?.filter {
+            it.movieId == movieId
+        }
+        if (movie == null) {
+            return ResponseEntity.notFound().build()
+        }
+        return ResponseEntity.ok(movie)
+    }
+
+
+    @PostMapping("/deletehistory")
+    fun deleteHistory(
+        @RequestParam userId: String,
+        @RequestParam movieId: String,
+    ): ResponseEntity<Unit> {
+        val user = userRepository.findByIdOrNull(userId) ?: return ResponseEntity.notFound().build()
+        user.watchHistory = user.watchHistory?.filterNot {
+            it.movieId == movieId
+        }?.toMutableList()
+        userRepository.save(user)
+        return ResponseEntity.ok().build()
+    }
+
+    @GetMapping("/stat")
+    fun getUserStat(): ResponseEntity<Map<String, Any>> {
+        val totalUsers = userRepository.count()
+        val totalMovies = userMovieRepository.count()
+        val totalComments = commentRepository.count()
+
+        val now = Date(System.currentTimeMillis())
+        val then = Date(System.currentTimeMillis() - 1000 * 60 * 60 * 24)
+
+        val usersCreatedToday = userRepository.findAllByTimestampBetween(then, now)
+        val totalUsersCreatedToday = usersCreatedToday.size
+        val stat = mapOf(
+            "totalUsers" to totalUsers,
+            "newUsersToday" to totalUsersCreatedToday,
+            "totalMovies" to totalMovies,
+            "totalComments" to totalComments
+
+        )
+        return ResponseEntity.ok(stat)
     }
 }

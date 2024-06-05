@@ -2,6 +2,7 @@ package io.github.tinlite.eimuserver.model
 
 import com.fasterxml.jackson.annotation.JsonView
 import org.bson.types.ObjectId
+import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.util.*
@@ -16,7 +17,8 @@ data class User(
     var follows: MutableList<String>?,
     @JsonView(UserDetail::class) var role: String,
     val hashedPassword: String,
-    var watchHistory: MutableList<WatchHistory>?
+    var watchHistory: MutableList<WatchHistory>?,
+    @CreatedDate val timestamp: Date? = null
 ) {
     interface UserBasic
     interface UserDetail : UserBasic
