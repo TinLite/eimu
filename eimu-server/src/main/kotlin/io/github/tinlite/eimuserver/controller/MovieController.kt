@@ -1,7 +1,5 @@
 package io.github.tinlite.eimuserver.controller
 
-//import io.github.tinlite.eimuserver.model.MovieHistory
-//import io.github.tinlite.eimuserver.model.MovieWatched
 import io.github.tinlite.eimuserver.model.EpisodeServer
 import io.github.tinlite.eimuserver.model.MovieDetail
 import io.github.tinlite.eimuserver.repository.MovieDetailRepository
