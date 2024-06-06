@@ -1,14 +1,13 @@
 'use client'
-import React, { useState, useEffect } from 'react';
-import { Pagination } from '@nextui-org/react';
-import { MovieListEntry } from '@/app/model/MovieModels';
 import '@/app/globals.css';
-import { unstable_noStore as noCache } from 'next/cache';
-import { Image, ScrollShadow } from "@nextui-org/react";
-import Link from 'next/link';
-import { getSearchMovie } from '@/app/repositories/MovieRepository';
+import { MovieListEntry } from '@/app/model/MovieModels';
 import { PaginatedMovieList } from '@/app/model/Pageable';
-import { useRouter, usePathname } from 'next/navigation';
+import { getSearchMovie } from '@/app/repositories/MovieRepository';
+import { Pagination } from '@nextui-org/react';
+import { unstable_noStore as noCache } from 'next/cache';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function SearchPage({ searchParams }: 
     { searchParams: 

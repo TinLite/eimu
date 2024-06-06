@@ -1,38 +1,11 @@
-// Import các modules cần thiết
-import React, { useState } from 'react';
-import './styles.css'; // File css với Tailwind CSS
-import { Movie , MovieListEntry} from '@/app/model/MovieModels';;
 
-// Định nghĩa một component MovieHistory
-const MovieHistory: React.FC = () => {
-  // Dữ liệu giả định cho lịch sử phim đã xem
-  const [movies, setMovies] = useState<MovieListEntry[]>([
-   
-  ]);
+import HistoryTableList from '@/app/components/HistoryTableList'
 
-  return (
-    <div className="container mx-auto mt-8">
-      <h1 className="text-2xl font-bold mb-4">Lịch sử phim đã xem</h1>
-      <table className="table-auto">
-        <thead>
-          <tr>
-            <th className="px-4 py-2">ID</th>
-            <th className="px-4 py-2">Tên phim</th>
-            <th className="px-4 py-2">Năm sản xuất</th>
-          </tr>
-        </thead>
-        <tbody>
-          {movies.map(movie => (
-            <tr key={movie.id}>
-              <td className="border px-4 py-2">{movie.id}</td>
-              <td className="border px-4 py-2">{movie.name}</td>
-              <td className="border px-4 py-2">{movie.year}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
-
-export default MovieHistory;
+export default async function History() {
+    const new_movie_list = await (await fetch("http://51.79.144.118:12594/movie")).json()
+    return (
+        <div className='text-white'>
+            <HistoryTableList />
+        </div>
+    )
+}

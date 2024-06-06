@@ -1,0 +1,20 @@
+meta {
+  name: ReplyComment
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/comments/reply/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "movieId":"co-di-ma-lay-chong-toi",
+    "userId":"6634d486e501d77ed0e9945c",
+    "replyTo": "664acbbd53ba98039ba412aa",
+    "content":"lmao"
+  }
+}

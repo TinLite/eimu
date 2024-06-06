@@ -1,8 +1,9 @@
-import { Inter } from "next/font/google";
-import "@/app/globals.css";
-import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
+import Navbar from "@/app/components/Navbar";
+import "@/app/globals.css";
 import { getServerSession } from "next-auth/next";
+import { Inter } from "next/font/google";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,10 @@ export default async function RootLayout({
   return (
       <body className={`${inter.className} bg-[#000D1C]`}>
         <Navbar />
-        <div className="pt-16">{children}
+        <div className="pt-16">
+          <Suspense fallback={<div>Loading...</div>}>
+          {children}
+          </Suspense>
         </div>
         <Footer />
       </body>

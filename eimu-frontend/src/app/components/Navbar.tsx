@@ -1,53 +1,34 @@
-import React from "react";
+import GenresDropdown from "@/app/components/navbar/GenresDropdown";
+import { getAllTag } from "@/app/repositories/MovieTagRepository";
+import { authOptions } from "@app/../../auth.config";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@app/../../auth.config";
-import { LoginButton, UserNavComponent } from "./navbar/LoginLogout";
 import { getUserDetail } from "../repositories/UserRepository";
+import { LoginButton, UserNavComponent } from "./navbar/LoginLogout";
 import SearchBar from "./navbar/SearchBar";
 const Navbar = async () => {
     const session = await getServerSession(authOptions);
+    const genresTag = await getAllTag();
     var userDetail = undefined;
     if (session?.user?.email)
         userDetail = await getUserDetail(session.user.email)
     return (
         <nav className="fixed top-0 left-0 w-full h-16 xl:px-20 bg-[#001731] text-gray-200 z-50">
             <div className="flex items-center justify-between">
-                <div className="flex ">
+                <div className="flex items-center">
                     <Link href={"/"} className="">
                         <Image src='/images/Eimu-logo-removebg-preview.png' alt='eimu'
                             width={65}
                             height={20} />
                     </Link>
-                    <Link href={"/genres"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim mới</Link>
-                    <Link href={"/genres/eccbc87e4b5ce2fe28308fd9f2a7baf3"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim bộ</Link>
-                    <Link href={"/genres/a87ff679a2f3e71d9181a67b7542122c"} className="px-4 flex items-center hover:text-sky-400 transition-colors">Phim lẻ</Link>
-                    <div className="dropdown dropdown-hover px-4 content-center">
-                        <div tabIndex={0} role="button" className=""><Link href={""} className="flex items-center hover:text-sky-400">
-                            Thể loại
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3 ml-1">
-                                <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clipRule="evenodd" />
-                            </svg>
-                        </Link>
-                        </div>
-                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-max grid grid-cols-3 gap-1 text-black">
-                            <li><Link className="text-black" href={"/genres/8f14e45fceea167a5a36dedd4bea2543"}>Hành động</Link></li>
-                            <li><Link className="text-black" href={"/genres/2a79ea27c279e471f4d180b08d62b00a"}>Tình cảm</Link></li>
-                            <li><Link className="text-black" href={"/genres/d3d9446802a44259755d38e6d163e820"}>Hài Hước</Link></li>
-                            <li><Link className="text-black" href={"/genres/c9f0f895fb98ab9159f51fd0297e236d"}>Phiêu Lưu</Link></li>
-                            <li><Link className="text-black" href={"/genres/c51ce410c124a10e0db5e4b97fc2af39"}>Chính Kịch</Link></li>
-                            <li><Link className="text-black" href={"/genres/9bf31c7ff062936a96d3c8bd1f8f2ff3"}>Giả Tưởng</Link></li>
-                            <li><Link className="text-black" href={"/genres/c74d97b01eae257e44aa9d5bade97baf"}>Lịch Sử</Link></li>
-                            <li><Link className="text-black" href={"/genres/70efdf2ec9b086079795c442636b55fb"}>Kinh Dị </Link></li>
-                            <li><Link className="text-black" href={"/genres/aab3238922bcc25a6f606eb525ffdc56"}>Gia Đình</Link></li>
-                            <li><Link className="text-black" href={"/genres/a8baa56554f96369ab93e4f3bb068c22"}>Cổ trang</Link></li>
-                            <li><Link className="text-black" href={"/genres/45c48cce2e2d7fbdea1afc51c7c6ad26,fbd7939d674997cdb4692d34de8633c4"}>Cartoon</Link></li>
-                            <li><Link className="text-black" href={"/genres/45c48cce2e2d7fbdea1afc51c7c6ad26/d2ddea18f00665ce8623e36bd4e3c7c5"}>Anime</Link></li>
-                        </ul>
-                    </div>
+                    <Link href={"/genres"} className="px-4 hover:text-sky-400 transition-colors">Phim mới</Link>
+                    <Link href={"/genres/eccbc87e4b5ce2fe28308fd9f2a7baf3"} className="px-4 hover:text-sky-400 transition-colors">Phim bộ</Link>
+                    <Link href={"/genres/a87ff679a2f3e71d9181a67b7542122c"} className="px-4 hover:text-sky-400 transition-colors">Phim lẻ</Link>
+                    <GenresDropdown genresTag={genresTag} />
                 </div>
                 <SearchBar />
+
                 <div className="flex items-center">
                     <Link href={"/user/history"} className="flex items-center hover:text-green-400 mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -62,9 +43,9 @@ const Navbar = async () => {
                         </svg>
                         <div className="flex-initial w-20 ml-1">Theo dõi</div>
                     </Link>
-                    { userDetail 
-                        ? ( <UserNavComponent user={userDetail} /> )
-                        : ( <LoginButton /> )
+                    {userDetail
+                        ? (<UserNavComponent user={userDetail} />)
+                        : (<LoginButton />)
                     }
                 </div>
             </div>

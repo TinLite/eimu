@@ -1,18 +1,16 @@
 'use client'
-import React from 'react';
-import '@/app/globals.css'
-import { MovieTag } from '@/app/model/MovieTagModels';
 import { MovieTileListing } from '@/app/components/MovieListing';
-import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react';
-import {Pagination} from "@nextui-org/react";
+import '@/app/globals.css';
+import { MovieTag } from '@/app/model/MovieTagModels';
 import { PaginatedMovieListWithTags } from '@/app/model/Pageable';
-import { usePathname,useRouter,useSearchParams } from 'next/navigation';
+import { BreadcrumbItem, Breadcrumbs, Pagination } from '@nextui-org/react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 export default function Genre({
     data,
     tags
 }: {
     data: PaginatedMovieListWithTags,
-    tags?: [MovieTag]
+    tags?: MovieTag[]
 }) 
 {
     const router= useRouter()

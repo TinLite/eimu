@@ -2,14 +2,20 @@ package io.github.tinlite.eimuserver.controller
 
 import io.github.tinlite.eimuserver.model.EpisodeServer
 import io.github.tinlite.eimuserver.model.MovieDetail
+import io.github.tinlite.eimuserver.model.MovieDetailUpdate
 import io.github.tinlite.eimuserver.repository.MovieDetailRepository
 import io.github.tinlite.eimuserver.repository.MovieTagRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
+import org.springframework.data.mongodb.core.MongoTemplate
+import org.springframework.data.mongodb.core.query.Criteria
+import org.springframework.data.mongodb.core.query.Query
 import org.springframework.data.mongodb.core.query.TextCriteria
+import org.springframework.data.mongodb.core.query.Update
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.json.MappingJacksonValue
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -21,8 +27,33 @@ class MovieController {
     @Autowired
     lateinit var tagRepository: MovieTagRepository
 
+    @Autowired
+    lateinit var mongoTemplate: MongoTemplate
+
     @GetMapping
-    fun listPaginated(@RequestParam page: Int = 1, @RequestParam size: Int = 20, @RequestParam tags: Collection<String>?, @RequestParam query: String?): ResponseEntity<Map<String, Any>> {
+    fun listPaginated(
+        @RequestParam page: Int = 1,
+        @RequestParam size: Int = 20,
+        @RequestParam tags: Collection<String>?,
+        @RequestParam query: String?,
+        @RequestParam ids: Collection<String>?
+    ): ResponseEntity<out Any> {
+
+        if (!ids.isNullOrEmpty()) {
+            val dataMovies = movieDetailRepository.findAllById(ids)
+            val movies = mutableListOf<MovieDetail>()
+            ids.forEach { iid ->
+                dataMovies.find { dMov ->
+                    iid == dMov.id
+                }?.let {
+                    movies.add(it)
+                }
+            }
+            val map = MappingJacksonValue(movies)
+            map.serializationView = MovieDetail.MovieListEntry::class.java
+            return ResponseEntity.ok(map)
+        }
+
         val pageRequest = PageRequest.of(page - 1, size)
         val data = if (!tags.isNullOrEmpty())
             movieDetailRepository.findAllByTagsPaginated(tags, pageRequest.withSort(Sort.by("modified").descending()))
@@ -30,7 +61,6 @@ class MovieController {
             movieDetailRepository.findAllBy(
                 TextCriteria.forDefaultLanguage().matchingAny(query),
                 pageRequest.withSort(Sort.by("score").descending())
-//                pageRequest.withSort(Sort.by("modified").descending())
             )
         else
             movieDetailRepository.findAllBy(pageRequest.withSort(Sort.by("modified").descending()))
@@ -44,6 +74,7 @@ class MovieController {
             ),
             "items" to data.content
         )
+
         if (!tags.isNullOrEmpty())
             response["tags"] = tagRepository.findAllByIdIn(tags)
         return ResponseEntity.ok(response)
@@ -57,8 +88,17 @@ class MovieController {
 
     @PostMapping("/{id}/update")
     fun update(@PathVariable id: String, @RequestBody data: List<EpisodeServer>) : ResponseEntity<Any> {
-        return ResponseEntity.ok(
-            movieDetailRepository.findAndUpdateEpisodesById(id, data)
-        )
+        val query = Query(Criteria.where("_id").`is`(id))
+        val update = Update().set("episodes", data)
+        return if (mongoTemplate.findAndModify(query, update, MovieDetail::class.java) == null) {
+            ResponseEntity.notFound().build()
+        } else {
+            ResponseEntity.ok().build()
+        }
+    }
+
+    @PostMapping("/{id}/updateDetail")
+    fun updateMovieDetail(@PathVariable id: String, @RequestBody data: MovieDetailUpdate) {
+
     }
 }

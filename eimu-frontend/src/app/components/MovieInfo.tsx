@@ -1,13 +1,30 @@
-import React from 'react'
-import Link from 'next/link'
-import { Button } from '@nextui-org/react'
-import { ScrollShadow } from '@nextui-org/react'
-import { Movie } from '@/app/model/MovieModels'
-import { getTagsDetail } from '../repositories/MovieTagRepository'
-import { unstable_noStore as noCache } from 'next/cache'
-export default async function MovieInfo({ movie }: { movie: Movie }) {
-    noCache();
-    const tags = await getTagsDetail(movie.tags)
+"use client";
+import { Movie } from '@/app/model/MovieModels';
+import { getUserDetail } from '@/app/repositories/UserRepository';
+import { ScrollShadow } from '@nextui-org/react';
+import { getServerSession } from 'next-auth';
+import { signIn } from 'next-auth/react';
+import Link from 'next/link';
+import { useState } from 'react';
+import { authOptions } from '../../../auth.config';
+import { MovieTag } from '../model/MovieTagModels';
+export default function MovieInfo({ movie, tags, isFollowed, isLogged, followClick, unfollowClick }: { movie: Movie, tags?: MovieTag[], isLogged: boolean, isFollowed?: boolean, followClick: () => Promise<boolean>, unfollowClick: () => Promise<boolean> }) {
+    const [followed, setFollowed] = useState(isFollowed ?? false);``
+    async function follow() {
+        if (isLogged) {
+            if (followed) {
+                const result = await unfollowClick()
+                if (result)
+                    setFollowed(false);
+            } else {
+                const result = await followClick()
+                if (result)
+                    setFollowed(true);
+            }
+        } else {
+            signIn();
+        }
+    }
     return (
         <div className='bg-gray-950 rounded-sm'>
             <div className='grid grid-cols-6'>
@@ -19,19 +36,28 @@ export default async function MovieInfo({ movie }: { movie: Movie }) {
                         </div>
                     </div>
                     <div className='flex mt-5 gap-2'>
-                        <Button className='bg-yellow-400 flex-grow'>Đánh giá</Button>
-                        <Button className='border-2 bg-transparent min-w-0 text-blue-500 border-blue-600 rounded-xl aspect-square w-10 grid place-items-center'>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-                            </svg>
-                        </Button>
+                        <button className='bg-yellow-500 hover:bg-yellow-600 text-white btn flex-grow'>Đánh giá</button>
+                        {/* btn fllow film */}
+                        <div className='tooltip tooltip-bottom' data-tip={isLogged ? `Bạn cần đăng nhập để lưu phim.` : `Ấn để ${(followed ? `theo dõi và lưu phim` : `huỷ theo dõi và xoá khỏi phim đã lưu`)}.`}>
+                            <button onClick={follow} className='aspect-square btn btn-ghost text-blue-500 grid place-items-center'>
+                                {(followed) ?
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.143 17.082a24.248 24.248 0 0 0 3.844.148m-3.844-.148a23.856 23.856 0 0 1-5.455-1.31 8.964 8.964 0 0 0 2.3-5.542m3.155 6.852a3 3 0 0 0 5.667 1.97m1.965-2.277L21 21m-4.225-4.225a23.81 23.81 0 0 0 3.536-1.003A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6.53 6.53m10.245 10.245L6.53 6.53M3 3l3.53 3.53" />
+                                    </svg>
+                                    :
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                                        <path fillRule="evenodd" d="M5.25 9a6.75 6.75 0 0 1 13.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 0 1-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 1 1-7.48 0 24.585 24.585 0 0 1-4.831-1.244.75.75 0 0 1-.298-1.205A8.217 8.217 0 0 0 5.25 9.75V9Zm4.502 8.9a2.25 2.25 0 1 0 4.496 0 25.057 25.057 0 0 1-4.496 0Z" clipRule="evenodd" />
+                                    </svg>
+                                }
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div className='col-span-5 my-5 mx-5'>
                     <h1 className='mb-4 uppercase text-3xl'>{movie.name}</h1>
                     {/* Tags */}
                     <div className='flex gap-4 mb-4'>
-                        {tags.map((element) => (
+                        {tags?.map((element) => (
                             <Link key={element.id} href={`/genres/${element.id}`} className='bg-gray-800 px-2 hover:bg-blue-800 transition-colors'>{element.value}</Link>
                         ))}
                     </div>

@@ -3,9 +3,9 @@
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 // import { signIn } from '@/../auth';
-import { createAccount } from '../repositories/UserRepository';
 import bcrypt from 'bcrypt';
 import { signIn } from 'next-auth/react';
+import { createAccount } from '../repositories/UserRepository';
 
 const UserData = z.object({
     username: z.string().min(4),
@@ -21,9 +21,6 @@ const UserRegisterData = z.object({
 
 export async function handleLogin(_state: String | undefined, formData: FormData) {
     "use server";
-    console.log("Hi!")
-    console.log(formData.get("username"))
-    console.log(formData.get("password"))
     try {
         await signIn('credentials', {
             username: formData.get("username"),
