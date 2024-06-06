@@ -48,6 +48,9 @@ export async function getMovieHistory(userId: string, movieId: string) {
  */
 export async function addHistory(userId: string, movieId: string, episodeId: string) {
     var request = await fetch(`${process.env.BACKEND_ADDRESS}/user/watch`, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
             userId: userId,
             movieId: movieId,
