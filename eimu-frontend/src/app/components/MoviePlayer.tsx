@@ -1,12 +1,17 @@
-import React from 'react'
-import { Movie } from '../model/MovieModels'
-import { unstable_noStore as noCache } from 'next/cache';
+import { addHistory } from '@/app/repositories/UserWatchHistory';
 import { ScrollShadow } from '@nextui-org/react';
+import { unstable_noStore as noCache } from 'next/cache';
+import { Movie } from '../model/MovieModels';
 
-export default async function MoviePlayer({ movie, episodeNumber }: { movie: Movie, episodeNumber?: String }) {
+export default async function MoviePlayer({ movie, episodeNumber, userId }: { movie: Movie, episodeNumber?: String, userId: string }) {
     var ep = movie.episodes[0].episodeList.find(
         (episode) => episode.name == episodeNumber
     ) ?? movie.episodes[0].episodeList[0];
+
+    if (userId) {
+        addHistory(userId, movie.id, ep.id);
+    }
+
     noCache();
     return (
         <div className='bg-[#1A1C22] my-8'>
