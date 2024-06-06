@@ -104,16 +104,19 @@ class MovieController {
     fun updateMovieDetail(@PathVariable id: String, @RequestBody update: MovieDetailUpdate): ResponseEntity<Unit> {
         val data = movieDetailRepository.findByIdOrNull(id) ?: return ResponseEntity.notFound().build()
         // Có các framework để làm cái này, nhưng học không kịp nên kệ
-        data.name = update.name
-        data.year = update.year
-        data.originalName = update.originalName
-        data.description = update.description
-        data.thumbUrl = update.thumbUrl
-        data.posterUrl = update.posterUrl
-        data.director = update.director
-        data.language = update.language
-        data.casts = update.casts
-        data.totalEpisodes = update.totalEpisodes
+        data.apply {
+            update.name?.let { name = it }
+            update.year?.let { year = it }
+            update.originalName?.let { originalName = it }
+            update.description?.let { description = it }
+            update.director?.let { director = it }
+            update.posterUrl?.let { posterUrl = it }
+            update.thumbUrl?.let { thumbUrl = it }
+            update.language?.let { language = it }
+            update.casts?.let { casts = it }
+            update.totalEpisodes?.let { totalEpisodes = it }
+        }
+
         movieDetailRepository.save(data)
         return ResponseEntity.ok().build()
     }
