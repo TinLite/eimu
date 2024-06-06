@@ -31,7 +31,7 @@ export type PaginatedUserList = {
 }
 
 export type Page<T> = {
-    data: T[],
+    items: T[],
     pageable: {
         page: number,
         totalPages: number,
