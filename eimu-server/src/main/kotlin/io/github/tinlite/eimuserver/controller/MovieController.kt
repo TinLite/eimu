@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/movie")
 class MovieController {
     @Autowired
+    private lateinit var movieTagRepository: MovieTagRepository
+
+    @Autowired
     lateinit var movieDetailRepository: MovieDetailRepository
 
     @Autowired
@@ -87,7 +90,7 @@ class MovieController {
     }
 
     @PostMapping("/{id}/update")
-    fun update(@PathVariable id: String, @RequestBody data: List<EpisodeServer>) : ResponseEntity<Any> {
+    fun update(@PathVariable id: String, @RequestBody data: List<EpisodeServer>): ResponseEntity<Unit> {
         val query = Query(Criteria.where("_id").`is`(id))
         val update = Update().set("episodes", data)
         return if (mongoTemplate.findAndModify(query, update, MovieDetail::class.java) == null) {
@@ -98,7 +101,33 @@ class MovieController {
     }
 
     @PostMapping("/{id}/updateDetail")
-    fun updateMovieDetail(@PathVariable id: String, @RequestBody data: MovieDetailUpdate) {
+    fun updateMovieDetail(@PathVariable id: String, @RequestBody update: MovieDetailUpdate): ResponseEntity<Unit> {
+        val data = movieDetailRepository.findByIdOrNull(id) ?: return ResponseEntity.notFound().build()
+        // Có các framework để làm cái này, nhưng học không kịp nên kệ
+        data.name = update.name
+        data.year = update.year
+        data.originalName = update.originalName
+        data.description = update.description
+        data.thumbUrl = update.thumbUrl
+        data.posterUrl = update.posterUrl
+        data.director = update.director
+        data.language = update.language
+        data.casts = update.casts
+        data.totalEpisodes = update.totalEpisodes
+        movieDetailRepository.save(data)
+        return ResponseEntity.ok().build()
+    }
 
+    @PostMapping("/{id}/updateTagList")
+    fun updateTag(@PathVariable id: String, tags: Collection<String>): ResponseEntity<Unit> {
+        // Xác thực tinh hợp lệ của tag
+        val data = movieTagRepository.findAllByIdIn(tags)
+        if (data.size != tags.size) {
+            return ResponseEntity.badRequest().build()
+        }
+        val movie = movieDetailRepository.findByIdOrNull(id) ?: return ResponseEntity.notFound().build()
+        movie.tags = tags
+        movieDetailRepository.save(movie)
+        return ResponseEntity.ok().build()
     }
 }
