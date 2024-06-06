@@ -5,4 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository
 
 interface MovieTagRepository : MongoRepository<MovieTag, String> {
     fun findAllByIdIn(id: Collection<String>) : List<MovieTag>
+    fun existsByIdIn(id: Collection<String>): Boolean
 }
