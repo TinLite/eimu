@@ -10,7 +10,7 @@ export async function getLatestMovies(): Promise<PaginatedMovieList> {
 export async function getLatestMoviesByTag(tagIds: string | string[], page?:number, size: number = 20): Promise<PaginatedMovieListWithTags> 
 {
     var combinedTagIds = (typeof tagIds == "string" ? tagIds : tagIds.join(","))
-    return await (await fetch(`${process.env.BACKEND_ADDRESS}/movie?page=${page || 1}&size=${size}&tags=${combinedTagIds}`, {next: {revalidate: 60}})).json() as PaginatedMovieListWithTags;
+    return await (await fetch(`${process.env.BACKEND_ADDRESS}/movie?page=${page ||1}&size=${size}&tags=${combinedTagIds}`, {next: {revalidate: 60}})).json() as PaginatedMovieListWithTags;
 }
 
 export async function getMovieDetail(movieId: string): Promise<Movie> {
