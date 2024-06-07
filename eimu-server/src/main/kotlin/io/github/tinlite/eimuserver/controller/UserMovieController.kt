@@ -42,7 +42,7 @@ class UserMovieController {
     fun listFollow(@RequestParam userId: String): ResponseEntity<List<String>> {
         val user = userRepository.findByIdOrNull(userId)
         return if (user != null) {
-            ResponseEntity.ok(user.follows)
+            ResponseEntity.ok(user.follows ?: listOf())
         } else {
             ResponseEntity.notFound().build()
         }
