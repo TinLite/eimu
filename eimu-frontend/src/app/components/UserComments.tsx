@@ -7,19 +7,16 @@ import { createCommentLike, removeCommentLike } from '../repositories/CommentRep
 
 function UserComment({ data, commentSubmitHandler }: { data: RecursiveCommentDetail, commentSubmitHandler?: (content: FormData, replyTo?: string) => Promise<void> }) {
     const [isReplying, setIsReplying] = useState(false)
-    const [liked, setLiked] = useState(false); 
-    const [likeCount, setLikeCount] = useState(data.likeCount); 
+    const [liked, setLiked] = useState(data.likes.includes("userId")); 
 
     const handleLike = async () => {
-        const likeData = { userId: data.userId, commentId: data.id }; 
+        const likeData = { userId: "userId", commentId: data.id }; 
         if (!liked) {
             const success = await createCommentLike(likeData);
             if (success) setLiked(true);
-            setLikeCount(likeCount + 1);
         } else {
             const success = await removeCommentLike(likeData);
             if (success) setLiked(false);
-            setLikeCount(likeCount - 1);
         }
     };
     return (
@@ -37,7 +34,6 @@ function UserComment({ data, commentSubmitHandler }: { data: RecursiveCommentDet
                 <span className='text-xs'>{data.timestamp}</span>
                 <button className={`btn btn-xs ${liked ? 'btn-primary' : 'btn-ghost'}`} onClick={handleLike}>
                     {liked ? 'Bỏ Thích' : 'Thích'}
-                    <span>{likeCount}</span>
                 </button>
                 <button className='btn btn-xs btn-ghost' onClick={() => setIsReplying(!isReplying)}>Trả lời {data.replies.length > 0 && `(${data.replies.length})`}</button>
             </div>
