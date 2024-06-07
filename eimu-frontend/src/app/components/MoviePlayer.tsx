@@ -5,7 +5,7 @@ import { Movie } from '../model/MovieModels';
 
 export default async function MoviePlayer({ movie, episodeNumber, userId }: { movie: Movie, episodeNumber?: String, userId: string }) {
     var ep = movie.episodes[0].episodeList.find(
-        (episode) => episode.name == episodeNumber
+        (episode) => episode.id == episodeNumber
     ) ?? movie.episodes[0].episodeList[0];
 
     if (userId) {
@@ -35,7 +35,7 @@ export default async function MoviePlayer({ movie, episodeNumber, userId }: { mo
                                 if (ep.name === episode.name) {
                                     return <div key={ep.id} className='px-2 py-1 bg-blue-800 rounded-lg text-center'>{episode.name}</div>;
                                 } else {
-                                    return <div key={ep.id}><a href={`/movie/${movie.id}/${episode.name}`} className='block px-3 py-1 bg-gray-950 hover:bg-blue-950 transition-colors rounded-lg text-center'>{episode.name}</a></div>;
+                                    return <div key={ep.id}><a href={`/movie/${movie.id}/${episode.id}`} className='block px-3 py-1 bg-gray-950 hover:bg-blue-950 transition-colors rounded-lg text-center'>{episode.name}</a></div>;
                                 }
                             })}
                         </div>
