@@ -1,7 +1,4 @@
 
-import MenuAccY from '@/app/components/Sidebar'
-import { Button } from '@nextui-org/react'
-import React from 'react'
 import HistoryTableList from '@/app/components/HistoryTableList'
 
 export default async function History() {

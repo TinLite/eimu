@@ -12,11 +12,11 @@ export async function getLatestMoviesByTag(tagIds: string | string[], page?: num
 }
 
 export async function getMovieDetail(movieId: string): Promise<Movie> {
-    return await (await fetch(`${process.env.BACKEND_ADDRESS}/movie/${movieId}`, { next: { revalidate: 1 } })).json() as Movie;
+    return await (await fetch(`${process.env.BACKEND_ADDRESS}/movie/${movieId}`, { next: { revalidate: 30 } })).json() as Movie;
 }
 
-export async function getSearchMovie(movieName: string, page: number = 1): Promise<PaginatedMovieList> {
-    return await (await fetch(`${process.env.BACKEND_ADDRESS}/movie?query=${movieName}&page=${page}`, { next: { revalidate: 30 } })).json() as PaginatedMovieList;
+export async function getSearchMovie(movieName: string, page: number = 1,size : number = 20 ): Promise<PaginatedMovieList> {
+    return await (await fetch(`${process.env.BACKEND_ADDRESS}/movie?query=${movieName}&size=${size}&page=${page}`, { next: { revalidate: 30 } })).json() as PaginatedMovieList;
 }
 
 export async function setEpisodeServerList(movieId: string, episodeList : EpisodeServer[]) {
@@ -32,16 +32,15 @@ export async function setEpisodeServerList(movieId: string, episodeList : Episod
 }
 
 export async function setDetail(movieId: string, updatedDetail: {
-    name?: string,
+    name: string,
     year?: number,
     originalName?: string,
     description?: string,
     director?: string,
     language?: string,
-    posterUrl?: string,
-    thumbUrl?: string,
     casts?: string,
     totalEpisodes?: number,
+
 }) {
     var response = await fetch(`${process.env.BACKEND_ADDRESS}/movie/${movieId}/updateDetail`, {
         method: "POST",

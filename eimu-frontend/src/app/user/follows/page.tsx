@@ -1,22 +1,19 @@
 
 import FollowTableList from '@/app/components/FollowTableList';
-import { getFollowList, isAlreadyFollowed } from '@/app/repositories/MovieFollowRepository';
-import { getLatestMovies } from '@/app/repositories/MovieRepository';
-import { getUserDetail } from '@/app/repositories/UserRepository';
+import { getFollowListWithMovieDetail } from '@/app/repositories/MovieFollowRepository';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../../auth.config';
 
-export default async function Follow({ searchParams }: { searchParams: { page?: number, query?: string } }) {
+export default async function Follow({ searchParams }: { searchParams: { page?: string } }) {
   const session = await getServerSession(authOptions);
-  var userDetail = await getUserDetail(session?.user?.email!);
-  var getfollow = await getFollowList(userDetail?.email!);
-  var movieList = await getLatestMovies(searchParams.page);
-  var followed = isAlreadyFollowed(userDetail?.email!, " movieList")
+  const userId = session?.user?.email!;
+  var getfollow = await getFollowListWithMovieDetail(userId, Number(searchParams.page?? "1"), 10);
+
   return (
     <div>
       <div className='text-white'>
-        <FollowTableList movieList={movieList.items} />
+        <FollowTableList movie={getfollow!} userId={userId} />
       </div>
-    </div>
+    </div >
   )
 }

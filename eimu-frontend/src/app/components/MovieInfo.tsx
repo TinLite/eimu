@@ -1,12 +1,15 @@
 "use client";
 import { Movie } from '@/app/model/MovieModels';
+import { getUserDetail } from '@/app/repositories/UserRepository';
 import { ScrollShadow } from '@nextui-org/react';
+import { getServerSession } from 'next-auth';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { authOptions } from '../../../auth.config';
 import { MovieTag } from '../model/MovieTagModels';
 export default function MovieInfo({ movie, tags, isFollowed, isLogged, followClick, unfollowClick }: { movie: Movie, tags?: MovieTag[], isLogged: boolean, isFollowed?: boolean, followClick: () => Promise<boolean>, unfollowClick: () => Promise<boolean> }) {
-    const [followed, setFollowed] = useState(isFollowed ?? false);
+    const [followed, setFollowed] = useState(isFollowed ?? false);``
     async function follow() {
         if (isLogged) {
             if (followed) {
@@ -40,7 +43,7 @@ export default function MovieInfo({ movie, tags, isFollowed, isLogged, followCli
                                 {(followed) ?
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M9.143 17.082a24.248 24.248 0 0 0 3.844.148m-3.844-.148a23.856 23.856 0 0 1-5.455-1.31 8.964 8.964 0 0 0 2.3-5.542m3.155 6.852a3 3 0 0 0 5.667 1.97m1.965-2.277L21 21m-4.225-4.225a23.81 23.81 0 0 0 3.536-1.003A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6.53 6.53m10.245 10.245L6.53 6.53M3 3l3.53 3.53" />
-                                    </svg>                                  
+                                    </svg>
                                     :
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                                         <path fillRule="evenodd" d="M5.25 9a6.75 6.75 0 0 1 13.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 0 1-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 1 1-7.48 0 24.585 24.585 0 0 1-4.831-1.244.75.75 0 0 1-.298-1.205A8.217 8.217 0 0 0 5.25 9.75V9Zm4.502 8.9a2.25 2.25 0 1 0 4.496 0 25.057 25.057 0 0 1-4.496 0Z" clipRule="evenodd" />
