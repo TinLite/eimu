@@ -6,6 +6,7 @@ import io.github.tinlite.eimuserver.model.UserDetail
 import io.github.tinlite.eimuserver.model.WatchHistory
 import io.github.tinlite.eimuserver.repository.CommentsRepository
 import io.github.tinlite.eimuserver.repository.MovieDetailRepository
+import io.github.tinlite.eimuserver.repository.RatesRepository
 import io.github.tinlite.eimuserver.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
@@ -26,6 +27,9 @@ class UserController {
 
     @Autowired
     lateinit var commentRepository: CommentsRepository
+
+    @Autowired
+    lateinit var rateRepository: RatesRepository
     @PostMapping("/create")
     fun createAccount(@RequestBody user: User): User {
         return userRepository.insert(user)

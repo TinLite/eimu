@@ -1,0 +1,19 @@
+meta {
+  name: Rate
+  type: http
+  seq: 12
+}
+
+post {
+  url: {{baseUrl}}/rating/ratemovie
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "movieId":"co-di-ma-lay-chong-toi",
+    "userId":"665fd27e9d998d478c8aac1f",
+    "rating": 8
+  }
+}
