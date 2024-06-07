@@ -29,11 +29,11 @@ export async function getHistoryList(userId: string) {
 export async function getMovieHistory(userId: string, movieId: string) {
     var request = await fetch(`${process.env.BACKEND_ADDRESS}/user/historyfilm/${userId}/${movieId}`, {
         next: {
-            revalidate: 1
+            revalidate: 5
         }
     })
     if (request.ok) {
-        return await request.json() as MovieHistoryEntry;
+        return (await request.json())[0] as MovieHistoryEntry;
     } else {
         return undefined;
     }

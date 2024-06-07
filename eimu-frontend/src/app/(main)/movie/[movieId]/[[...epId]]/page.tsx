@@ -12,7 +12,7 @@ import { getServerSession } from 'next-auth';
 
 export default async function Detail({ params }: { params: { movieId: string, epId?: string } }) {
     const movieId = params.movieId
-    const epId = params.epId // Every components should have a fall-safe check for nullable so no need to check it here.
+    var epId = params.epId // Every components should have a fall-safe check for nullable so no need to check it here.
     const session = await getServerSession(authOptions);
     var userDetail = undefined
     var isUserFollowedMovie = false
@@ -40,8 +40,13 @@ export default async function Detail({ params }: { params: { movieId: string, ep
         }
         return await addFollow(userId, movieId)
     }
+
     var historyWatching = await getMovieHistory(userId!, movieId);
-    
+    //check lich sua
+    if (!epId && historyWatching) {
+        epId = historyWatching.watchedEpisode
+    }
+
     return (
         <div className='text-gray-200 max-w-screen-xl mx-auto mt-4'>
             <MovieInfo movie={movieDetail} tags={tags} isLogged={userDetail !== undefined} isFollowed={isUserFollowedMovie} followClick={followHandler} unfollowClick={unfollowHandler} />
