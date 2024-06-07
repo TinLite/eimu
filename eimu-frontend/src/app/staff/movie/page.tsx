@@ -13,9 +13,9 @@ export default async function movie({searchParams}: {searchParams: { page?: numb
     }
     
     return (
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto py-4">
             <SearchBar />
-            <div className="overflow-auto w-full">
+            <div className="overflow-auto w-full h-[80lvh]">
                 <TableMovie movieList={movieList.items} />
             </div>
             <div className="grid place-items-center mt-4">
