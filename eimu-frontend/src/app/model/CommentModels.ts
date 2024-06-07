@@ -20,6 +20,7 @@ export type RecursiveCommentDetail = {
     replyTo?: string,
     replies: RecursiveCommentDetail[],
     likes: string[],
+    likeCount: number;
 }
 
 export type Comment = {
