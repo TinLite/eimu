@@ -4,9 +4,8 @@ import { MovieTag } from "@/app/model/MovieTagModels";
 import { Page, PaginatedMovieList } from "@/app/model/Pageable";
 import { removeFollow } from "@/app/repositories/MovieFollowRepository";
 import { Button, Pagination, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
-import { unstable_noStore as noCache } from "next/cache";
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useState } from "react";
+
 
 
 export default function FollowTableList({ movie, userId }: { movie: Page<MovieListEntry>, userId: string }) {
