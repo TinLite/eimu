@@ -1,16 +1,28 @@
 "use client";
-import { Suspense, useState } from 'react';
+import { Suspense, useState,useEffect } from 'react';
 import { RecursiveCommentDetail } from '../model/CommentModels';
 import CommentForm from './CommentForm';
 import { createCommentLike, removeCommentLike } from '../repositories/CommentRepository';
+import { authOptions } from "@app/../../auth.config";
+import { getServerSession } from "next-auth";
 
 
 function UserComment({ data, commentSubmitHandler }: { data: RecursiveCommentDetail, commentSubmitHandler?: (content: FormData, replyTo?: string) => Promise<void> }) {
     const [isReplying, setIsReplying] = useState(false)
-    const [liked, setLiked] = useState(data.likes.includes("userId")); 
+    const [liked, setLiked] = useState(false); 
+    //const [userId, setUserId] = useState<string | null>(null);
 
+    //useEffect(() => {
+    //    const fetchSession = async () => {
+    //        const session = await getServerSession(authOptions);
+    //        setUserId(session?.user?.email ?? null);
+    //    };
+
+    //    fetchSession();
+    //}, []);
     const handleLike = async () => {
-        const likeData = { userId: "userId", commentId: data.id }; 
+    //    if (!userId) return; 
+        const likeData = { userId: data.userId, commentId: data.id }; 
         if (!liked) {
             const success = await createCommentLike(likeData);
             if (success) setLiked(true);
