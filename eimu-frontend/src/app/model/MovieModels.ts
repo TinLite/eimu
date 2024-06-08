@@ -20,7 +20,8 @@ export interface Movie {
     casts?: string,
     tags: string[],
     description?: string,
-    episodes: EpisodeServer[]
+    episodes: EpisodeServer[],
+    totalEpisodes: number
 }
 
 export interface EpisodeServer {

@@ -6,9 +6,11 @@ import SideList from '@/app/components/SideList';
 import { addFollow, isAlreadyFollowed, removeFollow } from '@/app/repositories/MovieFollowRepository';
 import { getLatestMoviesByTag, getMovieDetail } from "@/app/repositories/MovieRepository";
 import { getTagsDetail } from '@/app/repositories/MovieTagRepository';
+import { createRate, getRate } from '@/app/repositories/RateRepository';
 import { getUserDetail } from '@/app/repositories/UserRepository';
 import { getMovieHistory } from '@/app/repositories/UserWatchHistory';
 import { getServerSession } from 'next-auth';
+import { z } from 'zod';
 
 export default async function Detail({ params }: { params: { movieId: string, epId?: string } }) {
     const movieId = params.movieId
@@ -41,15 +43,37 @@ export default async function Detail({ params }: { params: { movieId: string, ep
         return await addFollow(userId, movieId)
     }
 
+    const rateHandle = async (formData: FormData) => {
+        "use server";
+        if (!userId) {
+            return;
+        }
+        const rateValidator = z.object({
+            rating: z.number().min(0).max(10)
+        })
+        if (!formData.get("rating")) {
+            return
+        }
+        const data = parseInt(formData.get("rating")!.toString())
+        const result = rateValidator.safeParse({
+            rating: data
+        });
+        if (!result.success) {
+            return;
+        } else {
+            return await createRate(movieId, userId, result.data.rating)
+        }
+    }
+
     var historyWatching = await getMovieHistory(userId!, movieId);
     //check lich sua
     if (!epId && historyWatching) {
         epId = historyWatching.watchedEpisode
     }
-
+    var getrate = await getRate(movieId);
     return (
         <div className='text-gray-200 max-w-screen-xl mx-auto mt-4'>
-            <MovieInfo movie={movieDetail} tags={tags} isLogged={userDetail !== undefined} isFollowed={isUserFollowedMovie} followClick={followHandler} unfollowClick={unfollowHandler} />
+            <MovieInfo rateHandler={rateHandle} movie={movieDetail} tags={tags} isLogged={userDetail !== undefined} isFollowed={isUserFollowedMovie} followClick={followHandler} unfollowClick={unfollowHandler} rate={getrate.AvgMovie} />
             <MoviePlayer movie={movieDetail} episodeNumber={epId} userId={userId!} />
             <SideList title="Đề xuất cho bạn" link="#" data={recommended_list.items} />
             <Comment movie={movieDetail} userDetail={userDetail} userId={userId ?? undefined} />

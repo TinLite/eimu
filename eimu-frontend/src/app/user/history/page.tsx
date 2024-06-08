@@ -13,7 +13,6 @@ export default async function History() {
     if (gethistory) {
         history = await Promise.all(gethistory?.map((e) => getMovieDetail(e.movieId)))
     }
-
     return (
         <div className='text-white'>
             <HistoryTableList movie={history ?? []} userId={userId} ep={gethistory ?? []} />

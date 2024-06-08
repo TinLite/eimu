@@ -7,6 +7,7 @@ export default function GenresDropdown({
 }: {
     genresTag: MovieTag[]
 }) {
+    
     return (
         <div className="dropdown dropdown-hover px-4">
             <div className="flex items-center hover:text-sky-400">
