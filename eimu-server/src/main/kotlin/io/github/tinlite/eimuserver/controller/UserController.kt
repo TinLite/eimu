@@ -1,9 +1,6 @@
 package io.github.tinlite.eimuserver.controller
 
-import io.github.tinlite.eimuserver.model.SaveWatchHistoryRequest
-import io.github.tinlite.eimuserver.model.User
-import io.github.tinlite.eimuserver.model.UserDetail
-import io.github.tinlite.eimuserver.model.WatchHistory
+import io.github.tinlite.eimuserver.model.*
 import io.github.tinlite.eimuserver.repository.CommentsRepository
 import io.github.tinlite.eimuserver.repository.MovieDetailRepository
 import io.github.tinlite.eimuserver.repository.RatesRepository
@@ -59,6 +56,14 @@ class UserController {
         return ResponseEntity.ok(user)
     }
 
+    @PostMapping("/updateFlags/{userId}")
+    fun updateFlag(@RequestBody flags: MutableList<UserFlag>, @PathVariable userId: String): ResponseEntity<Unit> {
+        val user = userRepository.findByIdOrNull(userId) ?: return ResponseEntity.notFound().build()
+        user.flags = flags
+        userRepository.save(user)
+        return ResponseEntity.ok().build()
+    }
+
     @GetMapping("/listuser")
     fun showList(@RequestParam page: Int = 1, @RequestParam size: Int = 10): ResponseEntity<Map<String, Any>> {
         val result = userRepository.findAll(PageRequest.of(page - 1, size))
@@ -68,7 +73,8 @@ class UserController {
                 "name" to user.name,
                 "email" to user.email,
                 "phone" to user.phone,
-                "role" to user.role
+                "flags" to (user.flags ?: emptyList()),
+                "role" to user.role,
             )
         }
         val pagination = mapOf(
