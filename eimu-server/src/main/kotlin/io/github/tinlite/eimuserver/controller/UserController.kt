@@ -67,7 +67,8 @@ class UserController {
                 "id" to user.id,
                 "name" to user.name,
                 "email" to user.email,
-                "phone" to user.phone
+                "phone" to user.phone,
+                "role" to user.role
             )
         }
         val pagination = mapOf(
