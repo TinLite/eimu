@@ -9,9 +9,7 @@ import { MovieHistoryEntry } from "../model/MovieHistoryModels";
  */
 export async function getHistoryList(userId: string) {
     var request = await fetch(`${process.env.BACKEND_ADDRESS}/user/history/${userId}`, {
-        next: {
-            revalidate: 1
-        }
+        cache: "no-cache"
     })
     if (request.ok) {
         return await request.json() as MovieHistoryEntry[];
@@ -75,3 +73,4 @@ export async function deleteHistory(userId: string, movieId: string) {
     })
     return request.ok;
 }
+
