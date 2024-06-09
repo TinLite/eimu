@@ -51,7 +51,7 @@ export default function HistoryTableList({
                                         style={{ "background": `center / cover no-repeat url('${e.posterUrl}')` }}>
                                     </div>
                                 </TableCell>
-                                <TableCell>{e.name} ({e.originalName})</TableCell>
+                                <TableCell><a href={`/movie/${e.id}`} >{e.name} ({e.originalName})</a></TableCell>
 
                                 <TableCell key={e.episode.id}>{e.episode.name}</TableCell>
                                 <TableCell>
