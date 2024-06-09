@@ -1,4 +1,3 @@
-
 import FollowTableList from '@/app/components/FollowTableList';
 import { getFollowListWithMovieDetail } from '@/app/repositories/MovieFollowRepository';
 import { getServerSession } from 'next-auth';

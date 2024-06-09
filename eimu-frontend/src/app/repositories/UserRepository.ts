@@ -1,6 +1,6 @@
 'use server';
 
-import { FUser, UserDetail, UserLoginDetail } from "@/app/model/UserModels";
+import { FUser, UserDetail, UserFlag, UserLoginDetail } from "@/app/model/UserModels";
 import { PaginatedUserList } from "../model/Pageable";
 
 export async function getUserLoginDetail(v: string): Promise<UserLoginDetail | undefined> {
@@ -18,9 +18,7 @@ export async function getUserLoginDetail(v: string): Promise<UserLoginDetail | u
 
 export async function getUserDetail(v: string): Promise<UserDetail | undefined> {
     var request = await fetch(`${process.env.BACKEND_ADDRESS}/user/show?id=${v}`, {
-        next: {
-            revalidate: 60
-        }
+        cache: "no-cache"
     })
     if (request.ok) {
         return await request.json() as UserDetail;
@@ -44,14 +42,21 @@ export async function createAccount(userDetail: FUser) {
 }
 
 export async function getUserList() {
-    return await (await fetch(`${process.env.BACKEND_ADDRESS}/user/listuser`, { next: { revalidate: 1 } })).json() as PaginatedUserList;
+    return await (await fetch(`${process.env.BACKEND_ADDRESS}/user/listuser`, { cache: "no-cache" })).json() as PaginatedUserList;
 }
 
 export async function findUser(field: "name" | "email" | "phone", query: string) {
     return await (await fetch(`${process.env.BACKEND_ADDRESS}/user/search?field=${field}&query=${query}`, { cache: "no-cache" })).json() as PaginatedUserList;
 }
 
-export async function updateUser(userDetail: UserDetail) {
+export async function updateUser(userDetail: {
+    id: string,
+    name?: string,
+    email?: string,
+    phone?: string,
+    flags?: UserFlag[],
+    role?: string
+}) {
     var request = await fetch(
         `${process.env.BACKEND_ADDRESS}/user/update`,
         {
@@ -73,4 +78,19 @@ export async function deleteUser(userId: string) {
             cache: "no-cache"
         }
     )
+}
+
+export async function updateFlags(userId: string, flags: UserFlag[]) {
+    var request = await fetch(
+        `${process.env.BACKEND_ADDRESS}/user/updateFlags/${userId}`,
+        {
+            method: 'POST',
+            body: JSON.stringify(flags),
+            headers: {
+                "Content-Type": "application/json; charset=utf8"
+            },
+            cache: "no-cache"
+        }
+    )
+    return request.ok;
 }
