@@ -13,7 +13,7 @@ export async function createComment(comment: PendingComment) {
 }
 
 export async function queryComment(field: "movieid" | "userid" | "content", query: string) {
-    var request = await fetch(`${process.env.BACKEND_ADDRESS}/comments/query?field=${field}&query=${query}`);
+    var request = await fetch(`${process.env.BACKEND_ADDRESS}/comments/search?field=${field}&query=${query}`);
     if (request.ok) {
         return await request.json() as CommentDetail[];
     } else {
@@ -48,7 +48,8 @@ export async function createCommentLike(likeData: LikeAction) {
         body: JSON.stringify({
             id: likeData.commentId,
             userId: likeData.userId
-        })
+        }),
+        cache: "no-cache",
     });
     return request.ok;
 }
@@ -62,13 +63,14 @@ export async function removeCommentLike(likeDataToRemove: LikeAction) {
         body: JSON.stringify({
             id: likeDataToRemove.commentId,
             userId: likeDataToRemove.userId
-        })
+        }),
+        cache: "no-cache",
     });
     return request.ok;
 }
 
 export async function getRecursiveCommentByMovieId(movieId: String) {
-    var request = await fetch(`${process.env.BACKEND_ADDRESS}/comments/replies?movieId=${movieId}`);
+    var request = await fetch(`${process.env.BACKEND_ADDRESS}/comments/replies?movieId=${movieId}`, {cache: "no-cache"});
     if (request.ok) {
         return await request.json() as RecursiveCommentDetail[];
     } else {
