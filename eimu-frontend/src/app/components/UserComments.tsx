@@ -1,10 +1,36 @@
 "use client";
-import { Suspense, useState } from 'react';
+import { Suspense, useState,useEffect } from 'react';
 import { RecursiveCommentDetail } from '../model/CommentModels';
 import CommentForm from './CommentForm';
+import { createCommentLike, removeCommentLike } from '../repositories/CommentRepository';
+import { authOptions } from "@app/../../auth.config";
+import { getServerSession } from "next-auth";
+
 
 function UserComment({ data, commentSubmitHandler }: { data: RecursiveCommentDetail, commentSubmitHandler?: (content: FormData, replyTo?: string) => Promise<void> }) {
     const [isReplying, setIsReplying] = useState(false)
+    const [liked, setLiked] = useState(false); 
+    //const [userId, setUserId] = useState<string | null>(null);
+
+    //useEffect(() => {
+    //    const fetchSession = async () => {
+    //        const session = await getServerSession(authOptions);
+    //        setUserId(session?.user?.email ?? null);
+    //    };
+
+    //    fetchSession();
+    //}, []);
+    const handleLike = async () => {
+    //    if (!userId) return; 
+        const likeData = { userId: data.userId, commentId: data.id }; 
+        if (!liked) {
+            const success = await createCommentLike(likeData);
+            if (success) setLiked(true);
+        } else {
+            const success = await removeCommentLike(likeData);
+            if (success) setLiked(false);
+        }
+    };
     return (
         <div className='w-full gap-x-6 grid grid-cols-[auto_1fr] rounded-lg pt-2 px-4'>
             <div className="avatar">
@@ -18,7 +44,9 @@ function UserComment({ data, commentSubmitHandler }: { data: RecursiveCommentDet
             </div>
             <div className='flex col-start-2 items-center'>
                 <span className='text-xs'>{data.timestamp}</span>
-                <button className='btn btn-xs btn-ghost'>Thích</button>
+                <button className={`btn btn-xs ${liked ? 'btn-primary' : 'btn-ghost'}`} onClick={handleLike}>
+                    {liked ? 'Bỏ Thích' : 'Thích'}
+                </button>
                 <button className='btn btn-xs btn-ghost' onClick={() => setIsReplying(!isReplying)}>Trả lời {data.replies.length > 0 && `(${data.replies.length})`}</button>
             </div>
             {

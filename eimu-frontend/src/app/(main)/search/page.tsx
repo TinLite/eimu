@@ -30,9 +30,10 @@ export default function SearchPage({ searchParams }:
 
     const router = useRouter();
     const pathname = usePathname();
-    const handlePageChange = (newPage:number) => {
+    const handlePageChange = (Page:number) => {
         const params = new URLSearchParams(searchParams)
-        params.set("page",newPage.toString())
+        setCurrentPage(Page);
+        params.set("page",Page.toString())
         router.push(`${pathname}?${params.toString()}`)
     };
 
