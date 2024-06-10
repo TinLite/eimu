@@ -1,11 +1,15 @@
 import { getMovieDetail, setDetail } from "@/app/repositories/MovieRepository"
 import { getTagsDetail } from "@/app/repositories/MovieTagRepository"
+import { notFound } from "next/navigation"
 import { z } from "zod"
 import { StaffEpisodeEdit, StaffMovieEdit } from "./StaffMovieEdit"
 
 export default async function StaffMovieDetail({ params }: { params: { movieId: string } }) {
     const { movieId } = params
     const movie = await getMovieDetail(movieId)
+    if (!movie) {
+        return notFound();
+    }
     const tags = await getTagsDetail(movie.tags)
 
 

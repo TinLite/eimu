@@ -46,6 +46,14 @@ class CommentsController {
     fun searchComment(@RequestParam query: String, @RequestParam field: String)
             : ResponseEntity<List<Map<String, Any?>>> {
         val data = when (field.lowercase()) {
+            "id" -> {
+                val res = commentsRepository.findByIdOrNull(query)
+                if (res != null) {
+                    listOf(res)
+                } else {
+                    emptyList()
+                }
+            }
             "userid" -> commentsRepository.findByUserId(query)
             "movieid" -> commentsRepository.findByMovieId(query)
             "content" -> commentsRepository.findByContentContainsIgnoreCase(query)
