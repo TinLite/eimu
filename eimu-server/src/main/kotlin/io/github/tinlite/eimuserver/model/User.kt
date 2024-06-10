@@ -7,6 +7,11 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.util.*
 
+enum class UserFlag {
+    BANNED_LOGIN,
+    BANNED_COMMENT
+}
+
 @Document("user")
 data class User(
     @JsonView(UserBasic::class) @Id val id: ObjectId?,
@@ -16,6 +21,7 @@ data class User(
     @JsonView(UserDetail::class) var email: String?,
     var follows: MutableList<String>?,
     @JsonView(UserDetail::class) var role: String,
+    @JsonView(UserBasic::class) var flags: MutableList<UserFlag>?,
     val hashedPassword: String,
     var watchHistory: MutableList<WatchHistory>?,
     @CreatedDate val timestamp: Date? = null

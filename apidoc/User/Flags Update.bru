@@ -1,0 +1,21 @@
+meta {
+  name: Flags Update
+  type: http
+  seq: 13
+}
+
+post {
+  url: {{baseUrl}}/user/updateFlags/{{userId}}
+  body: json
+  auth: none
+}
+
+body:json {
+  [
+    "BANNED_LOGIN"
+  ]
+}
+
+vars:pre-request {
+  userId: 66306210cb57e62fd9f885c8
+}

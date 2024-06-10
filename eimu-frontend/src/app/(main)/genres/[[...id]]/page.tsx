@@ -8,7 +8,6 @@ export default async function Genre({
     params: { id?: string[] }
     searchParams: { page?: string }
 }) {
-    const movie_list = await getLatestMoviesByTag(params.id ?? [],  Number(searchParams.page), 21)
+    const movie_list = await getLatestMoviesByTag(params.id ?? [],  Number(searchParams.page))
     return (<Genres data={movie_list} tags={movie_list.tags} />)
 }
-

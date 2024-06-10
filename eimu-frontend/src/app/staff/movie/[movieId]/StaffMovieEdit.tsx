@@ -19,9 +19,10 @@ export function StaffMovieEdit({ movie, tags, detailSubmitAction }: { movie: Mov
         arearef.current!.style.height = (arearef.current!.scrollHeight) + "px";
     }
     const [formChanged, setFormChanged] = useState(false);
+
     return (
         <form onSubmit={() => setFormChanged(false)} action={formAction} onChange={() => setFormChanged(true)} className="*:py-2 hover:[&_input]:text-blue-400 [&_input]:transition-colors hover:[&_textarea]:text-blue-400 [&_textarea]:transition-colors">
-            <div className="flex gap-8">
+            <div className="flex gap-8 p-[10px]">
                 <div
                     className="aspect-[2/3] grid place-items-center w-44 rounded-2xl"
                     style={{ "background": `center / cover no-repeat url('${movie?.thumbUrl}')` }}>
@@ -65,6 +66,7 @@ export function StaffEpisodeEdit({episodeServerList} : {episodeServerList: Episo
     const [disabledMessage, setDisabledMessage] = useState("");
     const [episodeServer, setEpisodeServer] = useState(0);
     const [episodeId, setEpisodeId] = useState(0);
+    
     const editModal = useRef<HTMLDialogElement>(null);
     const [episode, setEpisode] = useState<Episode>();
     const editId = useRef<HTMLInputElement>(null);
@@ -97,11 +99,11 @@ export function StaffEpisodeEdit({episodeServerList} : {episodeServerList: Episo
                         {episodeServerList.map((s, i) =>
                             <button key={i} onClick={() => setEpisodeServer(i)} role="tab" className={`tab${episodeServer === i && ` tab-active`}`}>{s.serverName}</button>
                         )}
-                        <button className="tab">
+                        {/* <button className="tab">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
-                        </button>
+                        </button> */}
                     </div>
                 </div>
                 <div className="grid gap-2 grid-cols-12 mt-2">

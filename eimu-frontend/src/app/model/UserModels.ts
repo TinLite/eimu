@@ -3,10 +3,17 @@ export type UserLoginDetail = {
     hashedPassword: string,
 }
 
+export enum UserFlag {
+    BANNED_LOGIN = "BANNED_LOGIN",
+    BANNED_COMMENT = "BANNED_COMMENT"
+}
+
 export type UserDetail = {
+    id: string,
     name: string,
     email?: string,
     phone?: string,
+    flags: UserFlag[],
     role: string
 }
 

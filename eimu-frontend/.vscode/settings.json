@@ -3,4 +3,5 @@
         "source.organizeImports": "always",
         "source.sortImports": "always",
     },
+    "discord.enabled": false,
 }
