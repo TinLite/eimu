@@ -9,6 +9,7 @@ import { getTagsDetail } from '@/app/repositories/MovieTagRepository';
 import { getUserDetail } from '@/app/repositories/UserRepository';
 import { getMovieHistory } from '@/app/repositories/UserWatchHistory';
 import { getServerSession } from 'next-auth';
+import { notFound } from 'next/navigation';
 
 export default async function Detail({ params }: { params: { movieId: string, epId?: string } }) {
     const movieId = params.movieId
@@ -23,6 +24,9 @@ export default async function Detail({ params }: { params: { movieId: string, ep
     }
 
     const movieDetail = await getMovieDetail(movieId)
+    if (!movieDetail) {
+        return notFound();
+    }
     const tags = await getTagsDetail(movieDetail.tags)
     const recommended_list = await getLatestMoviesByTag(movieDetail.tags) // TODO: Actually fix this and move to another endpoint
 

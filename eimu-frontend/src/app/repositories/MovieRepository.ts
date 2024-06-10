@@ -11,8 +11,10 @@ export async function getLatestMoviesByTag(tagIds: string | string[], page?: num
     return await (await fetch(`${process.env.BACKEND_ADDRESS}/movie?page=${page || 1}&tags=${combinedTagIds}`, { next: { revalidate: 60 } })).json() as PaginatedMovieListWithTags;
 }
 
-export async function getMovieDetail(movieId: string): Promise<Movie> {
-    return await (await fetch(`${process.env.BACKEND_ADDRESS}/movie/${movieId}`, { next: { revalidate: 30 } })).json() as Movie;
+export async function getMovieDetail(movieId: string): Promise<Movie | undefined> {
+    const response = await fetch(`${process.env.BACKEND_ADDRESS}/movie/${movieId}`, { next: { revalidate: 30 } })
+    if (response.ok)
+        return await response.json() as Movie;
 }
 
 export async function getSearchMovie(movieName: string, page: number = 1,size : number = 20 ): Promise<PaginatedMovieList> {
@@ -32,7 +34,7 @@ export async function setEpisodeServerList(movieId: string, episodeList : Episod
 }
 
 export async function setDetail(movieId: string, updatedDetail: {
-    name: string,
+    name?: string,
     year?: number,
     originalName?: string,
     description?: string,
