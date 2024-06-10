@@ -23,18 +23,14 @@ export function InformationUser({
                     <div className='flex items-center mb-6'>
                         <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" className="w-20 h-20 text-large mr-7" />
                         <div className='font-bold text-2xl'>{user.name}
-                            { user.role == 'admin' &&
-                            <span className="badge badge-warning">Admin</span>
+                            {user.role == 'admin' &&
+                                <span className="badge badge-warning">Admin</span>
                             }
                         </div>
                     </div>
                     <div className='text-xl my-4 font-bold'>Thông tin cá nhân</div>
                     <div className="relative">
                         <div className="grid grid-cols-[auto_1fr] [&_>_*]:px-4 [&_>_*]:py-2">
-                            <div>Ngày sinh:</div>
-                            <div>Chưa cập nhật</div>
-                            <div>Giới tính:</div>
-                            <div>Chưa cập nhật</div>
                             <div>Email:</div>
                             <div>{user.email}</div>
                             <div>Số điện thoại:</div>
