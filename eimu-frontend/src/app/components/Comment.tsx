@@ -4,17 +4,19 @@ import UserComments from '@/app/components/UserComments';
 import { Movie } from '@/app/model/MovieModels';
 import { Suspense, useEffect, useState } from 'react';
 import { submitComment } from '../action/CommentFormAction';
-import { RecursiveCommentDetail } from '../model/CommentModels';
+import { CommentDetail, RecursiveCommentDetail } from '../model/CommentModels';
 import { UserDetail } from '../model/UserModels';
-import { createCommentLike, getRecursiveCommentByMovieId, removeCommentLike } from '../repositories/CommentRepository';
+import { createCommentLike, getRecursiveCommentByMovieId, queryComment, removeCommentLike } from '../repositories/CommentRepository';
 
 export default function Comment({ movie, userDetail, userId }: { movie: Movie, userDetail?: UserDetail, userId?: string }) {
 
     const [comments, setComments] = useState<RecursiveCommentDetail[]>([]);
+    const [allComments, setAllComments] = useState<CommentDetail[]>([]);
     const [seed, setSeed] = useState(0);
 
     useEffect(() => {
         getRecursiveCommentByMovieId(movie.id).then(setComments)
+        queryComment("movieid", movie.id).then(setAllComments) // TODO: Trùng hàm
     }, [seed])
 
     const submitHandler = async (movieId: string, userId: string, formData: FormData, replyTo?: string) =>
@@ -22,7 +24,8 @@ export default function Comment({ movie, userDetail, userId }: { movie: Movie, u
 
     const likeHandler = async (userId: string, commentId: string) => {
         console.log(userId, commentId)
-        const data = comments.find(comment => comment.id === commentId)
+        const data = allComments.find(comment => comment.id === commentId)
+
         if (!data) return;
         if (data.likes.includes(userId)) {
             return removeCommentLike({ userId: userId, commentId: commentId }).then(() => setSeed(seed + 1))
