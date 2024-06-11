@@ -33,6 +33,9 @@ class UserMovieController {
         if (!isMovieExistsInDatabase || isUserAlreadyFollowedMovie == true) {
             return ResponseEntity.notFound().build()
         }
+        if (user.follows == null) {
+            user.follows = mutableListOf()
+        }
         user.follows?.add(movieId) // Khong can phai gan lai, cai nay no thay doi han follow r
         userRepository.save(user)
         return ResponseEntity.ok(user.follows ?: mutableListOf())
