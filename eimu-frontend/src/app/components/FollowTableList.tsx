@@ -1,12 +1,10 @@
 'use client';
 import { MovieListEntry } from "@/app/model/MovieModels";
-import { MovieTag } from "@/app/model/MovieTagModels";
-import { Page, PaginatedMovieList } from "@/app/model/Pageable";
+import { Page } from "@/app/model/Pageable";
 import { removeFollow } from "@/app/repositories/MovieFollowRepository";
 import { Button, Pagination, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
-import { unstable_noStore as noCache } from "next/cache";
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useState } from "react";
+
 
 
 export default function FollowTableList({ movie, userId }: { movie: Page<MovieListEntry>, userId: string }) {
@@ -34,7 +32,7 @@ export default function FollowTableList({ movie, userId }: { movie: Page<MovieLi
                             Bỏ theo dõi
                         </TableColumn>
                     </TableHeader>
-                    {/* {movie.data.length > 0 ? ( */}
+                    {/* {movie.items.length > 0 ? ( */}
                     <TableBody>
                         {movie.items?.map((e) => (
                             <TableRow key={e.id}>
@@ -44,7 +42,7 @@ export default function FollowTableList({ movie, userId }: { movie: Page<MovieLi
                                         style={{ "background": `center / cover no-repeat url('${e.posterUrl}')` }}>
                                     </div>
                                 </TableCell>
-                                <TableCell>{e.name} ({e.originalName})</TableCell>
+                                <TableCell><a href={`/movie/${e.id}`} >{e.name} ({e.originalName})</a></TableCell>
                                 <TableCell>
                                     <Button className="btn btn-ghost btn-sm" onClick={() => removeFollow(userId, e.id).then(() => router.refresh())}>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="red" className="w-6 h-6">

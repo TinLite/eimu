@@ -3,6 +3,7 @@ import SideList from "@/app/components/SideList";
 import Carousel from "@/app/components/Carousel";
 import { getLatestMovies, getLatestMoviesByTag } from "@/app/repositories/MovieRepository";
 import { getAllTag } from "@/app/repositories/MovieTagRepository";
+import { getRate } from "@/app/repositories/RateRepository";
 
 export default async function Home() {
   const new_movie_list = await getLatestMovies()
@@ -11,9 +12,10 @@ export default async function Home() {
   const anime_movie_list = await getLatestMoviesByTag("45c48cce2e2d7fbdea1afc51c7c6ad26,d2ddea18f00665ce8623e36bd4e3c7c5")
   const chinese_movie_list = await getLatestMoviesByTag("c0c7c76d30bd3dcaefc96f40275bdc0a")
   const tag_list = await getAllTag()
+  
   return (
     <div className="text-white">
-      <Carousel items={new_movie_list.items} tagList={tag_list} />
+      <Carousel items={new_movie_list.items} tagList={tag_list}/>
       <SideList title="Vừa cập nhật!" link="/genres" data={new_movie_list.items} />
       <SideList title="Phim bộ" link="/genres" data={tv_movie_list.items} />
       <SideList title="Phim lẻ" link="/genres" data={theater_movie_list.items} />

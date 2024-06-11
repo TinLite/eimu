@@ -70,7 +70,6 @@ export default function SearchBar() {
                     </ul>
                 )}
             </form>
-            {/* <DropdownSearch /> */}
         </div>
     )
 }
