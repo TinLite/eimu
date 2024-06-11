@@ -41,7 +41,7 @@ export default function MovieInfo({ movie, tags, isFollowed, isLogged, followCli
                             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                                 <ModalContent >
                                     {(onClose) => (
-                                        <form method="post" action={(formData) => rateHandler(formData).then(() => router.refresh())}>
+                                        <form action={(formData) => rateHandler(formData).then(() => router.refresh())}>
                                             <ModalHeader className="flex flex-col gap-1">Đánh giá</ModalHeader>
                                             <ModalBody>
                                                 <div className="rating rating-lg rating-half flex justify-center">
