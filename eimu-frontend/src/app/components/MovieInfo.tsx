@@ -72,7 +72,7 @@ export default function MovieInfo({ movie, tags, isFollowed, isLogged, followCli
                             </Modal>
                         </>
                         {/* btn fllow film */}
-                        <div className='tooltip tooltip-bottom' data-tip={!isLogged ? `Bạn cần đăng nhập để lưu phim.` : `Ấn để ${(followed ? `theo dõi và lưu phim` : `huỷ theo dõi và xoá khỏi phim đã lưu`)}.`}>
+                        <div className='tooltip tooltip-bottom' data-tip={!isLogged ? `Bạn cần đăng nhập để lưu phim.` : `Ấn để ${(!followed ? `theo dõi và lưu phim` : `huỷ theo dõi và xoá khỏi phim đã lưu`)}.`}>
                             <button onClick={follow} className='aspect-square btn btn-ghost text-blue-500 grid place-items-center'>
                                 {(followed) ?
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
