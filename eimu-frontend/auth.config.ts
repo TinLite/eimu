@@ -1,3 +1,4 @@
+import { loginError } from '@/app/model/UserModels';
 import { getUserDetail, getUserLoginDetail } from '@/app/repositories/UserRepository';
 import bcrypt from 'bcrypt';
 import type { NextAuthOptions } from 'next-auth';
@@ -7,6 +8,7 @@ import { z } from 'zod';
 export const authOptions: NextAuthOptions = {
     pages: {
         signIn: '/login',
+        error: '/login'
     },
     session: {
         maxAge: 3 * 24 * 60 * 60
@@ -20,9 +22,16 @@ export const authOptions: NextAuthOptions = {
                 if (parsedCredentials.success) {
                     const { username, password } = parsedCredentials.data;
                     var data = await getUserLoginDetail(username);
-                    if (!data) return null;
+                    if(!data) {
+                        throw new Error(loginError.NOTFOUND.toString())
+                    }
                     const isMatch = await bcrypt.compare(password, data.hashedPassword);
-                    if (isMatch) return { id: data.id };
+                    if (isMatch) return { id: data.id }
+                    
+                    else{
+                        throw new Error(loginError.NOTFOUND.toString())
+                    }
+            
                 }
                 return null;
             },

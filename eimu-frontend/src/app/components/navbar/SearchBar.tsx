@@ -8,24 +8,29 @@ import { useState } from "react";
 
 export default function SearchBar() {
     const [searchTerm, setSearchTerm] = useState('');
-    const router = useRouter();
     const [result, setResult] = useState<MovieListEntry[]>([]);
+    const [isSubmitted, setIsSubmitted] = useState(false); // State to track if the search form is submitted
+    const router = useRouter();
 
     const handleSearchChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
+        setIsSubmitted(false); // Reset isSubmitted when search term changes
         if (event.target.value.trim() !== '') {
             const searchResults = await getSearchMovie(event.target.value);
             setResult(searchResults.items);
         } else {
-            setResult([])
+            setResult([]);
         }
     };
+
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         if (searchTerm) {
+            setIsSubmitted(true); // Set isSubmitted to true when form is submitted
             router.push(`/search?query=${searchTerm}`);
         }
     };
+
     return (
         <div>
             <form method="get" onSubmit={handleSubmit}>
@@ -51,7 +56,7 @@ export default function SearchBar() {
                         </button>
                     }
                 />
-                {result.length !== 0 && (
+                {result.length !== 0 && !isSubmitted && ( // Conditionally render the dropdown based on isSubmitted state
                     <ul className="absolute my-3 bg-[#263238] w-[18rem] p-2 rounded-sm">
                         {result?.map((e) => (
                             <li key={e.id} className="py-2 border-b-1 border-black">
