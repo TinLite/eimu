@@ -7,6 +7,9 @@ export enum UserFlag {
     BANNED_LOGIN = "BANNED_LOGIN",
     BANNED_COMMENT = "BANNED_COMMENT"
 }
+export enum loginError{
+    NOTFOUND ="NOTFOUND"
+}
 
 export type UserDetail = {
     id: string,
