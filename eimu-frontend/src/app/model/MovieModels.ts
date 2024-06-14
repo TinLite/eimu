@@ -1,4 +1,4 @@
-export interface MovieListEntry {
+export type MovieListEntry = {
     id: string,
     name: string,
     originalName?: string,
