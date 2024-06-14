@@ -12,7 +12,7 @@ export async function getLatestMoviesByTag(tagIds: string | string[], page?: num
 }
 
 export async function getMovieDetail(movieId: string): Promise<Movie | undefined> {
-    const response = await fetch(`${process.env.BACKEND_ADDRESS}/movie/${movieId}`, { next: { revalidate: 30 } })
+    const response = await fetch(`${process.env.BACKEND_ADDRESS}/movie/${movieId}`, { cache: "no-cache"})
     if (response.ok)
         return await response.json() as Movie;
 }

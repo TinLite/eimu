@@ -1,8 +1,12 @@
 import { getMovieDetail, setDetail } from "@/app/repositories/MovieRepository"
-import { getTagsDetail } from "@/app/repositories/MovieTagRepository"
+import { getAllTag, getTagsDetail } from "@/app/repositories/MovieTagRepository"
 import { notFound } from "next/navigation"
 import { z } from "zod"
 import { StaffEpisodeEdit, StaffMovieEdit } from "./StaffMovieEdit"
+
+export const metadata = {
+    title: 'Admin > Cập nhật thông tin phim'
+}
 
 export default async function StaffMovieDetail({ params }: { params: { movieId: string } }) {
     const { movieId } = params
@@ -11,6 +15,8 @@ export default async function StaffMovieDetail({ params }: { params: { movieId: 
         return notFound();
     }
     const tags = await getTagsDetail(movie.tags)
+
+    const allTags = await getAllTag()
 
 
 
@@ -45,8 +51,8 @@ export default async function StaffMovieDetail({ params }: { params: { movieId: 
         <div className="">
             <div className="bg-primary text-white text-center py-2">Thông tin ở trang này có thể được chỉnh sửa</div>
             <div className="px-8">
-                <StaffMovieEdit movie={movie} tags={tags} detailSubmitAction={detailSubmitHandler} />
-                <StaffEpisodeEdit episodeServerList={movie.episodes} />
+                <StaffMovieEdit movie={movie} tags={tags} detailSubmitAction={detailSubmitHandler} allTags={allTags} />
+                <StaffEpisodeEdit episodeServerList={movie.episodes} movieId={movieId} />
             </div>
         </div>
     )
